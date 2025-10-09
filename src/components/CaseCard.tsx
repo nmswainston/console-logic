@@ -7,7 +7,7 @@ interface CaseCardProps {
 
 export default function CaseCard({ case: caseItem }: CaseCardProps) {
   return (
-    <article className="group relative bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
+    <article className="group relative bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 fade-in">
       {/* Image */}
       <div className="aspect-w-16 aspect-h-9 bg-gray-100">
         <img

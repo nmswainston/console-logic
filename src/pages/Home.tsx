@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Terminal, Code, Zap } from 'lucide-react'
 import Section from '../components/Section'
 import SectionDemo from '../components/SectionDemo'
+import ErrorTest from '../components/ErrorTest'
 import { useMeta } from '../hooks/useMeta'
 
 export default function Home() {
@@ -91,6 +92,11 @@ export default function Home() {
 
       {/* Section Demo */}
       <SectionDemo />
+
+      {/* Error Boundary Test - Remove this in production */}
+      <Section title="Error Boundary Test">
+        <ErrorTest />
+      </Section>
     </div>
   )
 }

@@ -16,7 +16,7 @@ export default function Hero({
   return (
     <section className={`py-16 ${className}`}>
       <div className="container">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl fade-in">
           {/* Title */}
           {title && (
             <div className="mb-6">
