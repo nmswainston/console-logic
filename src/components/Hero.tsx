@@ -37,10 +37,10 @@ export default function Hero({
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-2">
-            <button className="px-6 py-3 bg-brand-600 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-600 text-white font-medium rounded-2xl transition-all duration-200">
+            <button className="button-primary">
               Get Started
             </button>
-            <button className="px-6 py-3 border border-white/15 hover:bg-white/5 text-ink font-medium rounded-2xl transition-all duration-200">
+            <button className="button-ghost">
               Learn More
             </button>
           </div>

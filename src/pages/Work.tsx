@@ -16,13 +16,13 @@ export default function Work() {
   }, [activeFilter])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="container py-8">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-ink mb-4">
           Our Work
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-xl text-ink/70 max-w-3xl mx-auto">
           Explore our portfolio of successful projects across web development, mobile apps, and branding.
         </p>
       </div>
@@ -36,7 +36,7 @@ export default function Work() {
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               activeFilter === category
                 ? 'bg-brand-600 text-white shadow-md'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-ink/10 text-ink/70 hover:bg-ink/20'
             }`}
             aria-pressed={activeFilter === category}
             aria-label={`Filter by ${category}`}
@@ -48,7 +48,7 @@ export default function Work() {
 
       {/* Results Count */}
       <div className="mb-8">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-ink/70">
           Showing {filteredCases.length} {filteredCases.length === 1 ? 'project' : 'projects'}
           {activeFilter !== 'All' && ` in ${activeFilter}`}
         </p>
@@ -64,7 +64,7 @@ export default function Work() {
       {/* Empty State */}
       {filteredCases.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-gray-400 mb-4">
+          <div className="text-ink/40 mb-4">
             <svg
               className="mx-auto h-12 w-12"
               fill="none"
@@ -79,10 +79,10 @@ export default function Work() {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <h3 className="text-lg font-medium text-ink mb-2">
             No projects found
           </h3>
-          <p className="text-gray-600">
+          <p className="text-ink/70">
             No projects match the selected filter. Try selecting a different category.
           </p>
         </div>

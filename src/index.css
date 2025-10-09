@@ -1,15 +1,123 @@
-@import "./styles/globals.css";
+@import "tailwindcss";
 @import "@fontsource/urbanist/400.css";
 @import "@fontsource/urbanist/500.css";
 @import "@fontsource/urbanist/600.css";
 @import "@fontsource/urbanist/700.css";
 
+@theme {
+  --color-cl-bg: var(--cl-bg);
+  --color-cl-surface: var(--cl-surface);
+  --color-cl-ink: var(--cl-ink);
+  --color-cl-primary: var(--cl-primary);
+  --color-cl-primary-muted: var(--cl-primary-muted);
+  --color-cl-amber: var(--cl-amber);
+  --color-cl-cyan: var(--cl-cyan);
+}
+
 @layer base {
   :root {
     --font-family-sans: "Urbanist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* Console Logic palette */
+    --cl-bg: #0D1117;
+    --cl-surface: #161B22;
+    --cl-ink: #F0F6FC;
+    --cl-primary: #00FF88;    /* Terminal Green */
+    --cl-primary-muted: #5CFFBF;
+    --cl-amber: #FFDD57;
+    --cl-cyan: #00E5FF;
+
+    /* Back-compat tokens mapped to new palette */
+    --color-brand-600: var(--cl-primary);
+    --color-brand-700: var(--cl-primary-muted);
+    --color-surface: var(--cl-surface);
+    --color-ink: var(--cl-ink);
   }
   
   body {
     font-family: var(--font-family-sans);
+    background-color: var(--cl-bg);
+    color: var(--cl-ink);
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply mx-auto max-w-6xl px-4;
+  }
+  
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/5;
+  }
+  
+  .button-primary {
+    @apply inline-flex items-center gap-2 rounded-2xl text-white px-5 py-3 hover:brightness-110 focus:outline-none focus:outline-2 focus:outline-offset-2;
+    background-color: var(--color-brand-600);
+    --tw-outline-color: var(--color-brand-600);
+  }
+  
+  .button-ghost {
+    @apply inline-flex items-center gap-2 rounded-2xl border border-white/15 px-5 py-3 hover:bg-white/5;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white text-gray-900 px-4 py-2 rounded-md shadow-lg border border-gray-300 focus:outline-2 focus:outline-offset-2;
+    --tw-outline-color: var(--color-brand-600);
+  }
+
+  .mobile-menu-toggle {
+    @apply relative inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:outline-2 focus:outline-offset-2 cursor-pointer;
+    --tw-outline-color: var(--color-brand-600);
+  }
+  
+  .mobile-menu-toggle input[type="checkbox"] {
+    @apply sr-only;
+  }
+  
+  .mobile-menu-toggle input[type="checkbox"]:checked ~ .menu-icon {
+    @apply hidden;
+  }
+  
+  .mobile-menu-toggle input[type="checkbox"]:checked ~ .close-icon {
+    @apply block;
+  }
+  
+  .mobile-menu-toggle input[type="checkbox"]:not(:checked) ~ .close-icon {
+    @apply hidden;
+  }
+  
+  .mobile-menu {
+    @apply md:hidden;
+  }
+  
+  .mobile-menu[data-state="closed"] {
+    @apply hidden;
+  }
+  
+  .mobile-menu[data-state="open"] {
+    @apply block;
   }
 }

@@ -12,16 +12,24 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="console.log(ic)" />
     <meta property="og:description" content="console.log(ic) - Creative digital solutions and web development services" />
-    <meta property="og:image" content="/og-image-placeholder.png" />
+    <meta property="og:image" content="/vite.svg" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="console.log(ic)" />
     <meta property="twitter:description" content="console.log(ic) - Creative digital solutions and web development services" />
-    <meta property="twitter:image" content="/og-image-placeholder.png" />
+    <meta property="twitter:image" content="/vite.svg" />
   </head>
   <body>
     <div id="root"></div>
+    <!-- Hidden Netlify form to enable form detection -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+      <input name="name" />
+      <input name="email" type="email" />
+      <textarea name="message"></textarea>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

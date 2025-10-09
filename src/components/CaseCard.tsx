@@ -7,9 +7,9 @@ interface CaseCardProps {
 
 export default function CaseCard({ case: caseItem }: CaseCardProps) {
   return (
-    <article className="group relative bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 fade-in">
+    <article className="group relative card overflow-hidden hover:shadow-md transition-shadow duration-200 fade-in">
       {/* Image */}
-      <div className="aspect-w-16 aspect-h-9 bg-gray-100">
+      <div className="aspect-video bg-ink/5">
         <img
           src={caseItem.image}
           alt={caseItem.title}
@@ -17,7 +17,7 @@ export default function CaseCard({ case: caseItem }: CaseCardProps) {
         />
         {caseItem.featured && (
           <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-brand-600 text-white">
+            <span className="inline-flex items-center px-2 py-1 rounded-2xl text-xs font-medium bg-brand-600 text-white">
               Featured
             </span>
           </div>
@@ -28,18 +28,18 @@ export default function CaseCard({ case: caseItem }: CaseCardProps) {
       <div className="p-6">
         {/* Category */}
         <div className="mb-2">
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+          <span className="inline-flex items-center px-2 py-1 rounded-2xl text-xs font-medium bg-ink/10 text-ink/80">
             {caseItem.category}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">
+        <h3 className="text-lg font-semibold text-ink mb-2 group-hover:text-brand-600 transition-colors">
           {caseItem.title}
         </h3>
 
         {/* Description */}
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+        <p className="text-ink/70 text-sm mb-4 line-clamp-3">
           {caseItem.description}
         </p>
 
@@ -48,7 +48,7 @@ export default function CaseCard({ case: caseItem }: CaseCardProps) {
           {caseItem.tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-50 text-gray-700"
+              className="inline-flex items-center px-2 py-1 rounded-2xl text-xs font-medium bg-ink/5 text-ink/70"
             >
               {tag}
             </span>
@@ -61,7 +61,7 @@ export default function CaseCard({ case: caseItem }: CaseCardProps) {
             href={caseItem.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors focus-visible"
+            className="inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors focus:outline-none focus:outline-2 focus:outline-offset-2 focus:outline-brand-600"
             aria-label={`View ${caseItem.title} project (opens in new tab)`}
           >
             View Project

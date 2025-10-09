@@ -4,14 +4,14 @@ import { services } from '../content/services';
 
 export const Services: React.FC = () => {
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-16">
+      <div className="container">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-ink mb-4">
             Our Services
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-ink/70 max-w-2xl mx-auto">
             We provide comprehensive digital solutions to help your business thrive in the modern world.
           </p>
         </div>

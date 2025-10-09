@@ -43,21 +43,21 @@ export default function Header({ children }: HeaderProps) {
     <>
       {/* Skip to content link */}
       <a
-        href="#main-content"
+        href="#main"
         className="skip-link"
       >
         Skip to main content
       </a>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 border-b border-white/10">
+      <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-surface/80 border-b border-white/10">
         <div className="container">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <div className="flex items-center">
               <Link 
                 to="/" 
-                className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors focus-visible"
+                className="text-xl font-bold text-ink hover:text-ink/80 transition-colors focus:outline-none focus:outline-2 focus:outline-offset-2 focus:outline-brand-600"
                 aria-label="Console Logic - Home"
               >
                 Console Logic
@@ -68,7 +68,7 @@ export default function Header({ children }: HeaderProps) {
             <nav 
               className="hidden md:flex items-center space-x-8" 
               role="navigation" 
-              aria-label="Main navigation"
+              aria-label="Primary"
             >
               {navigation.map((item) => {
                 const Icon = item.icon
@@ -77,10 +77,10 @@ export default function Header({ children }: HeaderProps) {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors focus-visible ${
+                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors focus:outline-none focus:outline-2 focus:outline-offset-2 focus:outline-brand-600 ${
                       isActive
-                        ? 'border-indigo-500 text-gray-900'
-                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                        ? 'border-brand-600 text-ink'
+                        : 'border-transparent text-ink/70 hover:border-ink/30 hover:text-ink'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >
@@ -95,7 +95,7 @@ export default function Header({ children }: HeaderProps) {
             <div className="md:hidden">
               <label 
                 ref={mobileMenuToggleRef}
-                className="mobile-menu-toggle focus-visible"
+                className="mobile-menu-toggle"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 <span className="sr-only">{isMobileMenuOpen ? 'Close main menu' : 'Open main menu'}</span>
@@ -105,7 +105,7 @@ export default function Header({ children }: HeaderProps) {
                   aria-expanded={isMobileMenuOpen}
                   checked={isMobileMenuOpen}
                   onChange={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="focus-visible"
+                  className="focus:outline-none focus:outline-2 focus:outline-offset-2 focus:outline-brand-600"
                 />
                 <Menu className={`menu-icon block h-6 w-6 ${isMobileMenuOpen ? 'hidden' : 'block'}`} aria-hidden="true" />
                 <X className={`close-icon h-6 w-6 ${isMobileMenuOpen ? 'block' : 'hidden'}`} aria-hidden="true" />
@@ -119,9 +119,9 @@ export default function Header({ children }: HeaderProps) {
             id="mobile-menu"
             className={`mobile-menu ${isMobileMenuOpen ? 'block' : 'hidden'}`}
             role="navigation"
-            aria-label="Mobile navigation"
+            aria-label="Primary"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-white/10">
               {navigation.map((item) => {
                 const Icon = item.icon
                 const isActive = location.pathname === item.href
@@ -129,10 +129,10 @@ export default function Header({ children }: HeaderProps) {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`group flex items-center px-3 py-2 text-base font-medium rounded-md transition-colors focus-visible ${
+                    className={`group flex items-center px-3 py-2 text-base font-medium rounded-2xl transition-colors focus:outline-none focus:outline-2 focus:outline-offset-2 focus:outline-brand-600 ${
                       isActive
-                        ? 'bg-indigo-50 text-indigo-700'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        ? 'bg-brand-600/10 text-brand-600'
+                        : 'text-ink/70 hover:bg-ink/5 hover:text-ink'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >
@@ -147,7 +147,7 @@ export default function Header({ children }: HeaderProps) {
       </header>
 
       {/* Main content wrapper with id for skip link */}
-      <main id="main-content" className="flex-1">
+      <main id="main" className="flex-1">
         {children}
       </main>
     </>
