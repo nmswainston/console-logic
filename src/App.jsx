@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ErrorBoundary from './components/ErrorBoundary'
-import Home from './pages/Home'
-import NotFound from './pages/NotFound'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -13,5 +13,5 @@ export default function App() {
         </Routes>
       </ErrorBoundary>
     </BrowserRouter>
-  )
+  );
 }

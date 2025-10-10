@@ -5,5 +5,5 @@ export default function Footer() {
         © 2025 console.log(ic) | Crafted with logic()
       </div>
     </footer>
-  )
+  );
 }

@@ -2,9 +2,11 @@
 
 /* Theme tokens (Tailwind v4 @theme) */
 @theme {
-  --font-sans: Inter, ui-sans-serif, system-ui, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-sans: Inter, ui-sans-serif, system-ui, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
   --font-display: Urbanist, var(--font-sans);
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-surface: oklch(18% 0.02 260);
   --color-elevated: oklch(22% 0.02 260);
@@ -29,7 +31,9 @@
   --accent: var(--color-accent);
 }
 
-html { color-scheme: dark; }
+html {
+  color-scheme: dark;
+}
 body {
   font-family: var(--font-sans);
   background: var(--surface);
@@ -37,21 +41,50 @@ body {
 }
 
 /* Utility classes */
-.text-terminal-green { color: var(--terminal); }
-.text-accent { color: var(--accent); }
-.bg-surface { background: var(--surface); }
-.bg-elevated { background: var(--elevated); }
-.border-border { border-color: var(--border); }
-.text-muted-foreground { color: var(--muted-foreground); }
-.text-muted { color: var(--muted-foreground); }
-.text-foreground { color: var(--foreground); }
-.text-foreground\/90 { color: color-mix(in oklab, var(--foreground) 90%, transparent 10%); }
-.bg-terminal-green { background: var(--terminal); }
-.font-display { font-family: var(--font-display); }
+.text-terminal-green {
+  color: var(--terminal);
+}
+.text-accent {
+  color: var(--accent);
+}
+.bg-surface {
+  background: var(--surface);
+}
+.bg-elevated {
+  background: var(--elevated);
+}
+.border-border {
+  border-color: var(--border);
+}
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+.text-muted {
+  color: var(--muted-foreground);
+}
+.text-foreground {
+  color: var(--foreground);
+}
+.text-foreground\/90 {
+  color: color-mix(in oklab, var(--foreground) 90%, transparent 10%);
+}
+.bg-terminal-green {
+  background: var(--terminal);
+}
+.font-display {
+  font-family: var(--font-display);
+}
 
 /* Accessible focus ring utility */
-.focus-ring { outline: 2px solid transparent; outline-offset: 2px; }
-.focus-ring:focus-visible { outline-color: var(--terminal); box-shadow: 0 0 0 3px color-mix(in oklab, var(--terminal), transparent 75%); border-radius: 0.5rem; }
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus-ring:focus-visible {
+  outline-color: var(--terminal);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--terminal), transparent 75%);
+  border-radius: 0.5rem;
+}
 
 /* Skip link */
 .skip-link {
@@ -66,7 +99,9 @@ body {
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--terminal), transparent 80%);
   z-index: 1000;
 }
-.skip-link:focus { top: 1rem; }
+.skip-link:focus {
+  top: 1rem;
+}
 
 /* Buttons */
 .btn {
@@ -74,23 +109,33 @@ body {
   border: 1px solid color-mix(in oklab, var(--border), transparent 10%);
   background: color-mix(in oklab, var(--elevated), transparent 10%);
 }
-.btn:hover { box-shadow: 0 0 0 1px color-mix(in oklab, var(--border), transparent 20%); }
+.btn:hover {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--border), transparent 20%);
+}
 .btn-primary {
   color: black;
   background: var(--terminal);
   border-color: var(--terminal);
 }
-.btn-primary:hover { background: var(--color-terminal-green-hover); border-color: var(--color-terminal-green-hover); }
+.btn-primary:hover {
+  background: var(--color-terminal-green-hover);
+  border-color: var(--color-terminal-green-hover);
+}
 .btn-ghost {
   background: transparent;
 }
 
 /* Form elements */
-.input, .textarea {
+.input,
+.textarea {
   @apply w-full rounded-lg bg-transparent px-3 py-2 text-sm;
   border: 1px solid var(--border);
 }
-.input:focus, .textarea:focus { outline: none; box-shadow: 0 0 0 2px color-mix(in oklab, var(--terminal), transparent 70%); }
+.input:focus,
+.textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--terminal), transparent 70%);
+}
 
 /* Cards */
 .card {
@@ -98,12 +143,29 @@ body {
   border-color: var(--border);
   background: var(--elevated);
 }
-.card-title { @apply font-medium; }
-.card-text { @apply text-sm text-muted-foreground; }
+.card-title {
+  @apply font-medium;
+}
+.card-text {
+  @apply text-sm text-muted-foreground;
+}
 
 /* Subtle terminal glow */
-.shadow-glow { box-shadow: 0 0 8px 0 color-mix(in oklab, var(--terminal), transparent 82%); }
+.shadow-glow {
+  box-shadow: 0 0 8px 0 color-mix(in oklab, var(--terminal), transparent 82%);
+}
 
 /* Blinking caret */
-@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-.caret { animation: blink 1.2s steps(1, end) infinite; }
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: blink 1.2s steps(1, end) infinite;
+}
