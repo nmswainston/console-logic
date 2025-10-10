@@ -6,20 +6,41 @@
     <title>404 · Logic not found</title>
     <meta name="color-scheme" content="dark light" />
     <script type="module">
-      import '/src/index.css'
+      import "/src/index.css";
     </script>
   </head>
   <body class="bg-surface text-foreground font-sans antialiased">
     <main class="min-h-screen grid place-items-center p-8">
       <div class="text-center max-w-lg">
         <div class="font-mono text-terminal-green">$ error</div>
-        <h1 class="mt-2 text-3xl md:text-4xl font-semibold" style="font-family: Urbanist, Inter, ui-sans-serif, system-ui, sans-serif">Error 404: Logic not found<span class="ml-1 inline-block h-6 w-[10px] translate-y-[2px] bg-terminal-green" style="animation: blink 1s steps(2, start) infinite"></span></h1>
-        <p class="mt-3 text-muted">The page you’re looking for has gone recursive. Head back home and try again.</p>
-        <a href="/" class="mt-6 inline-flex items-center justify-center rounded-md bg-terminal-green px-4 py-2 text-black font-medium">Return home</a>
+        <h1
+          class="mt-2 text-3xl md:text-4xl font-semibold"
+          style="
+            font-family: Urbanist, Inter, ui-sans-serif, system-ui, sans-serif;
+          "
+        >
+          Error 404: Logic not found<span
+            class="ml-1 inline-block h-6 w-[10px] translate-y-[2px] bg-terminal-green"
+            style="animation: blink 1s steps(2, start) infinite"
+          ></span>
+        </h1>
+        <p class="mt-3 text-muted">
+          The page you’re looking for has gone recursive. Head back home and try
+          again.
+        </p>
+        <a
+          href="/"
+          class="mt-6 inline-flex items-center justify-center rounded-md bg-terminal-green px-4 py-2 text-black font-medium"
+          >Return home</a
+        >
       </div>
     </main>
     <style>
-      @keyframes blink { 50% { opacity: 0; } }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
     </style>
   </body>
 </html>
