@@ -11,7 +11,15 @@ export default function Nav() {
           aria-label="Console Logic home"
           className="focus-ring group inline-flex items-center gap-2"
         >
-          <span className="h-2 w-2 rounded-sm bg-terminal-green shadow-glow"></span>
+          <img
+            src="/logo.png"
+            alt=""
+            aria-hidden="true"
+            className="h-6 w-auto"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
           <span className="font-display text-lg tracking-tight">
             console.log(ic)
           </span>
