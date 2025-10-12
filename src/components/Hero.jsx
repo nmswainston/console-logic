@@ -51,6 +51,8 @@ function Typewriter({ text, speed = 28, startDelay = 200 }) {
   );
 }
 
+import { getMailtoHref } from "../data/contact";
+
 export default function Hero() {
   return (
     <section
@@ -67,7 +69,7 @@ export default function Hero() {
           teams moving. Fewer surprises, faster shipping, measurable results.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#contact" className="btn btn-primary">
+          <a href={getMailtoHref()} className="btn btn-primary">
             Start a project
           </a>
           <a href="#work" className="btn btn-ghost">

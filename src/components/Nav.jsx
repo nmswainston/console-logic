@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getMailtoHref } from "../data/contact";
 
 export default function Nav() {
   return (
@@ -39,7 +40,7 @@ export default function Nav() {
           <li>
             <a
               className="focus-ring btn btn-primary"
-              href="#contact"
+              href={getMailtoHref()}
               aria-label="Start a conversation"
             >
               Let’s talk
