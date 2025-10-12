@@ -41,38 +41,17 @@ body {
 }
 
 /* Utility classes */
-.text-terminal-green {
-  color: var(--terminal);
-}
-.text-accent {
-  color: var(--accent);
-}
-.bg-surface {
-  background: var(--surface);
-}
-.bg-elevated {
-  background: var(--elevated);
-}
-.border-border {
-  border-color: var(--border);
-}
-.text-muted-foreground {
-  color: var(--muted-foreground);
-}
-.text-muted {
-  color: var(--muted-foreground);
-}
-.text-foreground {
-  color: var(--foreground);
-}
-.text-foreground\/90 {
-  color: color-mix(in oklab, var(--foreground) 90%, transparent 10%);
-}
-.bg-terminal-green {
-  background: var(--terminal);
-}
 .font-display {
   font-family: var(--font-display);
+}
+
+/* Motion timing: lean, consistent */
+.transition,
+.transition-colors,
+.transition-opacity,
+.transition-transform {
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 
 /* Accessible focus ring utility */
@@ -143,6 +122,9 @@ body {
   border-color: var(--border);
   background: var(--elevated);
 }
+.card:hover {
+  transform: translateY(-2%);
+}
 .card-title {
   @apply font-medium;
 }
@@ -168,4 +150,17 @@ body {
 }
 .caret {
   animation: blink 1.2s steps(1, end) infinite;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .transition,
+  .transition-colors,
+  .transition-opacity,
+  .transition-transform {
+    transition-duration: 0ms;
+  }
+  .card:hover {
+    transform: none;
+  }
 }
