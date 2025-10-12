@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Nav() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-surface/80 backdrop-blur">
@@ -6,42 +8,33 @@ export default function Nav() {
         aria-label="Primary"
         className="mx-auto flex max-w-screen-xl items-center justify-between px-6 py-4"
       >
-        <a
-          href="/"
+        <Link
+          to="/"
           aria-label="Console Logic home"
           className="focus-ring group inline-flex items-center gap-2"
         >
-          <img
-            src="/logo.png"
-            alt=""
-            aria-hidden="true"
-            className="h-6 w-auto"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-            }}
-          />
           <span className="font-display text-lg tracking-tight">
             console.log(ic)
           </span>
-        </a>
+        </Link>
         <ul className="flex items-center gap-6 text-sm text-muted-foreground">
           <li>
-            <a
+            <Link
               className="focus-ring hover:text-foreground transition-colors"
-              href="#work"
+              to="/projects"
               aria-label="See selected work"
             >
               Work
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className="focus-ring hover:text-foreground transition-colors"
-              href="#about"
+              to="/about"
               aria-label="Learn about the studio"
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
             <a

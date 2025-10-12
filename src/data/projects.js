@@ -1,5 +1,11 @@
 export const projects = [
   {
+    title: "Stacy's 40th Fiesta",
+    tag: "Event Site",
+    link: "https://stacys40thfiesta.com",
+    thumb: "https://stacys40thfiesta.com/social-1200x630.png",
+  },
+  {
     title: "Terminal Tonic",
     tag: "Web App",
     link: "#",

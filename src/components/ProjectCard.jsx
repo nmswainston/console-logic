@@ -1,9 +1,12 @@
 export default function ProjectCard({ title, tag, link = "#", thumb }) {
+  const isExternal = /^https?:\/\//.test(link);
   return (
     <a
       href={link}
       aria-label={`${title} – ${tag}`}
       className="focus-ring group block rounded-xl border border-border/60 bg-elevated p-5 transition hover:shadow-glow"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
     >
       <div className="overflow-hidden rounded-lg">
         <div className="relative aspect-video w-full">
