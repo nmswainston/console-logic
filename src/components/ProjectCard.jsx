@@ -12,10 +12,12 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
         <div className="relative aspect-video w-full">
           {thumb ? (
             <img
-              src={thumb}
+              src={thumb} width="800" height="450"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
               loading="lazy"
+              decoding="async"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
             />
           ) : (
             <div className="absolute inset-0 bg-surface" />
