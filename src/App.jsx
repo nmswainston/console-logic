@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./layout/Layout";
 import Home from "./pages/Home";
@@ -7,18 +7,26 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
+  const router = createBrowserRouter([
+    {
+      element: (
+        <ErrorBoundary>
+          <Layout />
+        </ErrorBoundary>
+      ),
+      children: [
+        { index: true, element: <Home /> },
+        { path: "projects", element: <Projects /> },
+        { path: "about", element: <About /> },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ]);
+
   return (
-    <BrowserRouter>
-      <ErrorBoundary>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </ErrorBoundary>
-    </BrowserRouter>
+    <RouterProvider
+      router={router}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    />
   );
 }

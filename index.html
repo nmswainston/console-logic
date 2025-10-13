@@ -9,23 +9,19 @@
       name="description"
       content="A modern terminal-inspired studio. Smart devs, clean code, logical outcomes."
     />
+    <link rel="canonical" href="https://consolelogic.net/" />
+
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="console.log(ic)" />
+    <meta property="og:site_name" content="console.log(ic)" />
+    <meta property="og:url" content="https://consolelogic.net/" />
+    <meta property="og:title" content="console.log(ic) • Clean builds. Smart automation." />
     <meta
       property="og:description"
-      content="A modern terminal-inspired studio. Smart devs, clean code, logical outcomes."
+      content="A small studio shipping fast, reliable web apps and AI automations."
     />
-    <meta property="og:image" content="/og.png" />
+    <meta property="og:image" content="https://consolelogic.net/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="console.log(ic)" />
-    <meta
-      name="twitter:description"
-      content="A modern terminal-inspired studio. Smart devs, clean code, logical outcomes."
-    />
-    <meta name="twitter:image" content="/og.png" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="/favicon.ico" />
@@ -38,10 +34,31 @@
       rel="stylesheet"
     />
 
+    <!-- JSON-LD: Organization (no Instagram/X) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "console.log(ic)",
+      "url": "https://consolelogic.net/",
+      "logo": "https://consolelogic.net/favicon.svg",
+      "sameAs": ["https://github.com/nmswainston"]
+    }
+    </script>
+
     <meta name="color-scheme" content="dark light" />
   </head>
   <body class="bg-surface text-foreground antialiased">
     <div id="root"></div>
+    
+    <!-- Hidden form for Netlify Forms detection -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

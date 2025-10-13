@@ -1,17 +1,20 @@
 import Hero from "../components/Hero";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
+import ContactModal from "../components/ContactModal";
 import { projects } from "../data/projects";
-import { getMailtoHref } from "../data/contact";
+import { useContactModal } from "../hooks/useContactModal";
 
 export default function Home() {
+  const { isOpen, openModal, closeModal } = useContactModal();
+
   return (
     <>
       <Hero />
       <Section id="work">
         <h2 className="font-display text-2xl">Selected work</h2>
           <div className="mt-8 grid gap-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
-            {projects.slice(0, -4).map((p) => (
+            {projects.map((p) => (
             <ProjectCard
               key={p.title}
               title={p.title}
@@ -34,10 +37,11 @@ export default function Home() {
         <h2 className="font-display text-2xl">
           Let's build something useful
         </h2>
-        <a href={getMailtoHref()} className="btn btn-primary mt-4">
+        <button onClick={openModal} className="btn btn-primary mt-4">
           Start a conversation
-        </a>
+        </button>
       </Section>
+      <ContactModal isOpen={isOpen} onClose={closeModal} />
     </>
   );
 }

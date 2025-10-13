@@ -51,63 +51,69 @@ function Typewriter({ text, speed = 28, startDelay = 200 }) {
   );
 }
 
-import { getMailtoHref } from "../data/contact";
+import ContactModal from "./ContactModal";
+import { useContactModal } from "../hooks/useContactModal";
 
 export default function Hero() {
+  const { isOpen, openModal, closeModal } = useContactModal();
+
   return (
-    <section
-      id="hero"
-      className="mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center"
-    >
-      <div>
-        <h1 className="font-display text-4xl leading-tight sm:text-5xl">
-          Smart devs. Clean code.{" "}
-          <span className="text-terminal-green">Logical</span> outcomes.
-        </h1>
-        <p className="mt-4 max-w-prose text-muted-foreground">
-          We build crisp frontends, tidy backends, and automations that keep
-          teams moving. Fewer surprises, faster shipping, measurable results.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a href={getMailtoHref()} className="btn btn-primary">
-            Start a project
-          </a>
-          <a href="#work" className="btn btn-ghost">
-            See work
-          </a>
-        </div>
-        <div className="mt-8 w-full rounded-xl border border-border/60 bg-elevated p-4 font-mono text-sm">
-          <div className="opacity-70">~/studio</div>
-          <div className="mt-1">
-            <span className="text-terminal-green">console</span>.
-            <span className="text-terminal-green">log</span>(
-            <span className="text-accent">"Welcome to logic."</span>);
-            <BlinkingCaret />
+    <>
+      <section
+        id="hero"
+        className="mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-6 py-24 lg:grid-cols-2 lg:items-center"
+      >
+        <div>
+          <h1 className="font-display text-4xl leading-tight sm:text-5xl">
+            Smart devs. Clean code.{" "}
+            <span className="text-terminal-green">Logical</span> outcomes.
+          </h1>
+          <p className="mt-4 max-w-prose text-muted-foreground">
+            We build crisp frontends, tidy backends, and automations that keep
+            teams moving. Fewer surprises, faster shipping, measurable results.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button onClick={openModal} className="btn btn-primary">
+              Start a project
+            </button>
+            <a href="#work" className="btn btn-ghost">
+              See work
+            </a>
+          </div>
+          <div className="mt-8 w-full rounded-xl border border-border/60 bg-elevated p-4 font-mono text-sm">
+            <div className="opacity-70">~/studio</div>
+            <div className="mt-1">
+              <span className="text-terminal-green">console</span>.
+              <span className="text-terminal-green">log</span>(
+              <span className="text-accent">"Welcome to logic."</span>);
+              <BlinkingCaret />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="rounded-2xl border border-border/60 bg-elevated p-6">
-        <ul className="grid gap-4">
-          <li className="card">
-            <h3 className="card-title">Web Apps</h3>
-            <p className="card-text">
-              React frontends with Tailwind v4, built for speed and sanity.
-            </p>
-          </li>
-          <li className="card">
-            <h3 className="card-title">Sites that sell</h3>
-            <p className="card-text">
-              Clean UX, clear copy, measurable outcomes.
-            </p>
-          </li>
-          <li className="card">
-            <h3 className="card-title">Automation</h3>
-            <p className="card-text">
-              From ops scripts to APIs that keep your team in flow.
-            </p>
-          </li>
-        </ul>
-      </div>
-    </section>
+        <div className="rounded-2xl border border-border/60 bg-elevated p-6">
+          <ul className="grid gap-4">
+            <li className="card">
+              <h3 className="card-title">Web Apps</h3>
+              <p className="card-text">
+                React frontends with Tailwind v4, built for speed and sanity.
+              </p>
+            </li>
+            <li className="card">
+              <h3 className="card-title">Sites that sell</h3>
+              <p className="card-text">
+                Clean UX, clear copy, measurable outcomes.
+              </p>
+            </li>
+            <li className="card">
+              <h3 className="card-title">Automation</h3>
+              <p className="card-text">
+                From ops scripts to APIs that keep your team in flow.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <ContactModal isOpen={isOpen} onClose={closeModal} />
+    </>
   );
 }
