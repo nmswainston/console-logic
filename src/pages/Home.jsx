@@ -1,12 +1,11 @@
 import Hero from "../components/Hero";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
-import ContactModal from "../components/ContactModal";
 import { projects } from "../data/projects";
-import { useContactModal } from "../hooks/useContactModal";
+import { useContactModal } from "../context/ContactModalContext";
 
 export default function Home() {
-  const { isOpen, openModal, closeModal } = useContactModal();
+  const { openModal } = useContactModal();
 
   return (
     <>
@@ -41,7 +40,6 @@ export default function Home() {
           Start a conversation
         </button>
       </Section>
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
     </>
   );
 }

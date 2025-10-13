@@ -51,11 +51,10 @@ function Typewriter({ text, speed = 28, startDelay = 200 }) {
   );
 }
 
-import ContactModal from "./ContactModal";
-import { useContactModal } from "../hooks/useContactModal";
+import { useContactModal } from "../context/ContactModalContext";
 
 export default function Hero() {
-  const { isOpen, openModal, closeModal } = useContactModal();
+  const { openModal } = useContactModal();
 
   return (
     <>
@@ -113,7 +112,6 @@ export default function Hero() {
           </ul>
         </div>
       </section>
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
     </>
   );
 }
