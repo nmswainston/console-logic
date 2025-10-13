@@ -6,10 +6,10 @@ export const projects = [
     thumb: "/projects/stacys40thfiesta.png",
   },
   {
-    title: "Terminal Tonic",
-    tag: "Web App",
-    link: "#",
-    thumb: "https://placehold.co/800x450/0a0a0a/00ff88?text=Terminal+Tonic",
+    title: "Litchfield Perk",
+    tag: "Website",
+    link: "https://www.nmswainston.com",
+    thumb: "/projects/consolelogic.png",
   },
   {
     title: "Logic Layers",
