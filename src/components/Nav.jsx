@@ -1,9 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-import ContactModal from "./ContactModal";
-import { useContactModal } from "../hooks/useContactModal";
+import { useContactModal } from "../context/ContactModalContext";
 
 export default function Nav() {
-  const { isOpen, openModal, closeModal } = useContactModal();
+  const { openModal } = useContactModal();
 
   return (
     <>
@@ -57,7 +56,6 @@ export default function Nav() {
           </ul>
         </nav>
       </header>
-      <ContactModal isOpen={isOpen} onClose={closeModal} />
     </>
   );
 }

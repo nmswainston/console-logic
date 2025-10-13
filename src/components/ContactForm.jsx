@@ -61,12 +61,13 @@ export default function ContactForm({ onClose }) {
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit} 
         className="space-y-4"
+        autoComplete="on"
       >
         {/* Hidden honeypot field for spam protection */}
         <input type="hidden" name="form-name" value="contact" />
         <div style={{ display: 'none' }}>
           <label>
-            Don't fill this out if you're human: <input name="bot-field" />
+            Don't fill this out if you're human: <input name="bot-field" autoComplete="off" />
           </label>
         </div>
         <div>
@@ -82,6 +83,7 @@ export default function ContactForm({ onClose }) {
             required
             className="w-full px-3 py-2 border border-border rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-terminal-green focus:border-transparent"
             placeholder="Your name"
+            autoComplete="name"
           />
         </div>
 
@@ -98,6 +100,7 @@ export default function ContactForm({ onClose }) {
             required
             className="w-full px-3 py-2 border border-border rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-terminal-green focus:border-transparent"
             placeholder="your@email.com"
+            autoComplete="email"
           />
         </div>
 
@@ -113,6 +116,7 @@ export default function ContactForm({ onClose }) {
             onChange={handleChange}
             className="w-full px-3 py-2 border border-border rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-terminal-green focus:border-transparent"
             placeholder="What can we help you with?"
+            autoComplete="off"
           />
         </div>
 
@@ -129,6 +133,7 @@ export default function ContactForm({ onClose }) {
             rows={4}
             className="w-full px-3 py-2 border border-border rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-terminal-green focus:border-transparent resize-none"
             placeholder="Tell us about your project..."
+            autoComplete="off"
           />
         </div>
 
