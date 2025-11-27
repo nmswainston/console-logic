@@ -1,8 +1,17 @@
+import { Helmet } from "react-helmet-async";
 import Section from "../components/Section";
 
 export default function About() {
   return (
     <>
+      <Helmet>
+        <title>About — Console Logic</title>
+        <meta
+          name="description"
+          content="Console Logic is a small studio focused on clean UX and clean code."
+        />
+        <link rel="canonical" href="https://console-logic.dev/about" />
+      </Helmet>
       <Section>
         <h1 className="font-display text-3xl">About</h1>
         <p className="mt-3 max-w-prose text-muted-foreground">

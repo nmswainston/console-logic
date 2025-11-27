@@ -104,18 +104,6 @@ body {
   background: transparent;
 }
 
-/* Form elements */
-.input,
-.textarea {
-  @apply w-full rounded-lg bg-transparent px-3 py-2 text-sm;
-  border: 1px solid var(--border);
-}
-.input:focus,
-.textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--terminal), transparent 70%);
-}
-
 /* Cards */
 .card {
   @apply rounded-xl border p-4 transition;
@@ -147,9 +135,6 @@ body {
   100% {
     opacity: 0;
   }
-}
-.caret {
-  animation: blink 1.2s steps(1, end) infinite;
 }
 
 /* Respect reduced motion preferences */

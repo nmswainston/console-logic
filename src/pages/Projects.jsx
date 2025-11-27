@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/projects";
@@ -5,6 +6,14 @@ import { projects } from "../data/projects";
 export default function Projects() {
   return (
     <>
+      <Helmet>
+        <title>Projects — Console Logic</title>
+        <meta
+          name="description"
+          content="A selection of recent work across apps, sites, and systems."
+        />
+        <link rel="canonical" href="https://console-logic.dev/projects" />
+      </Helmet>
       <Section>
         <h1 className="font-display text-3xl">Projects</h1>
         <p className="mt-3 max-w-prose text-muted-foreground">

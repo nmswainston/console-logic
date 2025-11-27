@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 function BlinkingCaret() {
   const reduce = useReducedMotion();
