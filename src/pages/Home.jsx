@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import { Helmet } from "react-helmet-async";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/projects";
@@ -9,6 +10,14 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>Console Logic — Smart devs. Clean code.</title>
+        <meta
+          name="description"
+          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+        />
+        <link rel="canonical" href="https://console-logic.dev/" />
+      </Helmet>
       <Hero />
       <Section id="work">
         <h2 className="font-display text-2xl">Selected work</h2>
