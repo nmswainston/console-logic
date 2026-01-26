@@ -1,5 +1,4 @@
 import { useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 function BlinkingCaret() {
   const reduce = useReducedMotion();
@@ -8,46 +7,6 @@ function BlinkingCaret() {
       className={`ml-1 inline-block h-5 w-[10px] translate-y-[2px] bg-terminal-green ${reduce ? "" : "[animation:blink_1s_steps(2,_start)_infinite]"}`}
       aria-hidden="true"
     />
-  );
-}
-
-function Typewriter({ text, speed = 28, startDelay = 200 }) {
-  const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    if (reduce) return;
-    let started = false;
-    const startTimer = setTimeout(() => {
-      started = true;
-    }, startDelay);
-    const id = setInterval(() => {
-      if (started) setIndex((i) => (i < text.length ? i + 1 : i));
-    }, speed);
-    return () => {
-      clearInterval(id);
-      clearTimeout(startTimer);
-    };
-  }, [text, speed, startDelay, reduce]);
-  if (reduce) {
-    return (
-      <span className="font-mono">
-        <span>{text}</span>
-        <span
-          className="ml-1 inline-block h-6 w-[10px] translate-y-[2px] bg-terminal-green"
-          aria-hidden="true"
-        />
-      </span>
-    );
-  }
-  const done = index >= text.length;
-  return (
-    <span className="font-mono">
-      <span>{text.slice(0, index)}</span>
-      <span
-        className={`ml-1 inline-block h-6 w-[10px] translate-y-[2px] bg-terminal-green ${done ? "[animation:blink_1s_steps(2,_start)_infinite]" : ""}`}
-        aria-hidden="true"
-      />
-    </span>
   );
 }
 
@@ -84,7 +43,7 @@ export default function Hero() {
             <div className="mt-1">
               <span className="text-terminal-green">console</span>.
               <span className="text-terminal-green">log</span>(
-              <span className="text-accent">"Welcome to logic."</span>);
+              <span className="text-accent">&quot;Welcome to logic.&quot;</span>);
               <BlinkingCaret />
             </div>
           </div>

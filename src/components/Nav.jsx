@@ -50,7 +50,7 @@ export default function Nav() {
                 className="focus-ring btn btn-primary"
                 aria-label="Start a conversation"
               >
-                Let's talk
+                Let&apos;s talk
               </button>
             </li>
           </ul>

@@ -28,13 +28,22 @@ export default function ContactModal({ isOpen, onClose }) {
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onClose();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Close modal"
       />
       
       {/* Modal */}
       <div className="relative w-full max-w-lg bg-surface border border-border rounded-2xl shadow-2xl">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display text-2xl">Let's start a conversation</h2>
+            <h2 className="font-display text-2xl">Let&apos;s start a conversation</h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-elevated rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-terminal-green"
