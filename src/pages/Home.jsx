@@ -43,7 +43,7 @@ export default function Home() {
       </Section>
       <Section id="contact">
         <h2 className="font-display text-2xl">
-          Let's build something useful
+          Let&apos;s build something useful
         </h2>
         <button onClick={openModal} className="btn btn-primary mt-4">
           Start a conversation
