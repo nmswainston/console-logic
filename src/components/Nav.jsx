@@ -18,7 +18,7 @@ export default function Nav() {
             className="focus-ring group inline-flex items-center gap-2"
           >
             <span className="font-display text-lg tracking-tight">
-              console.log(ic)
+              >_console.log(ic)
             </span>
           </Link>
           <ul className="flex items-center gap-6 text-sm text-muted-foreground">

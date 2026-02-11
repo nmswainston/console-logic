@@ -1,5 +1,5 @@
 export const contact = {
-  email: "consolelogicinfo@gmail.com",
+  email: "contact@consolelogic.net",
   subject: "Project inquiry from console.logic",
 };
 
