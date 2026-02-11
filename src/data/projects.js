@@ -1,25 +1,25 @@
 export const projects = [
   {
     title: "Portfolio",
-    tag: "Portfolio",
+    tag: "Personal Website",
     link: "https://www.nmswainston.com",
     thumb: "/projects/nmswainston.png",
   },
   {
     title: "Litchfield Perk",
-    tag: "Marketing Site",
+    tag: "Small Business Marketing Site",
     link: "https://litchfield-perk.netlify.app/",
     thumb: "/projects/litchfield-perk.png",
   },
   {
     title: "Relay",
-    tag: "SaaS",
+    tag: "Client Operations Platform",
     link: "https://relay-clientops.netlify.app/login",
     thumb: "/projects/relay.png",
   },
   {
     title: "Dwellpath",
-    tag: "Dashboard",
+    tag: "Tax Residency Tracking System",
     link: "https://dwellpath-demo.netlify.app/",
     thumb: "/projects/dwellpath.png",
   },
@@ -31,19 +31,19 @@ export const projects = [
   },
   {
     title: "Signal Over Noise",
-    tag: "Content",
+    tag: "AI Learning Platform",
     link: "https://signalovernoise.netlify.app/",
     thumb: "/projects/signal-over-noise.png",
   },
   {
     title: "Neural Vault",
-    tag: "Knowledge Base",
+    tag: "Personal Knowledge System",
     link: "https://neural-vault.netlify.app/",
     thumb: "/projects/neural-vault.png",
   },
   {
     title: "Mini SaaS Starter Kit",
-    tag: "Template",
+    tag: "Multi-Tenant SaaS Framework",
     link: "https://mini-saas-template.netlify.app/",
     thumb: "/projects/mini-saas-starter.png",
   },
