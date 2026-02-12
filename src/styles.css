@@ -149,3 +149,14 @@ body {
     transform: none;
   }
 }
+.logo-primary {
+  @apply text-blue-400;
+}
+
+.logo-accent {
+  @apply text-green-400;
+}
+
+.logo-muted {
+  @apply text-gray-300;
+}
