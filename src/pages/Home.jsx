@@ -22,7 +22,7 @@ export default function Home() {
       <Section id="work">
         <h2 className="font-display text-2xl">Selected work</h2>
           <div className="mt-8 grid gap-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
-            {projects.map((p) => (
+            {projects.slice(0, 6).map((p) => (
             <ProjectCard
               key={p.title}
               title={p.title}
