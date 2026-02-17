@@ -4,12 +4,12 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
     <a
       href={link}
       aria-label={`${title} – ${tag}`}
-      className="focus-ring group block rounded-xl border border-border/60 bg-elevated overflow-hidden transition hover:shadow-glow"
+      className="group block rounded-xl border border-border/60 bg-elevated overflow-hidden transition hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-preview focus:ring-offset-0"
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
     >
       <div className="p-5 pb-0">
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-surface/40">
+        <div className="preview-frame relative aspect-[16/10] w-full overflow-hidden rounded-lg">
           {thumb ? (
             <div className="flex h-full w-full items-center justify-center p-4">
               <img
