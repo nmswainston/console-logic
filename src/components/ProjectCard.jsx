@@ -19,7 +19,7 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
                 alt=""
                 loading="lazy"
                 decoding="async"
-                fetchpriority="high"
+                fetchPriority="high"
                 className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>

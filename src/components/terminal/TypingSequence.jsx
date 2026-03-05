@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import TypingText from "@/components/terminal/TypingText.jsx";
 import { TYPING_SPEED_MS, TYPING_LINE_DELAY_MS } from "@/data/constants";
@@ -8,9 +8,18 @@ export default function TypingSequence({
   speed = TYPING_SPEED_MS,
   lineDelay = TYPING_LINE_DELAY_MS,
   className = "",
+  onComplete,
 }) {
   const reduce = useReducedMotion();
   const [current, setCurrent] = useState(0);
+
+  // With reduced motion, content shows immediately; signal complete after a brief delay
+  useEffect(() => {
+    if (reduce && lines.length > 0) {
+      const t = setTimeout(() => onComplete?.(), 100);
+      return () => clearTimeout(t);
+    }
+  }, [reduce, lines.length, onComplete]);
 
   return (
     <div className={`space-y-1 font-mono text-sm text-terminal-green leading-normal ${className}`}>
@@ -31,6 +40,8 @@ export default function TypingSequence({
               onComplete={() => {
                 if (isActive && i < lines.length - 1) {
                   setCurrent(i + 1);
+                } else if (isActive && i === lines.length - 1) {
+                  onComplete?.();
                 }
               }}
             />

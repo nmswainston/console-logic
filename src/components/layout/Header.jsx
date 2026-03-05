@@ -73,20 +73,6 @@ export default function Header() {
           </li>
 
           <li>
-            <NavLink
-              to="/contact"
-              aria-label="Contact us"
-              className={({ isActive }) =>
-                `focus-ring transition-colors ${
-                  isActive ? "text-foreground" : "hover:text-foreground"
-                }`
-              }
-            >
-              Contact
-            </NavLink>
-          </li>
-
-          <li>
             <button
               onClick={openModal}
               className="focus-ring btn btn-primary"

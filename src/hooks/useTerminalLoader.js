@@ -18,16 +18,18 @@ export function useTerminalLoader(active = true, onComplete) {
     if (!active) return;
 
     if (reduce) {
-      setPercent(100);
-      setDone(true);
-      setVerifying(true);
-      setVerified(true);
-      onComplete?.();
+      queueMicrotask(() => {
+        setPercent(100);
+        setDone(true);
+        setVerifying(true);
+        setVerified(true);
+        onComplete?.();
+      });
       return;
     }
 
     if (percent >= 100) {
-      setDone(true);
+      queueMicrotask(() => setDone(true));
 
       const verifyTimer = setTimeout(() => {
         setVerifying(true);
