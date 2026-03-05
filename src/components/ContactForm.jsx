@@ -44,9 +44,8 @@ export default function ContactForm({ onClose }) {
       } else {
         setSubmitStatus("error");
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus("error");
-      console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -65,7 +64,7 @@ export default function ContactForm({ onClose }) {
       >
         {/* Hidden honeypot field for spam protection */}
         <input type="hidden" name="form-name" value="contact" />
-        <div style={{ display: 'none' }}>
+        <div className="hidden">
           <label>
             Don&apos;t fill this out if you&apos;re human: <input name="bot-field" autoComplete="off" />
           </label>
@@ -138,18 +137,18 @@ export default function ContactForm({ onClose }) {
         </div>
 
         {submitStatus === "success" && (
-          <div className="p-3 bg-green-100 border border-green-300 rounded-lg text-green-800 text-sm">
+          <div className="p-4 rounded-lg border border-terminal-green/30 bg-terminal-green/10 text-terminal-green text-sm leading-normal">
             ✓ Thanks! Your message has been sent successfully.
           </div>
         )}
 
         {submitStatus === "error" && (
-          <div className="p-3 bg-red-100 border border-red-300 rounded-lg text-red-800 text-sm">
+          <div className="p-4 rounded-lg border border-border bg-elevated text-muted-foreground text-sm leading-normal">
             ✗ Something went wrong. Please try again or email us directly.
           </div>
         )}
 
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-4 pt-4">
           <button
             type="submit"
             disabled={isSubmitting}

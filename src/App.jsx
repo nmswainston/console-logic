@@ -1,12 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy } from "react";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Layout from "./layout/Layout";
+import Layout from "@/components/layout/Layout.jsx";
 
-const Home = lazy(() => import("./pages/Home"));
-const Projects = lazy(() => import("./pages/Projects"));
-const About = lazy(() => import("./pages/About"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import TerminalBackground from "@/components/terminal/TerminalBackground.jsx";
+import TerminalGlow from "@/components/terminal/TerminalGlow.jsx";
+import ScanlineOverlay from "@/components/terminal/ScanlineOverlay.jsx";
+
+import ErrorBoundary from "@/components/ErrorBoundary.jsx";
+
+const Home = lazy(() => import("@/pages/Home.jsx"));
+const Work = lazy(() => import("@/pages/Work.jsx"));
+const About = lazy(() => import("@/pages/About.jsx"));
+const Contact = lazy(() => import("@/pages/Contact.jsx"));
+const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
 
 export default function App() {
   const router = createBrowserRouter([
@@ -18,17 +24,26 @@ export default function App() {
       ),
       children: [
         { index: true, element: <Home /> },
-        { path: "projects", element: <Projects /> },
+        { path: "projects", element: <Work /> },
         { path: "about", element: <About /> },
+        { path: "contact", element: <Contact /> },
         { path: "*", element: <NotFound /> },
       ],
     },
   ]);
 
   return (
-    <RouterProvider
-      router={router}
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    />
+    <>
+      {/* Global terminal animation layers */}
+      <TerminalBackground />
+      <TerminalGlow />
+      <ScanlineOverlay />
+
+      {/* App router */}
+      <RouterProvider
+        router={router}
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      />
+    </>
   );
 }

@@ -1,0 +1,22 @@
+/* Short aliases mapped to tokens for readability */
+:root {
+  --surface: var(--color-surface);
+  --elevated: var(--color-elevated);
+  --foreground: var(--color-foreground);
+  --muted-foreground: var(--color-muted-foreground);
+  --border: var(--color-border);
+  --preview: var(--preview-frame);
+  --terminal: var(--color-terminal-green);
+  --terminal-dim: var(--color-terminal-green-dim);
+  --accent: var(--color-accent);
+
+  /* Motion easing - consistent across all animations */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Terminal caret blink */
+  --caret-blink-duration: 1s;
+
+  /* Terminal line height */
+  --terminal-line-height: 1.5;
+}

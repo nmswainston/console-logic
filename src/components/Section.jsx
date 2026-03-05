@@ -1,24 +1,21 @@
-import { motion, useReducedMotion } from "framer-motion";
-import Container from "./Container";
+import { forwardRef } from "react";
+import Container from "@/components/layout/Container.jsx";
 
-export default function Section({
-  id,
-  borderTop = false,
-  className = "",
-  containerClassName = "",
-  children,
-}) {
-  const prefersReduced = useReducedMotion();
+const Section = forwardRef(function Section(
+  { id, borderTop = false, className = "", containerClassName = "", children },
+  ref
+) {
   return (
-    <motion.section
+    <section
+      ref={ref}
       id={id}
-      className={`${borderTop ? "border-t border-neutral-900/60" : ""} py-20 sm:py-24 ${className}`.trim()}
-      initial={prefersReduced ? false : { opacity: 0, y: 16 }}
-      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`relative ${borderTop ? "border-t border-border" : ""} py-24 ${className}`.trim()}
     >
-      <Container className={containerClassName}>{children}</Container>
-    </motion.section>
+      <Container className={containerClassName}>
+        {children}
+      </Container>
+    </section>
   );
-}
+});
+
+export default Section;
