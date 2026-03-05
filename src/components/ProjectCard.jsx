@@ -4,11 +4,11 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
     <a
       href={link}
       aria-label={`${title} – ${tag}`}
-      className="group block rounded-xl border border-border/60 bg-elevated overflow-hidden transition hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-preview focus:ring-offset-0"
+      className="group block rounded-lg border border-border bg-elevated overflow-hidden transition hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-0"
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
     >
-      <div className="p-5 pb-0">
+      <div className="p-6 pb-0">
         <div className="preview-frame relative aspect-[16/10] w-full overflow-hidden rounded-lg">
           {thumb ? (
             <div className="flex h-full w-full items-center justify-center p-4">
@@ -19,7 +19,7 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
                 alt=""
                 loading="lazy"
                 decoding="async"
-                fetchPriority="high"
+                fetchpriority="high"
                 className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>
@@ -29,16 +29,15 @@ export default function ProjectCard({ title, tag, link = "#", thumb }) {
         </div>
       </div>
 
-      <div className="p-5">
-        <div className="text-xs uppercase tracking-wide text-muted-foreground">
+      <div className="p-6">
+        <div className="text-sm uppercase tracking-wide text-muted-foreground leading-normal">
           {tag}
         </div>
-        <div className="mt-2 font-medium">{title}</div>
-        <div className="mt-3 text-sm text-muted-foreground transition-colors group-hover:text-foreground">
+        <div className="mt-2 font-medium text-base leading-snug">{title}</div>
+        <div className="mt-3 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
           View →
         </div>
       </div>
-
     </a>
   );
 }

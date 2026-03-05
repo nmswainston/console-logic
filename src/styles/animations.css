@@ -1,0 +1,24 @@
+/* Blinking caret */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .transition,
+  .transition-colors,
+  .transition-opacity,
+  .transition-transform {
+    transition-duration: 0ms;
+  }
+  .card:hover {
+    transform: none;
+  }
+}

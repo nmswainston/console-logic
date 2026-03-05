@@ -1,8 +1,8 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useContactModal } from "../context/ContactModalContext";
-import Logo from "../components/Logo";
+import { useContactModal } from "@/context/ContactModalContext.jsx";
+import Logo from "@/components/Logo.jsx";
 
-export default function Nav() {
+export default function Header() {
   const { openModal } = useContactModal();
   const location = useLocation();
 
@@ -13,7 +13,7 @@ export default function Nav() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-surface/80 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-surface/80 backdrop-blur">
       <nav
         role="navigation"
         aria-label="Primary"
@@ -28,7 +28,7 @@ export default function Nav() {
           <Logo />
         </Link>
 
-        <ul className="flex items-center gap-6 text-sm text-muted-foreground">
+        <ul className="flex items-center gap-6 text-base text-muted-foreground leading-normal">
           <li>
             <NavLink
               to="/"
@@ -69,6 +69,20 @@ export default function Nav() {
               }
             >
               About
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              to="/contact"
+              aria-label="Contact us"
+              className={({ isActive }) =>
+                `focus-ring transition-colors ${
+                  isActive ? "text-foreground" : "hover:text-foreground"
+                }`
+              }
+            >
+              Contact
             </NavLink>
           </li>
 

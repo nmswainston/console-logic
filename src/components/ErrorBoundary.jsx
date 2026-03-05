@@ -15,7 +15,7 @@ export default class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <div className="mx-auto max-w-screen-md px-6 py-20 text-center">
-          <h1 className="font-display text-2xl">Something went wrong.</h1>
+          <h1 className="font-display text-3xl leading-snug">Something went wrong.</h1>
           <p className="mt-2 text-muted-foreground">
             Try reloading the page to continue.
           </p>

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ContactForm from "./ContactForm";
+import ContactForm from "@/components/ContactForm.jsx";
 
 export default function ContactModal({ isOpen, onClose }) {
   useEffect(() => {
@@ -40,10 +40,10 @@ export default function ContactModal({ isOpen, onClose }) {
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-lg bg-surface border border-border rounded-2xl shadow-2xl">
+      <div className="relative w-full max-w-lg bg-elevated border border-border rounded-lg shadow-md">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display text-2xl">Let&apos;s start a conversation</h2>
+            <h2 className="font-display text-3xl leading-snug">Let&apos;s start a conversation</h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-elevated rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-terminal-green"
