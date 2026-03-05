@@ -11,7 +11,6 @@ import ErrorBoundary from "@/components/ErrorBoundary.jsx";
 const Home = lazy(() => import("@/pages/Home.jsx"));
 const Work = lazy(() => import("@/pages/Work.jsx"));
 const About = lazy(() => import("@/pages/About.jsx"));
-const Contact = lazy(() => import("@/pages/Contact.jsx"));
 const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
 
 export default function App() {
@@ -26,7 +25,6 @@ export default function App() {
         { index: true, element: <Home /> },
         { path: "projects", element: <Work /> },
         { path: "about", element: <About /> },
-        { path: "contact", element: <Contact /> },
         { path: "*", element: <NotFound /> },
       ],
     },

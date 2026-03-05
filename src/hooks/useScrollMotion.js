@@ -26,23 +26,32 @@ export function useScrollMotion({
   });
 
   const y = useTransform(scrollYProgress, [0, 1], yRange);
-  const opacity = useOpacity
-    ? useTransform(
-        scrollYProgress,
-        opacityInputRange,
-        opacityRange,
-        OPACITY_CLAMP
-      )
-    : null;
-  const scale = scaleRange
-    ? useTransform(scrollYProgress, [0, 1], scaleRange)
-    : null;
-  const rotateX = rotateXRange
-    ? useTransform(scrollYProgress, [0, 1], rotateXRange)
-    : null;
-  const rotateY = rotateYRange
-    ? useTransform(scrollYProgress, [0, 1], rotateYRange)
-    : null;
+  const opacityTransform = useTransform(
+    scrollYProgress,
+    opacityInputRange,
+    useOpacity ? opacityRange : [0, 0],
+    OPACITY_CLAMP
+  );
+  const scaleTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    scaleRange ?? [1, 1]
+  );
+  const rotateXTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    rotateXRange ?? [0, 0]
+  );
+  const rotateYTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    rotateYRange ?? [0, 0]
+  );
+
+  const opacity = useOpacity ? opacityTransform : null;
+  const scale = scaleRange ? scaleTransform : null;
+  const rotateX = rotateXRange ? rotateXTransform : null;
+  const rotateY = rotateYRange ? rotateYTransform : null;
 
   return {
     ref: targetRef ? null : ref,

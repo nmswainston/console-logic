@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 
@@ -22,6 +22,7 @@ export default function Home() {
   const workRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
+  const [heroLoadingComplete, setHeroLoadingComplete] = useState(false);
 
   return (
     <>
@@ -34,11 +35,11 @@ export default function Home() {
         <link rel="canonical" href="https://console-logic.dev/" />
       </Helmet>
 
-      <Hero />
+      <Hero onHeroComplete={() => setHeroLoadingComplete(true)} />
 
       {/* Services */}
       <Section id="services" borderTop ref={servicesRef}>
-        <SectionLoader label="loading section: services" sectionRef={servicesRef}>
+        <SectionLoader label="loading section: services" sectionRef={servicesRef} waitForReady={heroLoadingComplete}>
         <ScrollMotion className="mt-6" useOpacity={false}>
           <h2 className="font-display text-3xl leading-snug">What we do best</h2>
           <p className="mt-3 text-base text-muted-foreground leading-normal">

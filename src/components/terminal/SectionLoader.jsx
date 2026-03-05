@@ -12,7 +12,7 @@ import {
 const PROGRESS_INTERVAL_MS = 14; // ~1.4s to reach 100%
 const PROGRESS_INCREMENT = 1;    // slow, readable
 const VERIFY_DELAY = 250;        // pause before verifying
-const LOADED_DELAY = 1100;       // blink time before "section loaded."
+const LOADED_DELAY = 1750;       // blink time before "section loaded."
 const REVEAL_DELAY = 200;        // pause before content reveal
 
 // Hero-matched easing + stagger
@@ -48,6 +48,7 @@ export default function SectionLoader({
   children,
   isLastSection = false,
   offset,
+  waitForReady,
 }) {
   const [isActive, setIsActive] = useState(false);
   const [displayPercent, setDisplayPercent] = useState(0);
@@ -64,9 +65,18 @@ export default function SectionLoader({
   });
 
   // Scroll triggers the loader (but loader itself is timed)
+  // If waitForReady is set, don't start until it's true (e.g. after hero finishes)
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (!isActive && v > 0.15) setIsActive(true);
+    const ready = waitForReady === undefined || waitForReady === true;
+    if (!isActive && v > 0.15 && ready) setIsActive(true);
   });
+
+  // When waitForReady becomes true, check if we should activate (user may have scrolled already)
+  useEffect(() => {
+    if (waitForReady && scrollYProgress.get() > 0.15) {
+      setIsActive(true);
+    }
+  }, [waitForReady]);
 
   // Timer-driven progress bar (slow terminal)
   useEffect(() => {
@@ -86,8 +96,8 @@ export default function SectionLoader({
   useEffect(() => {
     if (displayPercent < 100) return;
   
-    const t1 = setTimeout(() => setShowVerify(true), 250);      // pause before verifying
-    const t2 = setTimeout(() => setShowLoaded(true), 1750);     // slower, readable
+    const t1 = setTimeout(() => setShowVerify(true), VERIFY_DELAY);
+    const t2 = setTimeout(() => setShowLoaded(true), LOADED_DELAY);
   
     return () => {
       clearTimeout(t1);

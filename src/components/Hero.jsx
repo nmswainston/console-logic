@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
@@ -23,7 +23,7 @@ function BlinkingCaret() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onHeroComplete }) {
   const { openModal } = useContactModal();
   const reduce = useReducedMotion();
   const heroRef = useRef(null);
@@ -31,6 +31,7 @@ export default function Hero() {
 
   const heroOffset = ["start end", "end start"];
   const fadeInRange = [0, 0.15];
+  const onBootComplete = useCallback(() => setBootDone(true), []);
 
   return (
     <section
@@ -56,7 +57,7 @@ export default function Hero() {
       )}
 
       {/* Boot sequence (independent, scroll-away) */}
-      <BootSequence onComplete={() => setBootDone(true)} />
+      <BootSequence onComplete={onBootComplete} />
 
       {/* Left column */}
       <div>
@@ -83,6 +84,7 @@ export default function Hero() {
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
                 className="font-display text-4xl sm:text-5xl leading-snug !space-y-0"
+                onComplete={onHeroComplete}
               />
             )}
           </div>
@@ -133,7 +135,7 @@ export default function Hero() {
               <div className="mt-1">
                 <span className="text-terminal-green">console</span>.
                 <span className="text-terminal-green">log</span>(
-                <span className="text-accent">"Welcome to logic."</span>);
+                <span className="text-accent">&quot;Welcome to logic.&quot;</span>);
                 <BlinkingCaret />
               </div>
             </div>

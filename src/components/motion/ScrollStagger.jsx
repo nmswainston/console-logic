@@ -66,14 +66,14 @@ function StaggerChild({ children, index, total, stagger, scrollYProgress, reduce
     skipScrollEffects ? [0, 0, 0, 0] : [16, 16, 0, 0]
   );
 
-  if (reduce) {
-    return <>{children}</>;
-  }
-
   const childStyle = useMemo(
     () => ({ opacity: childOpacity, y: childY }),
     [childOpacity, childY]
   );
+
+  if (reduce) {
+    return <>{children}</>;
+  }
 
   return (
     <motion.div style={childStyle}>
