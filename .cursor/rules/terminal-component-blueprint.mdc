@@ -1,0 +1,58 @@
+---
+description: Terminal-Modern component styling - use blueprint utilities for all new components
+globs: src/components/**/*.jsx
+alwaysApply: false
+---
+
+# Terminal Component Blueprint
+
+All new components must inherit the terminal-modern aesthetic using these utilities. Do not manually restyle; use the blueprint classes.
+
+## Base Identity
+
+- **`.terminal-base`** - Foundation for all components: card background, border, radius, padding, foreground color, sans font.
+- **`.terminal-surface`** - Panel identity: inset highlight + texture + 1px top border (green dim). Use for panel-like components.
+- **`.terminal-panel`** - Inset highlight only.
+- **`.terminal-panel-texture`** - Subtle noise overlay.
+
+## Spacing
+
+- **`.stack-sm`** - Small vertical gap (0.5rem).
+- **`.stack-md`** - Medium vertical gap (1rem). Default for new components.
+- **`.stack-lg`** - Large vertical gap (1.5rem).
+
+## Typography
+
+- **`.terminal-heading`** - Display font, headings.
+- **`.terminal-subheading`** - Display font, subheadings.
+- **`.terminal-body`** - Body text, muted foreground.
+- **`.terminal-mono`** - Monospace elements.
+
+## Code Blocks
+
+- **`.code-block-terminal`** - Elevated background, inset highlight, monospace, dim green top accent.
+
+## CTAs
+
+- **`.btn-primary`** / **`.btn-terminal-primary`** - Green background, black text.
+- **`.btn-ghost`** / **`.btn-terminal-ghost`** - Transparent, subtle border.
+
+## Sections
+
+- **`.terminal-section`** - Section shell: padding, max-width, centering, subtle depth.
+
+## Default for New Components
+
+When creating a new component, include by default:
+
+- `.terminal-base` (or `.terminal-surface` if panel-like)
+- `.terminal-panel` + `.terminal-panel-texture` (if panel)
+- `.stack-md` for vertical rhythm
+- `.terminal-body` for text
+- `.terminal-heading` for titles
+
+## Do Not Modify
+
+- ScrollMotion, ScrollStagger, TypingSequence, BootSequence
+- Animation timing or motion logic
+- Component structure or layout

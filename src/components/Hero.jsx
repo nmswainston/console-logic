@@ -13,10 +13,11 @@ import BootSequence from "@/components/terminal/BootSequence.jsx";
 
 function BlinkingCaret() {
   const reduce = useReducedMotion();
+
   return (
     <span
-      className={`ml-1 inline-block w-[0.6em] h-[1em] bg-terminal-green ${
-        reduce ? "" : "[animation:blink_1s_steps(2,_start)_infinite]"
+      className={`ml-1 inline-block h-[1em] w-[0.6em] bg-terminal-green ${
+        reduce ? "" : "cursor-blink"
       }`}
       aria-hidden="true"
     />
@@ -37,7 +38,7 @@ export default function Hero({ onHeroComplete }) {
     <section
       ref={heroRef}
       id="hero"
-      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-6 pt-12 pb-24 sm:pt-14 lg:grid-cols-2 lg:items-center"
+      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-6 pt-12 pb-20 sm:pt-14 sm:pb-24 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start"
     >
       {/* Terminal glow */}
       {!reduce && (
@@ -49,18 +50,15 @@ export default function Hero({ onHeroComplete }) {
           yRange={[0, 60]}
           className="absolute inset-0 -z-40"
         >
-          <div
-            aria-hidden="true"
-            className="terminal-glow-hero"
-          />
+          <div aria-hidden="true" className="terminal-glow-hero" />
         </ScrollMotion>
       )}
 
-      {/* Boot sequence (independent, scroll-away) */}
+      {/* Boot sequence */}
       <BootSequence onComplete={onBootComplete} />
 
-      {/* Left column */}
-      <div>
+      {/* Left column: headline, support, CTA */}
+      <div className="lg:col-1 lg:row-1">
         {/* Headline */}
         <ScrollMotion
           targetRef={heroRef}
@@ -70,7 +68,7 @@ export default function Hero({ onHeroComplete }) {
           scaleRange={[0.98, 1.02]}
           offset={heroOffset}
         >
-          <div className="h-[9em] sm:h-[12em] overflow-hidden">
+          <div className="h-[8em] overflow-hidden sm:h-[10em] md:h-[12em]">
             {bootDone && (
               <TypingSequence
                 lines={[
@@ -78,12 +76,12 @@ export default function Hero({ onHeroComplete }) {
                   "Clean code.",
                   [
                     { text: "Logical", className: "logo-blue" },
-                    { text: " outcomes." }
-                  ]
+                    { text: " outcomes.", className: "text-headline-accent" },
+                  ],
                 ]}
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
-                className="font-display text-4xl sm:text-5xl leading-snug !space-y-0"
+                className="font-display text-3xl leading-snug !space-y-0 sm:text-4xl md:text-5xl"
                 onComplete={onHeroComplete}
               />
             )}
@@ -98,9 +96,25 @@ export default function Hero({ onHeroComplete }) {
           opacityInputRange={fadeInRange}
           offset={heroOffset}
         >
-          <p className="mt-6 max-w-prose text-base text-muted-foreground leading-normal">
-            We build crisp frontends, tidy backends, and automations that keep
-            teams moving. Fewer surprises, faster shipping, measurable results.
+          <p className="mt-6 max-w-prose text-base leading-normal text-muted-foreground">
+            Console Logic builds fast, polished websites and internal tools for
+            small businesses and growing teams.
+            <br />
+            Clean architecture, thoughtful design, and systems that stay
+            maintainable long after launch.
+          </p>
+        </ScrollMotion>
+
+        {/* Credibility line */}
+        <ScrollMotion
+          targetRef={heroRef}
+          yRange={[28, -18]}
+          opacityRange={[0, 1]}
+          opacityInputRange={fadeInRange}
+          offset={heroOffset}
+        >
+          <p className="mt-4 text-sm text-muted-foreground/90">
+            Fast builds. Clean code. Clear communication.
           </p>
         </ScrollMotion>
 
@@ -115,38 +129,15 @@ export default function Hero({ onHeroComplete }) {
             Start a project
           </button>
           <a href="#work" className="btn btn-ghost">
-            See work
+            View work
           </a>
         </ScrollStagger>
-
-        {/* Code block */}
-        <div className="mt-8 [perspective:1200px]">
-          <ScrollMotion
-            targetRef={heroRef}
-            yRange={[40, -28]}
-            opacityRange={[0, 1]}
-            opacityInputRange={fadeInRange}
-            scaleRange={[0.97, 1.02]}
-            rotateYRange={[1.5, -1.5]}
-            offset={heroOffset}
-          >
-            <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
-              <div className="opacity-70">~/studio</div>
-              <div className="mt-1">
-                <span className="text-terminal-green">console</span>.
-                <span className="text-terminal-green">log</span>(
-                <span className="text-accent">&quot;Welcome to logic.&quot;</span>);
-                <BlinkingCaret />
-              </div>
-            </div>
-          </ScrollMotion>
-        </div>
       </div>
 
-      {/* Right column */}
+      {/* Hero cards - stacks after CTA on mobile */}
       <ScrollStagger
         targetRef={heroRef}
-        className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6"
+        className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-start"
         yRange={[40, -20]}
         offset={heroOffset}
       >
@@ -157,6 +148,30 @@ export default function Hero({ onHeroComplete }) {
           </TerminalCard>
         ))}
       </ScrollStagger>
+
+      {/* Code block - after hero cards on mobile, left column on desktop */}
+      <div className="lg:col-1 lg:row-2 [perspective:1200px]">
+        <ScrollMotion
+          targetRef={heroRef}
+          yRange={[40, -28]}
+          opacityRange={[0, 1]}
+          opacityInputRange={fadeInRange}
+          scaleRange={[0.97, 1.02]}
+          rotateYRange={[1.5, -1.5]}
+          offset={heroOffset}
+        >
+          <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
+            <div className="opacity-70">~/studio</div>
+            <div className="mt-1">
+              <span className="text-terminal-green">console</span>.
+              <span className="text-terminal-green">log</span>(
+              <span className="text-accent">&quot;Welcome to logic.&quot;</span>
+              );
+              <BlinkingCaret />
+            </div>
+          </div>
+        </ScrollMotion>
+      </div>
     </section>
   );
 }

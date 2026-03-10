@@ -47,9 +47,7 @@ export default function TypingSequence({
             />
 
             {isActive && !reduce && (
-              <span
-                className="ml-1 inline-block w-[0.6em] h-[1em] bg-terminal-green [animation:blink_1s_steps(2,_start)_infinite]"
-              />
+              <span className="ml-1 inline-block w-[0.6em] h-[1em] bg-terminal-green cursor-blink" aria-hidden="true" />
             )}
           </div>
         );

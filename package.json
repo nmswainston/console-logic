@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "optimize-images": "node scripts/optimize-images.js",
+    "prebuild": "npm run optimize-images",
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier -w .",
@@ -30,6 +32,7 @@
     "globals": "^17.1.0",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4.1.18",
     "vite": "^7.3.1"
   }

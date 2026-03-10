@@ -2,6 +2,7 @@
 :root {
   --surface: var(--color-surface);
   --elevated: var(--color-elevated);
+  --depth: var(--color-bg-depth);
   --foreground: var(--color-foreground);
   --muted-foreground: var(--color-muted-foreground);
   --border: var(--color-border);
@@ -9,6 +10,7 @@
   --terminal: var(--color-terminal-green);
   --terminal-dim: var(--color-terminal-green-dim);
   --accent: var(--color-accent);
+  --accent-cta: var(--color-accent-cta);
 
   /* Motion easing - consistent across all animations */
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);

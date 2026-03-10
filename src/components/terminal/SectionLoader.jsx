@@ -145,8 +145,7 @@ export default function SectionLoader({
       </div>
 
       {showVerify && <BlinkingVerify text="verifying integrity..." />}
-      {showLoaded && <LoaderLine text="section loading...
-      " />}
+      {showLoaded && <LoaderLine text="section loaded." />}
     </div>
   );
 }

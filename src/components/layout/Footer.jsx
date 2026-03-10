@@ -6,7 +6,7 @@ export default function Footer({
 }) {
   const year = new Date().getFullYear();
   const yearText =
-    yearStart && yearStart !== year ? `${yearStart}–${year}` : `${year}`;
+    yearStart && yearStart !== year ? `${yearStart}-${year}` : `${year}`;
 
   return (
     <footer className="border-t border-border">
