@@ -3,6 +3,7 @@
 @import "./animations.css";
 
 /* Theme tokens (Tailwind v4 @theme) */
+/* Color token system - dark terminal-inspired palette */
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, Arial, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
@@ -10,24 +11,68 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
 
-  --color-surface: oklch(18% 0.02 260);
-  --color-elevated: oklch(22% 0.02 260);
-  --color-card: var(--color-elevated);
+  /* Base palette - darker, sharper hierarchy */
+  --color-bg: #07141D;
+  --color-bg-elevated: #0B1F2A;
+  --color-bg-depth: #0F2A36;
+  --color-surface: #0E1821;
+  --color-panel: #0B1F2A;
+  --color-border: #163042;
+
+  /* Accent - signature green (logo, kicker, hover, highlights) */
+  --color-accent: #19E6A5;
+  /* CTA - primary buttons (slightly deeper for contrast) */
+  --color-accent-cta: #15C78A;
+
+  /* Text */
+  --color-text: #E6F1F5;
+  --color-text-muted: #9FB3C2;
+
+  /* Semantic aliases (preserve existing Tailwind usage) */
   --color-background: var(--color-surface);
-  --color-foreground: oklch(96% 0.01 260);
-  --color-muted-foreground: oklch(72% 0.02 260);
-  --color-border: oklch(35% 0.02 260);
+  --color-elevated: var(--color-panel);
+  --color-card: var(--color-panel);
+  --color-foreground: var(--color-text);
+  --color-muted-foreground: var(--color-text-muted);
 
-  --preview-frame: #151B24;
+  /* Terminal green = accent (for backward compatibility) */
+  --color-terminal-green: var(--color-accent);
+  --color-terminal-green-dim: color-mix(
+    in srgb,
+    var(--color-accent) 78%,
+    var(--color-bg) 22%
+  );
+  --color-terminal-green-hover: color-mix(
+    in srgb,
+    var(--color-accent) 90%,
+    white 10%
+  );
+  --color-terminal-green-subtle: color-mix(
+    in srgb,
+    var(--color-accent) 13%,
+    transparent
+  );
+  --color-terminal-glow: color-mix(
+    in srgb,
+    var(--color-accent) 4%,
+    transparent
+  );
+  --color-terminal-glow-hero: color-mix(
+    in srgb,
+    var(--color-accent) 2%,
+    transparent
+  );
+  --color-scanline-overlay: rgba(0, 0, 0, 0.25);
+
+  /* Logo (existing palette) */
+  --color-logo-blue: #61affe;
+  --color-logo-white: #ffffff;
+
+  /* Hero headline hierarchy - third line softer cyan accent */
+  --color-headline-accent: #4DB8B8;
+
+  --preview-frame: var(--color-panel);
   --color-preview: var(--preview-frame);
-
-  --color-terminal-green: #00e676;
-  --color-terminal-green-dim: color-mix(in oklab, var(--color-terminal-green) 78%, oklch(0.15 0 0));
-  --color-terminal-green-hover: #00f07a;
-  --color-terminal-green-subtle: color-mix(in oklab, var(--color-terminal-green) 13%, transparent);
-  --color-terminal-glow: color-mix(in oklab, var(--color-terminal-green) 5%, transparent);
-  --color-terminal-glow-hero: color-mix(in oklab, var(--color-terminal-green) 3%, transparent);
-  --color-accent: oklch(80% 0.12 150);
 }
 
 html {
@@ -39,8 +84,9 @@ body {
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.5;
-  background: var(--surface);
-  color: var(--foreground);
+  background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-bg-elevated) 100%);
+  background-attachment: fixed;
+  color: var(--color-text);
 }
 
 /* Utility classes */
@@ -48,12 +94,88 @@ body {
   font-family: var(--font-display);
 }
 
-/* Motion timing: lean, consistent */
+.terminal-mono,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Section spacing system - semantic vertical rhythm */
+.section-shell {
+  @apply py-16 md:py-24;
+}
+
+.section-header {
+  @apply mt-6 max-w-2xl;
+}
+
+.section-header-flex {
+  @apply mt-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4;
+}
+
+.section-kicker {
+  @apply text-sm font-medium uppercase tracking-[0.2em];
+  color: var(--color-accent);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--color-accent), transparent 75%);
+}
+
+.section-heading {
+  @apply mt-3 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl;
+}
+
+.section-intro {
+  @apply mt-4 text-[0.9375rem] leading-relaxed max-w-2xl;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.section-content {
+  @apply mt-12;
+}
+
+.section-content-tight {
+  @apply mt-8;
+}
+
+.section-content-loose {
+  @apply mt-16;
+}
+
+.section-grid-gap {
+  @apply gap-6;
+}
+
+.section-cta-gap {
+  @apply gap-4;
+}
+
+/* Inner surface panel - clear depth above page background */
+/* Terminal window treatment: faint top accent, inset highlight, restrained borders */
+.section-surface-panel {
+  background: var(--color-bg-depth);
+  border: 1px solid color-mix(in srgb, var(--color-border), transparent 20%);
+  border-top-color: color-mix(in srgb, var(--color-terminal-green-dim), transparent 60%);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow:
+    /* Top inset highlight - subtle bevel */
+    inset 0 1px 0 0 color-mix(in srgb, var(--color-panel) 95%, white 5%),
+    /* Soft green-tinted top inset - understated panel header feel */
+    inset 0 3px 10px -3px color-mix(in srgb, var(--color-terminal-green-subtle), transparent 92%),
+    /* Faint top accent line - terminal green */
+    0 1px 0 0 color-mix(in srgb, var(--color-terminal-green-dim), transparent 70%);
+}
+@media (min-width: 768px) {
+  .section-surface-panel {
+    padding: 2rem;
+  }
+}
+
+/* Motion timing - consistent ease-out, 150-250ms */
 .transition,
 .transition-colors,
 .transition-opacity,
 .transition-transform {
-  transition-duration: 150ms;
+  transition-duration: 200ms;
   transition-timing-function: ease-out;
 }
 
@@ -62,9 +184,11 @@ body {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
 .focus-ring:focus-visible {
-  outline-color: var(--color-terminal-green);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-terminal-green), transparent 75%);
+  outline-color: var(--color-accent);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-accent), transparent 75%);
   border-radius: 0.5rem;
 }
 
@@ -74,67 +198,152 @@ body {
   left: 1rem;
   top: -100px;
   padding: 0.5rem 0.75rem;
-  background: var(--elevated);
-  color: var(--foreground);
-  border: 1px solid var(--border);
+  background: var(--color-panel);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-terminal-green), transparent 80%);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-accent), transparent 80%);
   z-index: 1000;
 }
+
 .skip-link:focus {
   top: 1rem;
 }
 
 /* Buttons */
 .btn {
-  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-offset-0;
-  border: 1px solid color-mix(in oklab, var(--border), transparent 10%);
-  background: color-mix(in oklab, var(--elevated), transparent 10%);
+  @apply inline-flex items-center justify-center rounded-lg min-h-[44px] px-5 py-3 text-sm transition focus:outline-none focus:ring-2 focus:ring-offset-0;
+  border: 1px solid color-mix(in srgb, var(--color-border), transparent 10%);
+  background: color-mix(
+    in srgb,
+    var(--color-panel),
+    transparent 10%
+  );
 }
+
 .btn:hover {
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--border), transparent 20%);
+  box-shadow: 0 0 0 1px
+    color-mix(in srgb, var(--color-border), transparent 20%);
 }
+
 .btn-primary {
   color: black;
-  background: var(--terminal);
-  border-color: var(--terminal);
+  background: var(--color-accent-cta);
+  border-color: var(--color-accent-cta);
+  transition:
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out,
+    background 150ms ease-out,
+    border-color 150ms ease-out;
 }
-.btn-primary:hover {
-  background: var(--color-terminal-green-hover);
-  border-color: var(--color-terminal-green-hover);
+
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 8px -2px color-mix(in srgb, var(--color-accent-cta), transparent 50%),
+      0 4px 12px -4px color-mix(in srgb, var(--color-accent-cta), transparent 60%);
+    background: color-mix(in srgb, var(--color-accent-cta) 85%, white 15%);
+    border-color: color-mix(in srgb, var(--color-accent-cta) 85%, white 15%);
+  }
 }
+
 .btn-ghost {
   background: transparent;
 }
 
 /* Cards */
 .card {
-  @apply rounded-lg border p-6 transition;
-  border-color: var(--border);
-  background: var(--elevated);
+  @apply rounded-lg border p-6;
+  border-color: var(--color-border);
+  background: var(--color-panel);
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
 }
-.card:hover {
-  transform: translateY(-2%);
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 10px 0 color-mix(in srgb, var(--color-accent), transparent 85%),
+      0 4px 12px -2px color-mix(in srgb, var(--color-bg), transparent 70%);
+    border-color: color-mix(in srgb, var(--color-border), var(--color-accent) 20%);
+  }
 }
+
 .card-title {
   @apply font-medium text-2xl leading-snug;
 }
+
 .card-text {
-  @apply text-sm text-muted-foreground leading-normal;
+  @apply text-sm leading-normal text-muted-foreground;
 }
 
 /* Subtle terminal glow */
 .shadow-glow {
-  box-shadow: 0 0 8px 0 color-mix(in oklab, var(--terminal), transparent 82%);
+  box-shadow: 0 0 8px 0
+    color-mix(in srgb, var(--color-accent), transparent 85%);
 }
 
-/* Background glow (used by TerminalGlow and Hero) */
+/* Minimal glow for green accent text (headlines, kickers) - very subtle */
+.text-terminal-green,
+.text-accent {
+  text-shadow: 0 0 6px color-mix(in srgb, var(--color-accent), transparent 88%);
+}
+
+/* Card hover micro-interaction */
+.card-hover-lift {
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+@media (hover: hover) {
+  .card-hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 10px 0 color-mix(in srgb, var(--color-accent), transparent 85%),
+      0 4px 12px -2px color-mix(in srgb, var(--color-bg), transparent 70%);
+    border-color: color-mix(in srgb, var(--color-border), var(--color-accent) 20%);
+  }
+}
+
+/* Project card hover (link-based card) */
+.project-card-hover {
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+@media (hover: hover) {
+  .project-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 10px 0 color-mix(in srgb, var(--color-accent), transparent 85%),
+      0 4px 12px -2px color-mix(in srgb, var(--color-bg), transparent 70%);
+    border-color: color-mix(in srgb, var(--color-border), var(--color-accent) 20%);
+  }
+
+  /* Prevent double-lift when ProjectCard is inside TerminalCard */
+  .card-hover-lift .project-card-hover:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--color-border);
+  }
+}
+
+/* Background glow */
 .terminal-glow {
   background: var(--color-terminal-glow);
   filter: blur(48px);
 }
 
-/* Hero glow: reduced opacity, smaller blur, top 50% only */
+/* Hero glow */
 .terminal-glow-hero {
   position: absolute;
   inset-inline: 0;
@@ -146,34 +355,63 @@ body {
 }
 
 .logo-green {
-  color: var(--color-terminal-green);
+  color: var(--color-accent);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--color-accent), transparent 70%);
 }
 
 .logo-blue {
-  color: #61affe;
+  color: var(--color-logo-blue);
+}
+
+.text-headline-accent {
+  color: var(--color-headline-accent);
 }
 
 .logo-white {
-  color: #ffffff;
+  color: var(--color-logo-white);
 }
 
 .preview-frame {
   background: var(--preview-frame);
 }
 
-/* Code block terminal inset (subtle inner highlight, 1–2% brighter) */
+/* Project card: expand vertically on hover to reveal full description */
+.project-card-description-reveal {
+  max-height: 2.5rem;
+  overflow: hidden;
+  transition: max-height 200ms ease-out;
+}
+
+@media (hover: hover) {
+  .group:hover .project-card-description-reveal {
+    max-height: 30rem;
+  }
+}
+
+/* Code block terminal inset */
 .code-block-terminal {
-  box-shadow: inset 0 1px 0 0 color-mix(in oklab, var(--color-elevated) 98%, white);
+  box-shadow: inset 0 1px 0 0
+    color-mix(in srgb, var(--color-panel) 98%, white);
 }
 
-/* Terminal panel: card identity with top accent and panel edge */
+/* Terminal panel */
 .terminal-panel {
-  box-shadow: inset 0 1px 0 0 color-mix(in oklab, var(--color-elevated) 98%, white);
+  box-shadow: inset 0 1px 0 0
+    color-mix(in srgb, var(--color-panel) 98%, white);
 }
 
-/* Subtle noise texture for terminal panels (barely visible) */
+/* Mobile nav panel - terminal-inspired dropdown */
+.mobile-nav-panel {
+  background: var(--color-bg-depth);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border), transparent 20%);
+  border-top: 1px solid color-mix(in srgb, var(--color-terminal-green-dim), transparent 60%);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in srgb, var(--color-panel) 98%, white 5%),
+    0 4px 12px -2px color-mix(in srgb, var(--color-bg), transparent 70%);
+}
+
+/* Subtle noise texture for terminal panels */
 .terminal-panel-texture {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.015;
 }
-

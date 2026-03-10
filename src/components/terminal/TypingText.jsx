@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { TYPING_SPEED_MS } from "@/data/constants";
 
@@ -13,6 +13,9 @@ export default function TypingText({
   done = false,
 }) {
   const reduce = useReducedMotion();
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
   const fullText = segments
     ? segments.map((s) => (typeof s === "string" ? s : s.text)).join("")
     : text;
@@ -44,7 +47,7 @@ export default function TypingText({
 
         if (index === fullText.length) {
           clearInterval(interval);
-          onComplete();
+          onCompleteRef.current();
         }
       }, speed);
     };
@@ -55,7 +58,7 @@ export default function TypingText({
       clearTimeout(timer);
       clearInterval(interval);
     };
-  }, [fullText, speed, delay, reduce, active, done, onComplete]);
+  }, [fullText, speed, delay, reduce, active, done]);
 
   function renderContent() {
     if (!segments) {

@@ -9,7 +9,7 @@ const Section = forwardRef(function Section(
     <section
       ref={ref}
       id={id}
-      className={`relative ${borderTop ? "border-t border-border" : ""} py-24 ${className}`.trim()}
+      className={`relative ${borderTop ? "border-t border-border" : ""} section-shell ${className}`.trim()}
     >
       <Container className={containerClassName}>
         {children}
