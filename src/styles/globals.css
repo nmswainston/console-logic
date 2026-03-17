@@ -75,6 +75,43 @@
   --color-preview: var(--preview-frame);
 }
 
+/* Hero code syntax theme – higher contrast, IDE-like */
+.code-path {
+  /* brighter cyan/blue for the path */
+  color: #5bcffd;
+}
+
+.code-path-dim {
+  color: color-mix(in srgb, #5bcffd 60%, var(--color-text-muted) 40%);
+}
+
+.code-func {
+  /* warm orange for console/log */
+  color: #ffb454;
+}
+
+.code-func-dim {
+  color: color-mix(in srgb, #ffb454 65%, var(--color-text-muted) 35%);
+}
+
+.code-punc {
+  /* cool gray for punctuation */
+  color: #9fb3c2;
+}
+
+.code-punc-dim {
+  color: color-mix(in srgb, #9fb3c2 65%, transparent 35%);
+}
+
+.code-string {
+  /* punchy neon‑lime string that still fits the green theme */
+  color: #b8ff5c;
+}
+
+.code-string-dim {
+  color: color-mix(in srgb, #b8ff5c 70%, var(--color-text-muted) 30%);
+}
+
 html {
   color-scheme: dark;
   scroll-behavior: smooth;

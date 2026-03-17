@@ -73,10 +73,9 @@ export default function SectionLoader({
 
   // When waitForReady becomes true, check if we should activate (user may have scrolled already)
   useEffect(() => {
-    if (waitForReady && scrollYProgress.get() > 0.15) {
-      setIsActive(true);
-    }
-  }, [waitForReady]);
+    if (!waitForReady || scrollYProgress.get() <= 0.15) return;
+    queueMicrotask(() => setIsActive(true));
+  }, [waitForReady, scrollYProgress]);
 
   // Timer-driven progress bar (slow terminal)
   useEffect(() => {

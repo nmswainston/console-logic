@@ -13,7 +13,7 @@ export default function About() {
           name="description"
           content="console.log(ic) builds fast, clear, maintainable websites and web apps for teams of all sizes, from non-technical founders to product-minded companies."
         />
-        <link rel="canonical" href="https://console-logic.dev/about" />
+        <link rel="canonical" href="https://consolelogic.net/about" />
       </Helmet>
 
       <Section>
