@@ -64,7 +64,7 @@ export default function ProjectCaseStudy() {
       <Helmet>
         <title>{title} - console.log(ic)</title>
         <meta name="description" content={overview || description} />
-        <link rel="canonical" href={`https://console-logic.dev/projects/${slug}`} />
+        <link rel="canonical" href={`https://consolelogic.net/projects/${slug}`} />
       </Helmet>
 
       <Section>
@@ -151,16 +151,13 @@ export default function ProjectCaseStudy() {
             >
               ← Back to all projects
             </Link>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap shrink-0"
             >
               Back to top
-            </a>
+            </button>
           </div>
 
           <div

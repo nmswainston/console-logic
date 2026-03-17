@@ -6,6 +6,7 @@ import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
 
 import TypingSequence from "@/components/terminal/TypingSequence.jsx";
 import TerminalCard from "@/components/terminal/TerminalCard.jsx";
+import TypingText from "@/components/terminal/TypingText.jsx";
 
 import { heroServices } from "@/data/services";
 import { TYPING_SPEED_MS, TYPING_LINE_DELAY_MS } from "@/data/constants";
@@ -29,6 +30,9 @@ export default function Hero({ onHeroComplete }) {
   const reduce = useReducedMotion();
   const heroRef = useRef(null);
   const [bootDone, setBootDone] = useState(false);
+  const [studioDone, setStudioDone] = useState(false);
+  const [commandDone, setCommandDone] = useState(false);
+  const [headlineDone, setHeadlineDone] = useState(false);
 
   const heroOffset = ["start end", "end start"];
   const fadeInRange = [0, 0.15];
@@ -68,21 +72,24 @@ export default function Hero({ onHeroComplete }) {
           scaleRange={[0.98, 1.02]}
           offset={heroOffset}
         >
-          <div className="h-[8em] overflow-hidden sm:h-[10em] md:h-[12em]">
+          <div className="h-[9em] overflow-hidden sm:h-[10em] md:h-[12em]">
             {bootDone && (
               <TypingSequence
                 lines={[
-                  "Smart devs.",
+                  "Smart builds.",
                   "Clean code.",
                   [
                     { text: "Logical", className: "logo-blue" },
-                    { text: " outcomes.", className: "text-headline-accent" },
+                    { text: " outcomes."},
                   ],
                 ]}
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
-                className="font-display text-3xl leading-snug !space-y-0 sm:text-4xl md:text-5xl"
-                onComplete={onHeroComplete}
+                className="font-display text-8xl leading-snug !space-y-0 md:text-5xl"
+                onComplete={() => {
+                  setHeadlineDone(true);
+                  onHeroComplete?.();
+                }}
               />
             )}
           </div>
@@ -96,7 +103,7 @@ export default function Hero({ onHeroComplete }) {
           opacityInputRange={fadeInRange}
           offset={heroOffset}
         >
-          <p className="mt-6 max-w-prose text-base leading-normal text-muted-foreground">
+          <p className="mt-6 max-w-prose text-lg leading-normal text-muted-foreground sm:text-base">
             Console Logic builds fast, polished websites and internal tools for
             small businesses and growing teams.
             <br />
@@ -113,7 +120,7 @@ export default function Hero({ onHeroComplete }) {
           opacityInputRange={fadeInRange}
           offset={heroOffset}
         >
-          <p className="mt-4 text-sm text-muted-foreground/90">
+          <p className="mt-4 text-base text-muted-foreground/90 sm:text-sm">
             Fast builds. Clean code. Clear communication.
           </p>
         </ScrollMotion>
@@ -161,12 +168,47 @@ export default function Hero({ onHeroComplete }) {
           offset={heroOffset}
         >
           <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
-            <div className="opacity-70">~/studio</div>
-            <div className="mt-1">
-              <span className="text-terminal-green">console</span>.
-              <span className="text-terminal-green">log</span>(
-              <span className="text-accent">&quot;Welcome to logic.&quot;</span>
-              );
+            <TypingText
+              text="~/studio"
+              active={headlineDone}
+              speed={TYPING_SPEED_MS}
+              delay={0}
+              onComplete={() => setStudioDone(true)}
+              className={studioDone ? "code-path" : "code-path-dim"}
+            />
+            <div className="mt-1 flex items-center">
+              <TypingText
+                segments={[
+                  {
+                    text: "console",
+                    className: commandDone ? "code-func" : "code-func-dim",
+                  },
+                  {
+                    text: ".",
+                    className: commandDone ? "code-punc" : "code-punc-dim",
+                  },
+                  {
+                    text: "log",
+                    className: commandDone ? "code-func" : "code-func-dim",
+                  },
+                  {
+                    text: "(",
+                    className: commandDone ? "code-punc" : "code-punc-dim",
+                  },
+                  {
+                    text: '"Welcome to logic."',
+                    className: commandDone ? "code-string" : "code-string-dim",
+                  },
+                  {
+                    text: ");",
+                    className: commandDone ? "code-punc" : "code-punc-dim",
+                  },
+                ]}
+                active={studioDone}
+                speed={TYPING_SPEED_MS}
+                delay={TYPING_LINE_DELAY_MS}
+                onComplete={() => setCommandDone(true)}
+              />
               <BlinkingCaret />
             </div>
           </div>

@@ -26,7 +26,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
   const hasExternalLink = link && /^https?:\/\//.test(link);
   const caseStudyUrl = slug ? `/projects/${slug}` : null;
 
-  const cardContent = (
+  const previewContent = (
     <>
       <div className="project-card-image-wrap p-6 pb-0">
         <div className="preview-frame relative aspect-[16/10] w-full overflow-hidden rounded-lg">
@@ -39,7 +39,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
                 alt=""
                 loading={priority ? "eager" : "lazy"}
                 decoding="async"
-                fetchpriority={priority ? "high" : undefined}
+                {...(priority && { fetchpriority: "high" })}
                 className="max-h-full max-w-full object-contain transition-transform duration-200 ease-out group-hover:scale-[1.03]"
               />
             </div>
@@ -49,7 +49,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
         </div>
       </div>
 
-      <div className="p-6 flex flex-col min-h-[140px]">
+      <div className="px-6 pt-6 pb-0 flex flex-col min-h-[120px]">
         <div className="text-sm uppercase tracking-wide text-muted-foreground leading-normal">
           {tag}
         </div>
@@ -63,23 +63,52 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
             </div>
           </div>
         )}
-        <div className="mt-auto pt-3 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
-          View project
-        </div>
       </div>
     </>
+  );
+
+  const ctaLinks = (
+    <div className="px-6 pb-6 pt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
+      {caseStudyUrl ? (
+        <>
+          <Link
+            to={caseStudyUrl}
+            className="inline-flex items-center gap-1.5 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded font-medium"
+          >
+            View case study
+            <span aria-hidden>→</span>
+          </Link>
+          {hasExternalLink && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded"
+            >
+              See live site
+              <ExternalLinkIcon className="opacity-70" />
+            </a>
+          )}
+        </>
+      ) : (
+        <span>See live site</span>
+      )}
+    </div>
   );
 
   return (
     <div className="group block rounded-lg border border-border bg-elevated overflow-hidden project-card-hover focus-within:ring-2 focus-within:ring-terminal-green focus-within:ring-offset-0 relative">
       {caseStudyUrl ? (
-        <Link
-          to={caseStudyUrl}
-          aria-label={`${title} - ${tag}`}
-          className="block focus:outline-none"
-        >
-          {cardContent}
-        </Link>
+        <>
+          <Link
+            to={caseStudyUrl}
+            aria-label={`${title} - ${tag}`}
+            className="block focus:outline-none"
+          >
+            {previewContent}
+          </Link>
+          {ctaLinks}
+        </>
       ) : (
         <a
           href={link}
@@ -88,7 +117,8 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
           rel={hasExternalLink ? "noopener noreferrer" : undefined}
           className="block focus:outline-none"
         >
-          {cardContent}
+          {previewContent}
+          {ctaLinks}
         </a>
       )}
 

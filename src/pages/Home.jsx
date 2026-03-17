@@ -33,7 +33,7 @@ export default function Home() {
           name="description"
           content="We build crisp frontends, tidy backends, and automations that keep teams moving."
         />
-        <link rel="canonical" href="https://console-logic.dev/" />
+        <link rel="canonical" href="https://consolelogic.net/" />
       </Helmet>
 
       <Hero onHeroComplete={() => setHeroLoadingComplete(true)} />
@@ -43,137 +43,144 @@ export default function Home() {
       {/* Services */}
       <Section id="services" borderTop ref={servicesRef}>
         <SectionLoader label="loading section: services" sectionRef={servicesRef} waitForReady={heroLoadingComplete}>
-        <div className="section-surface-panel">
-          <ScrollMotion className="section-header" useOpacity={false}>
-            <p className="section-kicker">Services</p>
-            <h2 id="services-heading" className="section-heading">
-              What we do best
-            </h2>
-            <p className="section-intro">
-              We focus on clear flows, fast interfaces, and automation that quietly does its job -
-              the parts of the stack that move the needle.
-            </p>
-          </ScrollMotion>
+          <div className="section-surface-panel">
+            <ScrollMotion className="section-header" useOpacity={false}>
+              <p className="section-kicker">Services</p>
+              <h2 id="services-heading" className="section-heading">
+                What we do best
+              </h2>
+              <p className="section-intro">
+                We focus on clear flows, fast interfaces, and automation that quietly does its job -
+                the parts of the stack that move the needle.
+              </p>
+            </ScrollMotion>
 
-          <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-3" initiallyVisible>
-            {services.map((item) => (
-              <TerminalCard key={item.title} className="h-full">
-                <h3 className="card-title">{item.title}</h3>
-                <p className="card-text">{item.text}</p>
-              </TerminalCard>
-            ))}
-          </ScrollStagger>
-        </div>
+            <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-3" initiallyVisible>
+              {services.map((item) => (
+                <TerminalCard key={item.title} className="h-full">
+                  <h3 className="card-title">{item.title}</h3>
+                  <p className="card-text">{item.text}</p>
+                </TerminalCard>
+              ))}
+            </ScrollStagger>
+          </div>
         </SectionLoader>
       </Section>
 
       {/* Work */}
       <Section id="work" borderTop ref={workRef}>
         <SectionLoader label="loading section: work" sectionRef={workRef}>
-        <ScrollMotion className="section-header-flex" useOpacity={false}>
-          <div className="max-w-2xl">
-            <p className="section-kicker">Portfolio</p>
-            <h2 id="work-heading" className="section-heading">
-              Selected work
-            </h2>
-            <p className="section-intro">
-              Projects that demonstrate clear UX thinking, fast performance, and maintainable
-              implementation - so the result works well and stays easy to evolve.
-            </p>
-          </div>
-          <a
-            href="/projects"
-            className="inline-flex items-center min-h-[44px] py-2 text-base text-accent underline-offset-4 hover:underline leading-normal shrink-0"
-          >
-            View all work
-          </a>
-        </ScrollMotion>
+          <ScrollMotion className="section-header-flex" useOpacity={false}>
+            <div className="max-w-2xl">
+              <p className="section-kicker">Portfolio</p>
+              <h2 id="work-heading" className="section-heading">
+                Selected work
+              </h2>
+              <p className="section-intro">
+                Projects that demonstrate clear UX thinking, fast performance, and maintainable
+                implementation - so the result works well and stays easy to evolve.
+              </p>
+            </div>
+            <a
+              href="/projects"
+              className="inline-flex items-center min-h-[44px] py-2 text-base text-accent underline-offset-4 hover:underline leading-normal shrink-0"
+            >
+              View all work
+            </a>
+          </ScrollMotion>
 
-        <ScrollStagger className="section-content section-grid-gap grid sm:grid-cols-2 md:grid-cols-3" initiallyVisible>
-          {projects.slice(0, 6).map((p) => (
-            <TerminalCard key={p.title}>
-              <ProjectCard
-                title={p.title}
-                tag={p.tag}
-                description={p.description}
-                link={p.link}
-                slug={p.slug}
-                thumb={p.thumb}
-              />
-            </TerminalCard>
-          ))}
-        </ScrollStagger>
+          <ScrollStagger className="section-content section-grid-gap grid sm:grid-cols-2 md:grid-cols-3" initiallyVisible>
+            {projects.slice(0, 6).map((p) => (
+              <TerminalCard key={p.title}>
+                <ProjectCard
+                  title={p.title}
+                  tag={p.tag}
+                  description={p.description}
+                  link={p.link}
+                  slug={p.slug}
+                  thumb={p.thumb}
+                />
+              </TerminalCard>
+            ))}
+          </ScrollStagger>
         </SectionLoader>
       </Section>
 
       {/* About */}
       <Section id="about" borderTop ref={aboutRef}>
         <SectionLoader label="loading section: about" sectionRef={aboutRef} isLastSection>
-        <div className="section-surface-panel">
-          <ScrollMotion className="section-header" useOpacity={false}>
-            <p className="section-kicker">About</p>
-            <h2 id="about-heading" className="section-heading">
-              About the studio
-            </h2>
-            <p className="section-intro">
-              A small studio focused on clear flows, simple architecture, and software that stays
-              fast and understandable. You bring the business context; we translate it into
-              something that works.
-            </p>
-          </ScrollMotion>
+          <div className="section-surface-panel">
+            <ScrollMotion className="section-header" useOpacity={false}>
+              <p className="section-kicker">About</p>
+              <h2 id="about-heading" className="section-heading">
+                About the studio
+              </h2>
+              <p className="section-intro">
+                A small studio focused on clear flows, simple architecture, and software that stays
+                fast and understandable. You bring the business context; we translate it into
+                something that works.
+              </p>
+            </ScrollMotion>
 
-          <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-3" initiallyVisible>
-            {[
-              {
-                title: "Clear communication",
-                text: "Projects move forward when everyone understands the plan. We keep decisions transparent and explain the technical parts in plain language.",
-              },
-              {
-                title: "Practical architecture",
-                text: "Simple systems age better than clever ones. We design software that teams can understand, maintain, and extend.",
-              },
-              {
-                title: "Maintainable builds",
-                text: "The goal is software that stays easy to live with. Fast, readable, and structured so future updates are straightforward.",
-              },
-            ].map((item) => (
-              <TerminalCard key={item.title} className="h-full">
-                <h3 className="card-title">{item.title}</h3>
-                <p className="card-text">{item.text}</p>
-              </TerminalCard>
-            ))}
-          </ScrollStagger>
-        </div>
+            <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-3" initiallyVisible>
+              {[
+                {
+                  title: "Clear communication",
+                  text: "Projects move forward when everyone understands the plan. We keep decisions transparent and explain the technical parts in plain language.",
+                },
+                {
+                  title: "Practical architecture",
+                  text: "Simple systems age better than clever ones. We design software that teams can understand, maintain, and extend.",
+                },
+                {
+                  title: "Maintainable builds",
+                  text: "The goal is software that stays easy to live with. Fast, readable, and structured so future updates are straightforward.",
+                },
+              ].map((item) => (
+                <TerminalCard key={item.title} className="h-full">
+                  <h3 className="card-title">{item.title}</h3>
+                  <p className="card-text">{item.text}</p>
+                </TerminalCard>
+              ))}
+            </ScrollStagger>
+          </div>
         </SectionLoader>
       </Section>
 
       {/* Contact */}
       <Section id="contact" borderTop ref={contactRef}>
         <SectionLoader label="loading section: contact" sectionRef={contactRef} offset={SECTION_LOADER_OFFSET_CONTACT}>
-        <div className="section-surface-panel">
-          <ScrollMotion className="section-header" useOpacity={false}>
-            <p className="section-kicker">Get in touch</p>
-            <h2 id="contact-heading" className="section-heading">
-              Let us make your software less stressful
-            </h2>
-            <p className="section-intro">
-              Whether you need a new site, a cleaner frontend, or automation that quietly does
-              its job. We ship useful things and keep them easy to live with.
-            </p>
+          <div className="section-surface-panel">
+            <ScrollMotion className="section-header" useOpacity={false}>
+              <p className="section-kicker">Get in touch</p>
+              <h2 id="contact-heading" className="section-heading">
+                Let us make your software less stressful
+              </h2>
+              <p className="section-intro">
+                Whether you need a new site, a cleaner frontend, or automation that quietly does
+                its job. We ship useful things and keep them easy to live with.
+              </p>
 
-            <ScrollStagger className="section-content section-cta-gap flex flex-wrap items-center" initiallyVisible>
-              <button
-                onClick={openModal}
-                className="btn btn-primary"
+              <ScrollStagger
+                className="mt-1 mb-7 section-cta-gap flex flex-wrap items-center"
+                initiallyVisible
               >
-                Start a conversation
-              </button>
-              <a href="#hero" className="btn btn-ghost">
-                Back to top
-              </a>
-            </ScrollStagger>
-          </ScrollMotion>
-        </div>
+                <button
+                  onClick={openModal}
+                  className="btn btn-primary"
+                >
+                  Start a conversation
+                </button>
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="btn btn-ghost"
+                >
+                  Back to top
+                </button>
+              </ScrollStagger>
+            </ScrollMotion>
+          </div>
         </SectionLoader>
       </Section>
     </>

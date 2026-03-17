@@ -39,8 +39,8 @@ export const TERMINAL_DELAY_AFTER_COMPLETE = 500;
 export const TERMINAL_VERIFY_DELAY = 1200;
 
 /** Typing animation (ms) */
-export const TYPING_SPEED_MS = 20;
-export const TYPING_LINE_DELAY_MS = 200;
+export const TYPING_SPEED_MS = 50;
+export const TYPING_LINE_DELAY_MS = 100;
 
 /** SectionLoader timed progress (no scroll) */
 export const PROGRESS_INCREMENT = 2;

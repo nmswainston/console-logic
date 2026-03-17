@@ -1,6 +1,6 @@
 export default function Footer({
   brandName = "console.log(ic)",
-  brandUrl = "https://www.consolelogic.net",
+  brandUrl = "https://consolelogic.net",
   showCraftedBy = true,
   yearStart,
 }) {

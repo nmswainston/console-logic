@@ -12,7 +12,7 @@ export default function Work() {
           name="description"
           content="A selection of recent work across apps, sites, and systems."
         />
-        <link rel="canonical" href="https://console-logic.dev/projects" />
+        <link rel="canonical" href="https://consolelogic.net/projects" />
       </Helmet>
       <Section>
         <h1 className="font-display text-3xl leading-snug sm:text-4xl md:text-5xl">Projects</h1>
