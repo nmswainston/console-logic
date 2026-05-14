@@ -1,55 +1,51 @@
 # Console Logic
 
-Personal developer portfolio and site for Nick Swainston's dev work.
+Personal developer site and portfolio for Nick Swainston.
 
-## Overview
+## Problem
 
-Console Logic is the personal website and dev portfolio for Nick Swainston. It showcases projects, skills, and work — serving as the public face of `console-logic`, the dev brand/handle.
+Developers need a central online presence that represents their work and brand — but most portfolio sites are either cookie-cutter templates or take too long to build from scratch.
+
+## Solution
+
+Console Logic is a hand-built personal site that serves as the public face of the `console-logic` dev brand. Clean, fast, and built to showcase real work rather than filler content.
+
+## Screenshots
+
+> *Add 2–4 screenshots here*
 
 ## Tech Stack
 
 - JavaScript
 - Vite
 - Tailwind CSS
-- PostCSS
 
-## Getting Started
+## Features
 
-### Prerequisites
+- Project showcase with descriptions and links
+- About section and professional background
+- Custom 404 page
+- Fast static site with optimized Vite build
+- Cursor AI rules for AI-assisted development
 
-- Node.js 18+
-- npm
-
-### Installation
+## Installation
 
 ```bash
 npm install
-```
-
-### Development
-
-```bash
 npm run dev
 ```
 
-### Build
+## Lessons Learned
 
-```bash
-npm run build
-```
+- A developer's personal site is itself a project — it should demonstrate the same care as client work
+- Keeping a portfolio lean and up to date is an ongoing habit, not a one-time task
+- Performance matters for first impressions — a slow portfolio site undercuts the work it's showcasing
 
-## Project Structure
+## Future Improvements
 
-```
-src/          # Site source code (components, pages, styles)
-public/       # Static assets
-scripts/      # Build and utility scripts
-```
-
-## Notes
-
-- Custom 404 page included (`404.html`)
-- Cursor rules for AI-assisted development in `.cursor/rules/`
+- Case study write-ups for featured projects
+- Blog or writing section
+- Dark/light mode toggle
 
 ---
 
