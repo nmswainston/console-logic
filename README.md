@@ -10,10 +10,6 @@ Developers need a central online presence that represents their work and brand â
 
 Console Logic is a hand-built personal site that serves as the public face of the `console-logic` dev brand. Clean, fast, and built to showcase real work rather than filler content.
 
-## Screenshots
-
-> *Add 2â€“4 screenshots here*
-
 ## Tech Stack
 
 - JavaScript
