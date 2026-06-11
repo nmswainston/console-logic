@@ -94,7 +94,7 @@ export default function Hero({ onHeroComplete }) {
     <section
       ref={heroRef}
       id="hero"
-      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-8 px-6 pt-12 pb-20 sm:pt-14 sm:pb-24 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start lg:gap-10"
+      className="relative -mt-16 mx-auto grid max-w-screen-xl grid-cols-1 gap-8 px-6 pt-6 pb-20 sm:pt-14 sm:pb-24 lg:mt-0 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start lg:gap-10"
     >
       {/* Terminal glow */}
       {!reduce && (
@@ -113,8 +113,10 @@ export default function Hero({ onHeroComplete }) {
       {/* Boot sequence */}
       <BootSequence onComplete={onBootComplete} />
 
-      {/* Left column: headline → sub → credibility → CTAs → code block (mobile/tablet only) */}
-      <div className="lg:col-1 lg:row-1">
+      {/* Left column. On mobile/tablet it fills the first viewport and centers its
+          content (headline → code block → sub → credibility → CTAs), pushing the
+          service cards below the fold. On desktop it returns to normal grid flow. */}
+      <div className="flex min-h-[calc(100dvh_-_4rem)] flex-col justify-center lg:col-1 lg:row-1 lg:block lg:min-h-0">
         {/* Headline */}
         <ScrollMotion
           targetRef={heroRef}
@@ -127,7 +129,7 @@ export default function Hero({ onHeroComplete }) {
           {/* Height matches exactly 3 lines at the fluid font size — no dead space */}
           <div
             className="overflow-hidden"
-            style={{ height: "calc(4.2 * clamp(1.5rem, 8vw, 3.75rem))" }}
+            style={{ height: "calc(4.2 * clamp(1.5rem, 8vw, 3.5rem))" }}
           >
             {bootDone && (
               <TypingSequence
@@ -141,7 +143,7 @@ export default function Hero({ onHeroComplete }) {
                 ]}
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
-                className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.75rem)] leading-snug !space-y-0"
+                className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.5rem)] leading-snug !space-y-0"
                 onComplete={() => {
                   setHeadlineDone(true);
                   onHeroComplete?.();
@@ -149,6 +151,21 @@ export default function Hero({ onHeroComplete }) {
               />
             )}
           </div>
+        </ScrollMotion>
+
+        {/* Code block — sits directly under the headline on mobile/tablet; hidden on
+            desktop, where it appears in its own grid cell (bottom-left). */}
+        <ScrollMotion
+          targetRef={heroRef}
+          yRange={[40, -28]}
+          opacityRange={[0, 1]}
+          opacityInputRange={fadeInRange}
+          scaleRange={[0.97, 1.02]}
+          rotateYRange={[1.5, -1.5]}
+          offset={heroOffset}
+          className="mt-8 lg:hidden [perspective:1200px]"
+        >
+          <CodeBlock {...codeBlockProps} />
         </ScrollMotion>
 
         {/* Subheadline */}
@@ -195,20 +212,6 @@ export default function Hero({ onHeroComplete }) {
             View work
           </a>
         </ScrollStagger>
-
-        {/* Code block — flows naturally after CTAs on mobile/tablet, hidden on desktop */}
-        <ScrollMotion
-          targetRef={heroRef}
-          yRange={[40, -28]}
-          opacityRange={[0, 1]}
-          opacityInputRange={fadeInRange}
-          scaleRange={[0.97, 1.02]}
-          rotateYRange={[1.5, -1.5]}
-          offset={heroOffset}
-          className="mt-8 lg:hidden [perspective:1200px]"
-        >
-          <CodeBlock {...codeBlockProps} />
-        </ScrollMotion>
       </div>
 
       {/* Hero cards — right column on desktop, below left col on mobile/tablet */}
