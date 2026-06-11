@@ -9,13 +9,15 @@ const navLinks = [
 
 export default function Footer({
   brandName = "console.log(ic)",
-  brandUrl = "https://consolelogic.net",
+  brandUrl = "/",
   showCraftedBy = true,
   yearStart,
 }) {
   const year = new Date().getFullYear();
   const yearText =
     yearStart && yearStart !== year ? `${yearStart}-${year}` : `${year}`;
+
+  const isExternal = /^https?:\/\//.test(brandUrl);
 
   return (
     <footer className="border-t border-border">
@@ -24,12 +26,25 @@ export default function Footer({
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           {/* Brand */}
           <div>
-            <a
-              href={brandUrl}
-              className="font-mono text-base text-accent transition-colors hover:text-foreground"
-            >
-              {">_"}{brandName}
-            </a>
+            {isExternal ? (
+              <a
+                href={brandUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-base text-accent transition-colors hover:text-foreground"
+              >
+                {">_"}
+                {brandName}
+              </a>
+            ) : (
+              <Link
+                to={brandUrl}
+                className="font-mono text-base text-accent transition-colors hover:text-foreground"
+              >
+                {">_"}
+                {brandName}
+              </Link>
+            )}
             <p className="mt-2 text-sm text-muted-foreground max-w-xs leading-relaxed">
               Fast builds. Clean code. Clear communication.
             </p>
@@ -73,12 +88,23 @@ export default function Footer({
         <div className="mt-10 border-t border-border pt-6 text-xs font-mono text-muted-foreground">
           <span>
             © {yearText}{" "}
-            <a
-              href={brandUrl}
-              className="text-accent hover:text-foreground transition-colors"
-            >
-              {brandName}
-            </a>
+            {isExternal ? (
+              <a
+                href={brandUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-foreground transition-colors"
+              >
+                {brandName}
+              </a>
+            ) : (
+              <Link
+                to={brandUrl}
+                className="text-accent hover:text-foreground transition-colors"
+              >
+                {brandName}
+              </Link>
+            )}
             {showCraftedBy && " | Crafted with logic"}
           </span>
         </div>
