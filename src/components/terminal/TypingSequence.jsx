@@ -21,8 +21,15 @@ export default function TypingSequence({
     }
   }, [reduce, lines.length, onComplete]);
 
+  // Font, size, color, and line-height come from `className` (and the inner
+  // TypingText spans). Don't emit competing defaults like text-sm or
+  // leading-normal here: with conflicting utilities on one element the winner
+  // depends on stylesheet order, which differs between the dev server and the
+  // production build and made the hero headline render at text-8xl on dev but
+  // md:text-5xl in production.
   return (
-    <div className={`space-y-1 font-mono text-sm text-terminal-green leading-normal ${className}`}>
+    <div className={`space-y-1 ${className}`}>
+
       {lines.map((line, i) => {
         const isActive = i === current;
         const isDone = i < current;
