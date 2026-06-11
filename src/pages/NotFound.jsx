@@ -1,12 +1,12 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 
 export default function NotFound() {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>404 - Page not found | console.log(ic)</title>
         <meta name="robots" content="noindex, follow" />
-      </Helmet>
+      </Head>
       <main className="min-h-[100dvh] grid place-items-center p-8">
         <div className="text-center max-w-lg">
           <div className="font-mono text-terminal-green">$ error</div>

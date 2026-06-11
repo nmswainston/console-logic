@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite-react-ssg dev",
     "optimize-images": "node scripts/optimize-images.js",
-    "prebuild": "npm run optimize-images",
-    "build": "vite build",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "prebuild": "npm run sitemap && npm run optimize-images",
+    "build": "vite-react-ssg build",
     "preview": "vite preview",
     "format": "prettier -w .",
     "lint": "eslint .",
@@ -18,8 +19,8 @@
     "framer-motion": "^12.29.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^6.30.4",
+    "vite-react-ssg": "^0.9.1-beta.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
