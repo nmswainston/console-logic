@@ -11,35 +11,25 @@ export default function Button({
   onClick,
   href,
   className = "",
+  as,
   ...props
 }) {
   const reduce = useReducedMotion();
-  const cn = `${variants[variant] || variants.primary} ${className}`.trim();
+  const cn = `${variants[variant] || variants.primary} focus-ring ${className}`.trim();
 
-  if (href) {
-    return (
-      <motion.a
-        href={href}
-        className={cn}
-        whileHover={reduce ? {} : { scale: 1.04 }}
-        whileTap={reduce ? {} : { scale: 0.98 }}
-        {...props}
-      >
-        {children}
-      </motion.a>
-    );
-  }
+  const Component = as === "a" || href ? motion.a : motion.button;
 
   return (
-    <motion.button
-      type="button"
+    <Component
+      type={Component === motion.button ? "button" : undefined}
       onClick={onClick}
+      href={href}
       className={cn}
       whileHover={reduce ? {} : { scale: 1.04 }}
       whileTap={reduce ? {} : { scale: 0.97 }}
       {...props}
     >
       {children}
-    </motion.button>
+    </Component>
   );
 }

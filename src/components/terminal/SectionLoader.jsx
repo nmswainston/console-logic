@@ -8,12 +8,12 @@ import {
   SECTION_LOADER_OFFSET_LAST,
 } from "@/data/constants";
 
-// Slow terminal pacing
-const PROGRESS_INTERVAL_MS = 14; // ~1.4s to reach 100%
-const PROGRESS_INCREMENT = 1;    // slow, readable
-const VERIFY_DELAY = 250;        // pause before verifying
-const LOADED_DELAY = 1750;       // blink time before "section loaded."
-const REVEAL_DELAY = 200;        // pause before content reveal
+// Snappy terminal pacing — total reveal time ~550ms after trigger
+const PROGRESS_INTERVAL_MS = 4;  // reaches 100% in ~80ms
+const PROGRESS_INCREMENT = 5;    // 20 steps to 100%
+const VERIFY_DELAY = 80;         // pause before verifying
+const LOADED_DELAY = 300;        // brief flash before content reveal
+const REVEAL_DELAY = 80;         // pause before content reveal
 
 // Hero-matched easing + stagger
 const revealParent = {
@@ -94,10 +94,10 @@ export default function SectionLoader({
   // After 100%, show verifying → then loaded
   useEffect(() => {
     if (displayPercent < 100) return;
-  
+
     const t1 = setTimeout(() => setShowVerify(true), VERIFY_DELAY);
     const t2 = setTimeout(() => setShowLoaded(true), LOADED_DELAY);
-  
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);

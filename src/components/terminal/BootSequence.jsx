@@ -31,7 +31,7 @@ export default function BootSequence({ onComplete }) {
       initial={{ y: 0, opacity: 1 }}
       animate={scrollAway ? { y: -32, opacity: 0 } : { y: 0, opacity: 1 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="font-mono text-sm text-terminal-green absolute top-4 sm:top-6 left-6 leading-normal pointer-events-none"
+      className="font-mono text-[13px] sm:text-sm md:text-base text-terminal-green absolute top-4 sm:top-6 left-6 leading-normal pointer-events-none"
     >
       <div>{`> system booting...`}</div>
 
