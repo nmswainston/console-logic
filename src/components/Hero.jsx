@@ -25,6 +25,56 @@ function BlinkingCaret() {
   );
 }
 
+function CodeBlock({ headlineDone, studioDone, commandDone, setStudioDone, setCommandDone }) {
+  return (
+    <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
+      <TypingText
+        text="~/studio"
+        active={headlineDone}
+        speed={TYPING_SPEED_MS}
+        delay={0}
+        onComplete={() => setStudioDone(true)}
+        className={studioDone ? "code-path" : "code-path-dim"}
+      />
+      <div className="mt-1 flex items-center">
+        <TypingText
+          segments={[
+            {
+              text: "console",
+              className: commandDone ? "code-func" : "code-func-dim",
+            },
+            {
+              text: ".",
+              className: commandDone ? "code-punc" : "code-punc-dim",
+            },
+            {
+              text: "log",
+              className: commandDone ? "code-func" : "code-func-dim",
+            },
+            {
+              text: "(",
+              className: commandDone ? "code-punc" : "code-punc-dim",
+            },
+            {
+              text: '"Welcome to logic."',
+              className: commandDone ? "code-string" : "code-string-dim",
+            },
+            {
+              text: ");",
+              className: commandDone ? "code-punc" : "code-punc-dim",
+            },
+          ]}
+          active={studioDone}
+          speed={TYPING_SPEED_MS}
+          delay={TYPING_LINE_DELAY_MS}
+          onComplete={() => setCommandDone(true)}
+        />
+        <BlinkingCaret />
+      </div>
+    </div>
+  );
+}
+
 export default function Hero({ onHeroComplete }) {
   const { openModal } = useContactModal();
   const reduce = useReducedMotion();
@@ -38,11 +88,13 @@ export default function Hero({ onHeroComplete }) {
   const fadeInRange = [0, 0.15];
   const onBootComplete = useCallback(() => setBootDone(true), []);
 
+  const codeBlockProps = { headlineDone, studioDone, commandDone, setStudioDone, setCommandDone };
+
   return (
     <section
       ref={heroRef}
       id="hero"
-      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-6 pt-12 pb-20 sm:pt-14 sm:pb-24 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start"
+      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-8 px-6 pt-12 pb-20 sm:pt-14 sm:pb-24 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start lg:gap-10"
     >
       {/* Terminal glow */}
       {!reduce && (
@@ -61,7 +113,7 @@ export default function Hero({ onHeroComplete }) {
       {/* Boot sequence */}
       <BootSequence onComplete={onBootComplete} />
 
-      {/* Left column: headline, support, CTA */}
+      {/* Left column: headline → sub → credibility → CTAs → code block (mobile/tablet only) */}
       <div className="lg:col-1 lg:row-1">
         {/* Headline */}
         <ScrollMotion
@@ -72,7 +124,11 @@ export default function Hero({ onHeroComplete }) {
           scaleRange={[0.98, 1.02]}
           offset={heroOffset}
         >
-          <div className="h-[9em] overflow-hidden sm:h-[10em] md:h-[12em]">
+          {/* Height matches exactly 3 lines at the fluid font size — no dead space */}
+          <div
+            className="overflow-hidden"
+            style={{ height: "calc(4.2 * clamp(1.5rem, 8vw, 3.75rem))" }}
+          >
             {bootDone && (
               <TypingSequence
                 lines={[
@@ -85,7 +141,7 @@ export default function Hero({ onHeroComplete }) {
                 ]}
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
-                className="font-display text-8xl leading-snug !space-y-0 md:text-5xl"
+                className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.75rem)] leading-snug !space-y-0"
                 onComplete={() => {
                   setHeadlineDone(true);
                   onHeroComplete?.();
@@ -139,9 +195,23 @@ export default function Hero({ onHeroComplete }) {
             View work
           </a>
         </ScrollStagger>
+
+        {/* Code block — flows naturally after CTAs on mobile/tablet, hidden on desktop */}
+        <ScrollMotion
+          targetRef={heroRef}
+          yRange={[40, -28]}
+          opacityRange={[0, 1]}
+          opacityInputRange={fadeInRange}
+          scaleRange={[0.97, 1.02]}
+          rotateYRange={[1.5, -1.5]}
+          offset={heroOffset}
+          className="mt-8 lg:hidden [perspective:1200px]"
+        >
+          <CodeBlock {...codeBlockProps} />
+        </ScrollMotion>
       </div>
 
-      {/* Hero cards - stacks after CTA on mobile */}
+      {/* Hero cards — right column on desktop, below left col on mobile/tablet */}
       <ScrollStagger
         targetRef={heroRef}
         className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-start"
@@ -156,8 +226,8 @@ export default function Hero({ onHeroComplete }) {
         ))}
       </ScrollStagger>
 
-      {/* Code block - after hero cards on mobile, left column on desktop */}
-      <div className="lg:col-1 lg:row-2 [perspective:1200px]">
+      {/* Code block — desktop only, explicit grid placement bottom-left */}
+      <div className="hidden lg:block lg:col-1 lg:row-2 [perspective:1200px]">
         <ScrollMotion
           targetRef={heroRef}
           yRange={[40, -28]}
@@ -167,51 +237,7 @@ export default function Hero({ onHeroComplete }) {
           rotateYRange={[1.5, -1.5]}
           offset={heroOffset}
         >
-          <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
-            <TypingText
-              text="~/studio"
-              active={headlineDone}
-              speed={TYPING_SPEED_MS}
-              delay={0}
-              onComplete={() => setStudioDone(true)}
-              className={studioDone ? "code-path" : "code-path-dim"}
-            />
-            <div className="mt-1 flex items-center">
-              <TypingText
-                segments={[
-                  {
-                    text: "console",
-                    className: commandDone ? "code-func" : "code-func-dim",
-                  },
-                  {
-                    text: ".",
-                    className: commandDone ? "code-punc" : "code-punc-dim",
-                  },
-                  {
-                    text: "log",
-                    className: commandDone ? "code-func" : "code-func-dim",
-                  },
-                  {
-                    text: "(",
-                    className: commandDone ? "code-punc" : "code-punc-dim",
-                  },
-                  {
-                    text: '"Welcome to logic."',
-                    className: commandDone ? "code-string" : "code-string-dim",
-                  },
-                  {
-                    text: ");",
-                    className: commandDone ? "code-punc" : "code-punc-dim",
-                  },
-                ]}
-                active={studioDone}
-                speed={TYPING_SPEED_MS}
-                delay={TYPING_LINE_DELAY_MS}
-                onComplete={() => setCommandDone(true)}
-              />
-              <BlinkingCaret />
-            </div>
-          </div>
+          <CodeBlock {...codeBlockProps} />
         </ScrollMotion>
       </div>
     </section>
