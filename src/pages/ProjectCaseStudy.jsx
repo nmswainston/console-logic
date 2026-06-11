@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import { useParams, Link } from "react-router-dom";
 import Section from "@/components/Section.jsx";
 import { getProjectBySlug, getAdjacentProjects } from "@/data/projects";
@@ -32,10 +32,10 @@ export default function ProjectCaseStudy() {
   if (!project) {
     return (
       <>
-        <Helmet>
+        <Head>
           <title>Project not found | console.log(ic)</title>
           <meta name="robots" content="noindex, follow" />
-        </Helmet>
+        </Head>
         <main className="min-h-[100dvh] grid place-items-center p-8">
           <div className="text-center max-w-lg">
             <div className="font-mono text-terminal-green">$ error</div>
@@ -58,14 +58,25 @@ export default function ProjectCaseStudy() {
   const { title, tag, thumb, description, overview, problem, approach, outcome, techStack, link } = project;
   const hasLiveSite = link && /^https?:\/\//.test(link);
   const { prev, next } = getAdjacentProjects(slug);
+  const canonical = `https://consolelogic.net/projects/${slug}`;
+  const metaDescription = overview || description;
+  const ogImage = thumb ? `https://consolelogic.net${thumb}` : "https://consolelogic.net/og.png";
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{title} - console.log(ic)</title>
-        <meta name="description" content={overview || description} />
-        <link rel="canonical" href={`https://consolelogic.net/projects/${slug}`} />
-      </Helmet>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${title} - console.log(ic)`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:title" content={`${title} - console.log(ic)`} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImage} />
+      </Head>
 
       <Section>
         <header className="section-header max-w-3xl">
