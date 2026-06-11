@@ -44,10 +44,10 @@
     
     <!-- Hidden form for Netlify Forms detection -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="text" name="subject" />
-      <textarea name="message"></textarea>
+      <input type="text" name="name" autocomplete="name" />
+      <input type="email" name="email" autocomplete="email" />
+      <input type="text" name="subject" autocomplete="off" />
+      <textarea name="message" autocomplete="off"></textarea>
     </form>
     
     <script type="module" src="/src/main.jsx"></script>
