@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
@@ -27,14 +27,25 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>console.log(ic) - Smart devs. Clean code.</title>
         <meta
           name="description"
           content="We build crisp frontends, tidy backends, and automations that keep teams moving."
         />
         <link rel="canonical" href="https://consolelogic.net/" />
-      </Helmet>
+        <meta property="og:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta
+          property="og:description"
+          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+        />
+        <meta property="og:url" content="https://consolelogic.net/" />
+        <meta name="twitter:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta
+          name="twitter:description"
+          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+        />
+      </Head>
 
       <Hero onHeroComplete={() => setHeroLoadingComplete(true)} />
 

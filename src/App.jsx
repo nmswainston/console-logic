@@ -1,49 +1,38 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy } from "react";
 import Layout from "@/components/layout/Layout.jsx";
-
-import TerminalBackground from "@/components/terminal/TerminalBackground.jsx";
-import TerminalGlow from "@/components/terminal/TerminalGlow.jsx";
-import ScanlineOverlay from "@/components/terminal/ScanlineOverlay.jsx";
-
 import ErrorBoundary from "@/components/ErrorBoundary.jsx";
 
-const Home = lazy(() => import("@/pages/Home.jsx"));
-const Work = lazy(() => import("@/pages/Work.jsx"));
-const ProjectCaseStudy = lazy(() => import("@/pages/ProjectCaseStudy.jsx"));
-const About = lazy(() => import("@/pages/About.jsx"));
-const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
+import Home from "@/pages/Home.jsx";
+import Work from "@/pages/Work.jsx";
+import ProjectCaseStudy from "@/pages/ProjectCaseStudy.jsx";
+import About from "@/pages/About.jsx";
+import NotFound from "@/pages/NotFound.jsx";
 
-export default function App() {
-  const router = createBrowserRouter([
-    {
-      element: (
-        <ErrorBoundary>
-          <Layout />
-        </ErrorBoundary>
-      ),
-      children: [
-        { index: true, element: <Home /> },
-        { path: "projects", element: <Work /> },
-        { path: "projects/:slug", element: <ProjectCaseStudy /> },
-        { path: "about", element: <About /> },
-        { path: "*", element: <NotFound /> },
-      ],
-    },
-  ]);
+import { projects } from "@/data/projects";
 
-  return (
-    <>
-      {/* Global terminal animation layers */}
-      <TerminalBackground />
-      <TerminalGlow />
-      <ScanlineOverlay />
-
-      {/* App router */}
-      <RouterProvider
-        router={router}
-        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-      />
-    </>
-  );
-}
+/**
+ * Route table shared by the client router and the static-site generator.
+ * vite-react-ssg crawls these at build time and emits one HTML file per
+ * route, expanding the dynamic case-study route via getStaticPaths.
+ */
+export const routes = [
+  {
+    path: "/",
+    element: (
+      <ErrorBoundary>
+        <Layout />
+      </ErrorBoundary>
+    ),
+    entry: "src/components/layout/Layout.jsx",
+    children: [
+      { index: true, element: <Home /> },
+      { path: "projects", element: <Work /> },
+      {
+        path: "projects/:slug",
+        element: <ProjectCaseStudy />,
+        getStaticPaths: () => projects.map((p) => `projects/${p.slug}`),
+      },
+      { path: "about", element: <About /> },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+];

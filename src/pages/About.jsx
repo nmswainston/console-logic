@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 import Section from "@/components/Section.jsx";
 
@@ -7,14 +7,25 @@ export default function About() {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>About - console.log(ic)</title>
         <meta
           name="description"
           content="console.log(ic) builds fast, clear, maintainable websites and web apps for teams of all sizes, from non-technical founders to product-minded companies."
         />
         <link rel="canonical" href="https://consolelogic.net/about" />
-      </Helmet>
+        <meta property="og:title" content="About - console.log(ic)" />
+        <meta
+          property="og:description"
+          content="console.log(ic) builds fast, clear, maintainable websites and web apps for teams of all sizes, from non-technical founders to product-minded companies."
+        />
+        <meta property="og:url" content="https://consolelogic.net/about" />
+        <meta name="twitter:title" content="About - console.log(ic)" />
+        <meta
+          name="twitter:description"
+          content="console.log(ic) builds fast, clear, maintainable websites and web apps for teams of all sizes, from non-technical founders to product-minded companies."
+        />
+      </Head>
 
       <Section>
         {/* Intro */}
