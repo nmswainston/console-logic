@@ -85,10 +85,10 @@ export default function About() {
 
         {/* If you're not technical */}
         <ScrollMotion className="mt-24 section-header max-w-prose" useOpacity={false}>
-          <p className="section-kicker">If you're not technical</p>
+          <p className="section-kicker">If you&rsquo;re not technical</p>
           <h2 className="section-heading">We keep things simple</h2>
           <p className="section-intro">
-            Most clients aren't. We keep things simple, explain decisions in plain
+            Most clients aren&rsquo;t. We keep things simple, explain decisions in plain
             language, and guide you through the process without jargon or overwhelm.
             You focus on your business; we handle the technical side.
           </p>
@@ -156,10 +156,10 @@ export default function About() {
         {/* CTA */}
         <ScrollMotion className="mt-24 section-header max-w-prose" useOpacity={false}>
           <p className="section-kicker">Ready when you are</p>
-          <h2 className="section-heading">Let's build something that lasts</h2>
+          <h2 className="section-heading">Let&rsquo;s build something that lasts</h2>
           <p className="section-intro">
             If the approach here sounds like the kind of work you want to do,
-            we'd love to hear what you're building.
+            we&rsquo;d love to hear what you&rsquo;re building.
           </p>
           <div className="mt-6">
             <button onClick={openModal} className="btn btn-primary">
