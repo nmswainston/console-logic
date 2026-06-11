@@ -7,7 +7,8 @@ export default function TypingSequence({
   lines = [],
   speed = TYPING_SPEED_MS,
   lineDelay = TYPING_LINE_DELAY_MS,
-  className = "",
+  // Default: small terminal mono style. Override entirely by passing className.
+  className = "font-mono text-sm text-terminal-green leading-normal",
   onComplete,
 }) {
   const reduce = useReducedMotion();
@@ -29,7 +30,6 @@ export default function TypingSequence({
   // md:text-5xl in production.
   return (
     <div className={`space-y-1 ${className}`}>
-
       {lines.map((line, i) => {
         const isActive = i === current;
         const isDone = i < current;
