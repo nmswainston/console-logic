@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import Section from "@/components/Section.jsx";
 import ProjectCard from "@/components/ProjectCard.jsx";
 import { projects } from "@/data/projects";
@@ -6,14 +6,25 @@ import { projects } from "@/data/projects";
 export default function Work() {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Projects - console.log(ic)</title>
         <meta
           name="description"
           content="A selection of recent work across apps, sites, and systems."
         />
         <link rel="canonical" href="https://consolelogic.net/projects" />
-      </Helmet>
+        <meta property="og:title" content="Projects - console.log(ic)" />
+        <meta
+          property="og:description"
+          content="A selection of recent work across apps, sites, and systems."
+        />
+        <meta property="og:url" content="https://consolelogic.net/projects" />
+        <meta name="twitter:title" content="Projects - console.log(ic)" />
+        <meta
+          name="twitter:description"
+          content="A selection of recent work across apps, sites, and systems."
+        />
+      </Head>
       <Section>
         <h1 className="font-display text-3xl leading-snug sm:text-4xl md:text-5xl">Projects</h1>
         <p className="mt-3 max-w-prose text-base text-muted-foreground leading-normal">
