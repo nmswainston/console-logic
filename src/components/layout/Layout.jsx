@@ -3,6 +3,7 @@ import { Head } from "vite-react-ssg";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import Header from "@/components/layout/Header.jsx";
 import Footer from "@/components/layout/Footer.jsx";
+import BackToTopButton from "@/components/BackToTopButton.jsx";
 
 import TerminalBackground from "@/components/terminal/TerminalBackground.jsx";
 import TerminalGlow from "@/components/terminal/TerminalGlow.jsx";
@@ -58,6 +59,7 @@ function LayoutContent() {
         <Outlet />
       </main>
       <Footer />
+      <BackToTopButton />
       {isOpen && (
         <Suspense fallback={null}>
           <ContactModal isOpen={isOpen} onClose={closeModal} />
