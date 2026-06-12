@@ -17,6 +17,10 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { SECTION_LOADER_OFFSET_CONTACT } from "@/data/constants";
 
+// Hidden until real client quotes replace the placeholders below.
+// Flip to true to bring the "What clients say" section back.
+const SHOW_TESTIMONIALS = false;
+
 // TODO: Replace these with real client quotes before going live.
 // Keep each quote short (1–2 sentences) and attribute to first name + role/company.
 const testimonials = [
@@ -137,7 +141,11 @@ export default function Home() {
 
       {/* About */}
       <Section id="about" borderTop ref={aboutRef}>
-        <SectionLoader label="loading section: about" sectionRef={aboutRef}>
+        <SectionLoader
+          label="loading section: about"
+          sectionRef={aboutRef}
+          isLastSection={!SHOW_TESTIMONIALS}
+        >
           <div className="section-surface-panel">
             <ScrollMotion className="section-header" useOpacity={false}>
               <p className="section-kicker">About</p>
@@ -176,33 +184,35 @@ export default function Home() {
         </SectionLoader>
       </Section>
 
-      {/* Testimonials */}
-      <Section id="testimonials" borderTop ref={testimonialsRef}>
-        <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef} isLastSection>
-          <div className="section-surface-panel">
-            <ScrollMotion className="section-header" useOpacity={false}>
-              <p className="section-kicker">What clients say</p>
-              <h2 id="testimonials-heading" className="section-heading">
-                Heard from the people we build for
-              </h2>
-            </ScrollMotion>
+      {/* Testimonials — hidden behind SHOW_TESTIMONIALS until real quotes land */}
+      {SHOW_TESTIMONIALS && (
+        <Section id="testimonials" borderTop ref={testimonialsRef}>
+          <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef} isLastSection>
+            <div className="section-surface-panel">
+              <ScrollMotion className="section-header" useOpacity={false}>
+                <p className="section-kicker">What clients say</p>
+                <h2 id="testimonials-heading" className="section-heading">
+                  Heard from the people we build for
+                </h2>
+              </ScrollMotion>
 
-            <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-2" initiallyVisible>
-              {testimonials.map((t) => (
-                <TerminalCard key={t.name + t.role} className="h-full">
-                  <p className="card-text text-base leading-relaxed">
-                    {"“"}{t.quote}{"”"}
-                  </p>
-                  <p className="mt-4 text-sm font-mono text-terminal-green">
-                    {"—"} {t.name},{" "}
-                    <span className="text-muted-foreground">{t.role}</span>
-                  </p>
-                </TerminalCard>
-              ))}
-            </ScrollStagger>
-          </div>
-        </SectionLoader>
-      </Section>
+              <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-2" initiallyVisible>
+                {testimonials.map((t) => (
+                  <TerminalCard key={t.name + t.role} className="h-full">
+                    <p className="card-text text-base leading-relaxed">
+                      {"“"}{t.quote}{"”"}
+                    </p>
+                    <p className="mt-4 text-sm font-mono text-terminal-green">
+                      {"—"} {t.name},{" "}
+                      <span className="text-muted-foreground">{t.role}</span>
+                    </p>
+                  </TerminalCard>
+                ))}
+              </ScrollStagger>
+            </div>
+          </SectionLoader>
+        </Section>
+      )}
 
       {/* Contact */}
       <Section id="contact" borderTop ref={contactRef}>
