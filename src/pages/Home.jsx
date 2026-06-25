@@ -17,29 +17,11 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { SECTION_LOADER_OFFSET_CONTACT } from "@/data/constants";
 
-// TODO: Replace these with real client quotes before going live.
-// Keep each quote short (1–2 sentences) and attribute to first name + role/company.
-const testimonials = [
-  {
-    quote:
-      "Console Logic delivered a clean, fast site and made the whole process easy to follow. No jargon, no surprises — just a site that works.",
-    name: "Client name",
-    role: "Founder",
-  },
-  {
-    quote:
-      "We replaced a mess of spreadsheets with an internal tool that actually fits how our team works. It's been running quietly in the background ever since.",
-    name: "Client name",
-    role: "Operations lead",
-  },
-];
-
 export default function Home() {
   const { openModal } = useContactModal();
   const servicesRef = useRef(null);
   const workRef = useRef(null);
   const aboutRef = useRef(null);
-  const testimonialsRef = useRef(null);
   const contactRef = useRef(null);
   const [heroLoadingComplete, setHeroLoadingComplete] = useState(false);
 
@@ -169,34 +151,6 @@ export default function Home() {
                 <TerminalCard key={item.title} className="h-full">
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-text">{item.text}</p>
-                </TerminalCard>
-              ))}
-            </ScrollStagger>
-          </div>
-        </SectionLoader>
-      </Section>
-
-      {/* Testimonials */}
-      <Section id="testimonials" borderTop ref={testimonialsRef}>
-        <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef} isLastSection>
-          <div className="section-surface-panel">
-            <ScrollMotion className="section-header" useOpacity={false}>
-              <p className="section-kicker">What clients say</p>
-              <h2 id="testimonials-heading" className="section-heading">
-                Heard from the people we build for
-              </h2>
-            </ScrollMotion>
-
-            <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-2" initiallyVisible>
-              {testimonials.map((t) => (
-                <TerminalCard key={t.name + t.role} className="h-full">
-                  <p className="card-text text-base leading-relaxed">
-                    {"“"}{t.quote}{"”"}
-                  </p>
-                  <p className="mt-4 text-sm font-mono text-terminal-green">
-                    {"—"} {t.name},{" "}
-                    <span className="text-muted-foreground">{t.role}</span>
-                  </p>
                 </TerminalCard>
               ))}
             </ScrollStagger>
