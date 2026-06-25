@@ -17,11 +17,33 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { SECTION_LOADER_OFFSET_CONTACT } from "@/data/constants";
 
+// Hidden until real client quotes replace the placeholders below.
+// Flip to true to bring the "What clients say" section back.
+const SHOW_TESTIMONIALS = false;
+
+// TODO: Replace these with real client quotes before going live.
+// Keep each quote short (1–2 sentences) and attribute to first name + role/company.
+const testimonials = [
+  {
+    quote:
+      "Console Logic delivered a clean, fast site and made the whole process easy to follow. No jargon, no surprises — just a site that works.",
+    name: "Client name",
+    role: "Founder",
+  },
+  {
+    quote:
+      "We replaced a mess of spreadsheets with an internal tool that actually fits how our team works. It's been running quietly in the background ever since.",
+    name: "Client name",
+    role: "Operations lead",
+  },
+];
+
 export default function Home() {
   const { openModal } = useContactModal();
   const servicesRef = useRef(null);
   const workRef = useRef(null);
   const aboutRef = useRef(null);
+  const testimonialsRef = useRef(null);
   const contactRef = useRef(null);
   const [heroLoadingComplete, setHeroLoadingComplete] = useState(false);
 
@@ -119,7 +141,11 @@ export default function Home() {
 
       {/* About */}
       <Section id="about" borderTop ref={aboutRef}>
-        <SectionLoader label="loading section: about" sectionRef={aboutRef}>
+        <SectionLoader
+          label="loading section: about"
+          sectionRef={aboutRef}
+          isLastSection={!SHOW_TESTIMONIALS}
+        >
           <div className="section-surface-panel">
             <ScrollMotion className="section-header" useOpacity={false}>
               <p className="section-kicker">About</p>
@@ -158,6 +184,36 @@ export default function Home() {
         </SectionLoader>
       </Section>
 
+      {/* Testimonials — hidden behind SHOW_TESTIMONIALS until real quotes land */}
+      {SHOW_TESTIMONIALS && (
+        <Section id="testimonials" borderTop ref={testimonialsRef}>
+          <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef} isLastSection>
+            <div className="section-surface-panel">
+              <ScrollMotion className="section-header" useOpacity={false}>
+                <p className="section-kicker">What clients say</p>
+                <h2 id="testimonials-heading" className="section-heading">
+                  Heard from the people we build for
+                </h2>
+              </ScrollMotion>
+
+              <ScrollStagger className="section-content section-grid-gap grid md:grid-cols-2" initiallyVisible>
+                {testimonials.map((t) => (
+                  <TerminalCard key={t.name + t.role} className="h-full">
+                    <p className="card-text text-base leading-relaxed">
+                      {"“"}{t.quote}{"”"}
+                    </p>
+                    <p className="mt-4 text-sm font-mono text-terminal-green">
+                      {"—"} {t.name},{" "}
+                      <span className="text-muted-foreground">{t.role}</span>
+                    </p>
+                  </TerminalCard>
+                ))}
+              </ScrollStagger>
+            </div>
+          </SectionLoader>
+        </Section>
+      )}
+
       {/* Contact */}
       <Section id="contact" borderTop ref={contactRef}>
         <SectionLoader label="loading section: contact" sectionRef={contactRef} offset={SECTION_LOADER_OFFSET_CONTACT}>
@@ -184,6 +240,22 @@ export default function Home() {
                   className="btn btn-primary"
                 >
                   Start a conversation
+                </button>
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="btn btn-ghost inline-flex items-center gap-2"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                  Back to top
                 </button>
               </ScrollStagger>
             </ScrollMotion>
