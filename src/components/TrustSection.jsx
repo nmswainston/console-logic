@@ -25,16 +25,12 @@ const trustItems = [
     },
 ];
 
-export default function TrustSection({ waitForReady }) {
+export default function TrustSection() {
     const trustRef = useRef(null);
 
     return (
         <Section id="trust" borderTop ref={trustRef}>
-            <SectionLoader
-                label="loading section: trust"
-                sectionRef={trustRef}
-                waitForReady={waitForReady}
-            >
+            <SectionLoader label="loading section: trust" sectionRef={trustRef}>
                 <ScrollMotion className="section-header" useOpacity={false}>
                     <p className="section-kicker">Why clients hire Console Logic</p>
 
