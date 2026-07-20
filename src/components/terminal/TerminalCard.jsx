@@ -2,11 +2,15 @@ import { useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 
-export default function TerminalCard({ children, className = "" }) {
+/* hoverRing=false keeps the border color constant on hover (no green ring) -
+   used for project tiles, where the description panel expands the tile and the
+   border should not brighten while it does. */
+export default function TerminalCard({ children, className = "", hoverRing = true }) {
   const reduce = useReducedMotion();
   const hoverClasses = useMemo(
-    () => (reduce ? "" : "group card-hover-lift"),
-    [reduce]
+    () =>
+      reduce ? "" : `group card-hover-lift${hoverRing ? "" : " card-hover-quiet"}`,
+    [reduce, hoverRing]
   );
 
   return (
@@ -17,10 +21,12 @@ export default function TerminalCard({ children, className = "" }) {
         aria-hidden="true"
         className="terminal-panel-texture pointer-events-none absolute inset-0 rounded-lg"
       />
-      <div
-        className={`absolute inset-0 rounded-lg border border-terminal-green/20 pointer-events-none opacity-0 transition-opacity duration-200 ease-out ${reduce ? "" : "group-hover:opacity-100"}`}
-        aria-hidden
-      />
+      {hoverRing && (
+        <div
+          className={`absolute inset-0 rounded-lg border border-terminal-green/20 pointer-events-none opacity-0 transition-opacity duration-200 ease-out ${reduce ? "" : "group-hover:opacity-100"}`}
+          aria-hidden
+        />
+      )}
       <div className="relative [&>*+*]:mt-3">{children}</div>
     </motion.div>
   );

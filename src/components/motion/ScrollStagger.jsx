@@ -51,7 +51,7 @@ export default function ScrollStagger({
 
 function StaggerChild({ children, index, total, stagger, scrollYProgress, reduce, initiallyVisible }) {
   const staggerSpan = Math.min(0.2, Math.max(STAGGER_CHILDREN, stagger * total));
-  const start = Math.min(0.5, index * STAGGER_CHILDREN);
+  const start = Math.min(0.5, index * stagger);
   const end = start + staggerSpan;
   const skipScrollEffects = reduce || initiallyVisible;
   const childOpacity = useTransform(
