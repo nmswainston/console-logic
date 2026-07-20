@@ -25,12 +25,12 @@ function BlinkingCaret() {
   );
 }
 
-function CodeBlock({ headlineDone, studioDone, commandDone, setStudioDone, setCommandDone }) {
+function CodeBlock({ startTyping, studioDone, commandDone, setStudioDone, setCommandDone }) {
   return (
     <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
       <TypingText
         text="~/studio"
-        active={headlineDone}
+        active={startTyping}
         speed={TYPING_SPEED_MS}
         delay={0}
         onComplete={() => setStudioDone(true)}
@@ -82,13 +82,18 @@ export default function Hero() {
   const [bootDone, setBootDone] = useState(false);
   const [studioDone, setStudioDone] = useState(false);
   const [commandDone, setCommandDone] = useState(false);
-  const [headlineDone, setHeadlineDone] = useState(false);
+  // The code block starts typing as soon as the headline's SECOND line begins,
+  // so it isn't missed while the full tagline finishes.
+  const [codeBlockActive, setCodeBlockActive] = useState(false);
 
   const heroOffset = ["start end", "end start"];
   const fadeInRange = [0, 0.15];
   const onBootComplete = useCallback(() => setBootDone(true), []);
+  const onHeadlineLineStart = useCallback((line) => {
+    if (line === 1) setCodeBlockActive(true);
+  }, []);
 
-  const codeBlockProps = { headlineDone, studioDone, commandDone, setStudioDone, setCommandDone };
+  const codeBlockProps = { startTyping: codeBlockActive, studioDone, commandDone, setStudioDone, setCommandDone };
 
   return (
     <section
@@ -144,7 +149,7 @@ export default function Hero() {
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
                 className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.5rem)] leading-snug !space-y-0"
-                onComplete={() => setHeadlineDone(true)}
+                onLineStart={onHeadlineLineStart}
               />
             )}
           </div>
