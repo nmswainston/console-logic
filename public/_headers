@@ -1,0 +1,7 @@
+# Self-hosted fonts: treated as immutable (rename the file if a font is ever updated)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Vite build output is content-hashed, safe to cache forever
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
