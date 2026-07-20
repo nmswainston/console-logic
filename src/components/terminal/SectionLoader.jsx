@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import TypingText from "@/components/terminal/TypingText.jsx";
 import LoaderLine from "@/components/terminal/LoaderLine.jsx";
-import {
-  TYPING_SPEED_MS,
-  SECTION_LOADER_OFFSET,
-  SECTION_LOADER_OFFSET_LAST,
-} from "@/data/constants";
+import { TYPING_SPEED_MS } from "@/data/constants";
 
 // Snappy terminal pacing — total reveal time ~550ms after trigger
 const PROGRESS_INTERVAL_MS = 4;  // reaches 100% in ~80ms
@@ -14,6 +10,14 @@ const PROGRESS_INCREMENT = 5;    // 20 steps to 100%
 const VERIFY_DELAY = 80;         // pause before verifying
 const LOADED_DELAY = 300;        // brief flash before content reveal
 const REVEAL_DELAY = 80;         // pause before content reveal
+
+// Trigger once the section top clears the bottom ~120px of the viewport
+const IN_VIEW_MARGIN = "0px 0px -120px 0px";
+
+// Hydration detector: false during SSG/hydration, true afterwards
+const subscribeNoop = () => () => {};
+const getTrue = () => true;
+const getFalse = () => false;
 
 // Hero-matched easing + stagger
 const revealParent = {
@@ -46,36 +50,26 @@ export default function SectionLoader({
   label = "loading section",
   sectionRef,
   children,
-  isLastSection = false,
-  offset,
-  waitForReady,
 }) {
-  const [isActive, setIsActive] = useState(false);
+  const reduce = useReducedMotion();
+  const fallbackRef = useRef(null);
   const [displayPercent, setDisplayPercent] = useState(0);
   const [showVerify, setShowVerify] = useState(false);
   const [showLoaded, setShowLoaded] = useState(false);
   const [hasRevealed, setHasRevealed] = useState(false);
 
-  const resolvedOffset =
-    offset ?? (isLastSection ? SECTION_LOADER_OFFSET_LAST : SECTION_LOADER_OFFSET);
+  // Static HTML (SSG + hydration render) shows the real content so crawlers
+  // and no-JS visitors see it; the loader takes over once hydration finishes.
+  const hydrated = useSyncExternalStore(subscribeNoop, getTrue, getFalse);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef ?? undefined,
-    offset: resolvedOffset,
+  // IntersectionObserver trigger — latches on first entry, no scroll
+  // subscription left running after the section reveals.
+  const inView = useInView(sectionRef ?? fallbackRef, {
+    once: true,
+    margin: IN_VIEW_MARGIN,
   });
 
-  // Scroll triggers the loader (but loader itself is timed)
-  // If waitForReady is set, don't start until it's true (e.g. after hero finishes)
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const ready = waitForReady === undefined || waitForReady === true;
-    if (!isActive && v > 0.15 && ready) setIsActive(true);
-  });
-
-  // When waitForReady becomes true, check if we should activate (user may have scrolled already)
-  useEffect(() => {
-    if (!waitForReady || scrollYProgress.get() <= 0.15) return;
-    queueMicrotask(() => setIsActive(true));
-  }, [waitForReady, scrollYProgress]);
+  const isActive = inView;
 
   // Timer-driven progress bar (slow terminal)
   useEffect(() => {
@@ -111,6 +105,13 @@ export default function SectionLoader({
       return () => clearTimeout(t);
     }
   }, [showLoaded]);
+
+  // Reduced motion: skip the loader theater entirely. Pre-hydration render
+  // must match the server output, so it also shows the plain content.
+  // Without a sectionRef the observer has no target, so degrade the same way.
+  if (reduce || !hydrated || !sectionRef) {
+    return <>{children}</>;
+  }
 
   // Smooth staggered reveal (hero-matched)
   if (hasRevealed) {

@@ -53,4 +53,9 @@
   .cursor-blink {
     animation: none;
   }
+  .project-card-overlay,
+  .project-card-overlay-box > p {
+    transition-duration: 0ms;
+    transition-delay: 0ms;
+  }
 }

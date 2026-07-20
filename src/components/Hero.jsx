@@ -75,7 +75,7 @@ function CodeBlock({ headlineDone, studioDone, commandDone, setStudioDone, setCo
   );
 }
 
-export default function Hero({ onHeroComplete }) {
+export default function Hero() {
   const { openModal } = useContactModal();
   const reduce = useReducedMotion();
   const heroRef = useRef(null);
@@ -144,10 +144,7 @@ export default function Hero({ onHeroComplete }) {
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
                 className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.5rem)] leading-snug !space-y-0"
-                onComplete={() => {
-                  setHeadlineDone(true);
-                  onHeroComplete?.();
-                }}
+                onComplete={() => setHeadlineDone(true)}
               />
             )}
           </div>

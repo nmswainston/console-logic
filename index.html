@@ -12,17 +12,23 @@
     -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Fonts: Urbanist (display) + Inter (body) + JetBrains Mono (mono) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts: Inter (body) + JetBrains Mono (headings/terminal), self-hosted
+         variable woff2 in /public/fonts, declared in src/styles/fonts.css.
+         Preload the latin files both families need on every page; font
+         preloads require crossorigin even for same-origin requests. -->
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@600&family=JetBrains+Mono:wght@400;500&display=swap"
-      as="style"
+      href="/fonts/jetbrains-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/inter-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
 
     <!-- JSON-LD: Organization (no Instagram/X) -->
