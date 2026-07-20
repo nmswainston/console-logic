@@ -49,30 +49,24 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
         </div>
       </div>
 
-      <div className="px-6 pt-6 pb-0 flex flex-col min-h-[120px]">
+      <div className="px-6 pt-6 pb-0 flex flex-col">
         <div className="text-sm uppercase tracking-wide text-muted-foreground leading-normal">
           {tag}
         </div>
         <div className="mt-2 font-medium text-base leading-snug">{title}</div>
-        {description && (
-          <div className="mt-2">
-            <div className="project-card-description-reveal">
-              <p className="text-sm text-muted-foreground leading-normal pr-0">
-                {description}
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
 
-  const ctaLinks = (
-    <div className="px-6 pb-6 pt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
+  // inOverlay renders the hover-overlay copy: identical layout, but the links
+  // are removed from the tab order (keyboard users get the in-flow originals).
+  const ctaRow = (inOverlay = false) => (
+    <div className="pt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
       {caseStudyUrl ? (
         <>
           <Link
             to={caseStudyUrl}
+            tabIndex={inOverlay ? -1 : undefined}
             className="inline-flex items-center gap-1.5 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded font-medium"
           >
             View case study
@@ -83,6 +77,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
               href={link}
               target="_blank"
               rel="noopener noreferrer"
+              tabIndex={inOverlay ? -1 : undefined}
               className="inline-flex items-center gap-1 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded"
             >
               See live site
@@ -96,19 +91,46 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
     </div>
   );
 
+  /* Bottom panel: clamped description + CTA row in flow (defines the card's
+     collapsed size), plus a hover overlay holding the full description and
+     the same CTA row, which expands over the page instead of pushing it. */
+  const bottomPanel = (
+    <div className="relative px-6 pb-6">
+      {description && (
+        <p className="project-card-description mt-2 text-sm text-muted-foreground leading-normal">
+          {description}
+        </p>
+      )}
+      {ctaRow()}
+      {description && (
+        <div className="project-card-overlay" aria-hidden="true">
+          {/* Inside a TerminalCard tile, this box continues the inner card's
+              border so the text box visibly expands along with the tile;
+              standalone (Work page) it is unstyled. */}
+          <div className="project-card-overlay-box">
+            {/* No mt-2 here: the in-flow copy's top margin collapses out of
+                the wrapper, but inside the absolutely-positioned overlay it
+                would not, which would push this copy 8px lower. */}
+            <p className="text-sm text-muted-foreground leading-normal pointer-events-none">
+              {description}
+            </p>
+            {ctaRow(true)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <div className="group block rounded-lg border border-border bg-elevated overflow-hidden project-card-hover focus-within:ring-2 focus-within:ring-terminal-green focus-within:ring-offset-0 relative">
+    <div className="group block rounded-lg border border-border bg-elevated project-card-hover focus-within:ring-2 focus-within:ring-terminal-green focus-within:ring-offset-0 relative">
       {caseStudyUrl ? (
-        <>
-          <Link
-            to={caseStudyUrl}
-            aria-label={`${title} - ${tag}`}
-            className="block focus:outline-none"
-          >
-            {previewContent}
-          </Link>
-          {ctaLinks}
-        </>
+        <Link
+          to={caseStudyUrl}
+          aria-label={`${title} - ${tag}`}
+          className="block focus:outline-none"
+        >
+          {previewContent}
+        </Link>
       ) : (
         <a
           href={link}
@@ -118,9 +140,9 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
           className="block focus:outline-none"
         >
           {previewContent}
-          {ctaLinks}
         </a>
       )}
+      {bottomPanel}
 
       {hasExternalLink && (
         <a
