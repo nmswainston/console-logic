@@ -10,6 +10,10 @@ export default function TypingSequence({
   // Default: small terminal mono style. Override entirely by passing className.
   className = "font-mono text-sm text-terminal-green leading-normal",
   onComplete,
+  /** Called with the line index each time a new line begins typing (never for
+      line 0, which starts with the sequence itself, and never under reduced
+      motion, where nothing types). */
+  onLineStart,
 }) {
   const reduce = useReducedMotion();
   const [current, setCurrent] = useState(0);
@@ -47,6 +51,7 @@ export default function TypingSequence({
               onComplete={() => {
                 if (isActive && i < lines.length - 1) {
                   setCurrent(i + 1);
+                  onLineStart?.(i + 1);
                 } else if (isActive && i === lines.length - 1) {
                   onComplete?.();
                 }
