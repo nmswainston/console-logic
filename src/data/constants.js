@@ -21,14 +21,6 @@ export const STAGGER_CHILDREN = 0.08;
 /** Scroll motion defaults - use across ScrollMotion, ScrollStagger */
 export const SCROLL_OFFSET = ["start end", "end start"];
 
-/** SectionLoader: progress reaches 100% when section center is at viewport center */
-export const SECTION_LOADER_OFFSET = ["start end", "center center"];
-
-/** Last section: progress reaches 100% when section top hits viewport center (less scroll needed) */
-export const SECTION_LOADER_OFFSET_LAST = ["start end", "start center"];
-
-/** Contact section: completes sooner (section top at 75% viewport) so bar reaches 100% before page end */
-export const SECTION_LOADER_OFFSET_CONTACT = ["start end", "start 0.75"];
 export const SCROLL_Y_RANGE = [40, -20];
 export const OPACITY_INPUT_RANGE = [0, 0.15];
 export const OPACITY_OUTPUT_RANGE = [0, 1];
