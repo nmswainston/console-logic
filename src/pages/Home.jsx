@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Head } from "vite-react-ssg";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 
@@ -15,7 +15,6 @@ import ProjectCard from "@/components/ProjectCard.jsx";
 
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
-import { SECTION_LOADER_OFFSET_CONTACT } from "@/data/constants";
 
 // Hidden until real client quotes replace the placeholders below.
 // Flip to true to bring the "What clients say" section back.
@@ -45,7 +44,6 @@ export default function Home() {
   const aboutRef = useRef(null);
   const testimonialsRef = useRef(null);
   const contactRef = useRef(null);
-  const [heroLoadingComplete, setHeroLoadingComplete] = useState(false);
 
   return (
     <>
@@ -69,13 +67,13 @@ export default function Home() {
         />
       </Head>
 
-      <Hero onHeroComplete={() => setHeroLoadingComplete(true)} />
+      <Hero />
 
-      <TrustSection waitForReady={heroLoadingComplete} />
+      <TrustSection />
 
       {/* Services */}
       <Section id="services" borderTop ref={servicesRef}>
-        <SectionLoader label="loading section: services" sectionRef={servicesRef} waitForReady={heroLoadingComplete}>
+        <SectionLoader label="loading section: services" sectionRef={servicesRef}>
           <div className="section-surface-panel">
             <ScrollMotion className="section-header" useOpacity={false}>
               <p className="section-kicker">Services</p>
@@ -124,7 +122,7 @@ export default function Home() {
 
           <ScrollStagger className="section-content section-grid-gap grid sm:grid-cols-2 md:grid-cols-3" initiallyVisible>
             {projects.slice(0, 6).map((p) => (
-              <TerminalCard key={p.title}>
+              <TerminalCard key={p.title} hoverRing={false}>
                 <ProjectCard
                   title={p.title}
                   tag={p.tag}
@@ -141,11 +139,7 @@ export default function Home() {
 
       {/* About */}
       <Section id="about" borderTop ref={aboutRef}>
-        <SectionLoader
-          label="loading section: about"
-          sectionRef={aboutRef}
-          isLastSection={!SHOW_TESTIMONIALS}
-        >
+        <SectionLoader label="loading section: about" sectionRef={aboutRef}>
           <div className="section-surface-panel">
             <ScrollMotion className="section-header" useOpacity={false}>
               <p className="section-kicker">About</p>
@@ -187,7 +181,7 @@ export default function Home() {
       {/* Testimonials — hidden behind SHOW_TESTIMONIALS until real quotes land */}
       {SHOW_TESTIMONIALS && (
         <Section id="testimonials" borderTop ref={testimonialsRef}>
-          <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef} isLastSection>
+          <SectionLoader label="loading section: testimonials" sectionRef={testimonialsRef}>
             <div className="section-surface-panel">
               <ScrollMotion className="section-header" useOpacity={false}>
                 <p className="section-kicker">What clients say</p>
@@ -216,7 +210,7 @@ export default function Home() {
 
       {/* Contact */}
       <Section id="contact" borderTop ref={contactRef}>
-        <SectionLoader label="loading section: contact" sectionRef={contactRef} offset={SECTION_LOADER_OFFSET_CONTACT}>
+        <SectionLoader label="loading section: contact" sectionRef={contactRef}>
           <div className="section-surface-panel">
             <ScrollMotion className="section-header" useOpacity={false}>
               <p className="section-kicker">Get in touch</p>
