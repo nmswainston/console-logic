@@ -26,6 +26,24 @@ export const projects = [
     techStack: ["HTML", "CSS", "JavaScript"],
   },
   {
+    slug: "garfias-mountain-glass-art",
+    title: "Garfias Mountain Glass Art",
+    tag: "Artist storefront",
+    link: "https://garfiasmountainglassart.com/",
+    thumb: "/projects/garfias-mountain-glass-art.png",
+    description:
+      "A stained glass artist with 30 years of work needed a home for it online. Brand site pairs her story with a gallery, shop categories, and custom orders.",
+    overview:
+      "A storefront and brand site for an Arizona stained glass studio. Presents the artist's story, gallery, and shop categories, and routes buyers to Etsy listings and custom order requests.",
+    problem:
+      "Thirty years of handmade stained glass lived only in marketplace listings and social posts. There was no single place that told the artist's story, showed the range of work, and made custom orders easy to request.",
+    approach:
+      "A warm, photography-forward design that matches the work: desert landscapes, handmade texture, and light. Clear paths to shop by category, browse the gallery, ask about custom pieces, and join the email list.",
+    outcome:
+      "One link that represents the studio. Buyers can browse categories and reach Etsy or the custom order form in a tap, and the artist has a brand home that grows with her work.",
+    techStack: ["React", "Vite", "Etsy storefront"],
+  },
+  {
     slug: "relay",
     title: "Relay",
     tag: "Internal tool",
