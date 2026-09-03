@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { track } from "@/lib/analytics.js";
 
 export default function ContactForm({ onClose }) {
   const [formData, setFormData] = useState({
@@ -35,6 +36,9 @@ export default function ContactForm({ onClose }) {
 
       if (response.ok) {
         setSubmitStatus("success");
+        // The conversion that actually matters: a delivered message, not an
+        // opened form.
+        track("contact-submitted");
         setFormData({ name: "", email: "", subject: "", message: "" });
         
         // Close modal after a short delay

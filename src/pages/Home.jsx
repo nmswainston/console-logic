@@ -230,7 +230,7 @@ export default function Home() {
                 initiallyVisible
               >
                 <button
-                  onClick={openModal}
+                  onClick={() => openModal("home-cta")}
                   className="btn btn-primary"
                 >
                   Start a conversation
