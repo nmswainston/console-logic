@@ -322,12 +322,21 @@ body {
   }
 }
 
+/* Monospace costs 0.6em per character, so a 24px title needs 14.4px per
+   char. At 390px the card leaves 292px inside its gutters and padding, a
+   budget of only 20 characters. Stepping down one size below sm buys eight
+   more and still sits clearly above the 14px body text. balance evens out
+   titles with three or more words that wrap anyway. */
 .card-title {
-  @apply font-medium text-2xl leading-snug;
+  @apply font-medium text-xl leading-snug sm:text-2xl;
+  text-wrap: balance;
 }
 
 .card-text {
   @apply text-sm leading-normal text-muted-foreground;
+  /* pretty, not balance: this is body copy, and it only needs the last line
+     protected from ending on a single orphan word. */
+  text-wrap: pretty;
 }
 
 /* Subtle terminal glow */
