@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion, useTransform } from "framer-motion";
 import { useScrollMotion } from "@/hooks/useScrollMotion";
-import { STAGGER_CHILDREN } from "@/data/constants";
+import { DISTANCE_MD, STAGGER_CHILDREN } from "@/data/constants";
 
 /** Container never gets opacity - only children (cards, blocks) do. */
 const OPACITY_CLAMP = { clamp: true };
@@ -63,7 +63,7 @@ function StaggerChild({ children, index, total, stagger, scrollYProgress, reduce
   const childY = useTransform(
     scrollYProgress,
     [0, start, end, 1],
-    skipScrollEffects ? [0, 0, 0, 0] : [16, 16, 0, 0]
+    skipScrollEffects ? [0, 0, 0, 0] : [DISTANCE_MD, DISTANCE_MD, 0, 0]
   );
 
   const childStyle = useMemo(
