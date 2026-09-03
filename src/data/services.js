@@ -1,6 +1,6 @@
 export const services = [
   {
-    title: "Product-ready frontends",
+    title: "Clean frontends",
     text: "React interfaces with clean UX, built for speed, clarity, and long term sanity.",
   },
   {
@@ -8,7 +8,7 @@ export const services = [
     text: "APIs and services that are boring to maintain and predictable to debug.",
   },
   {
-    title: "Automation that sticks",
+    title: "Workflows that last",
     text: "Workflows, scripts, and glue code that keep your team in flow instead of in spreadsheets.",
   },
 ];

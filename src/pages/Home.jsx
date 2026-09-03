@@ -160,7 +160,7 @@ export default function Home() {
                   text: "Projects move forward when everyone understands the plan. We keep decisions transparent and explain the technical parts in plain language.",
                 },
                 {
-                  title: "Practical architecture",
+                  title: "Simple systems",
                   text: "Simple systems age better than clever ones. We design software that teams can understand, maintain, and extend.",
                 },
                 {
