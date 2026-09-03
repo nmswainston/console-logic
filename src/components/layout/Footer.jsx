@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { contact } from "@/data/contact";
+import Logo from "@/components/Logo.jsx";
+import CommandPrompt from "@/components/CommandPrompt.jsx";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -31,23 +33,24 @@ export default function Footer({
                 href={brandUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-base text-accent transition-colors hover:text-foreground"
+                aria-label={brandName}
+                className="inline-block transition-opacity hover:opacity-80"
               >
-                {">_"}
-                {brandName}
+                <Logo className="text-base" />
               </a>
             ) : (
               <Link
                 to={brandUrl}
-                className="font-mono text-base text-accent transition-colors hover:text-foreground"
+                aria-label={brandName}
+                className="inline-block transition-opacity hover:opacity-80"
               >
-                {">_"}
-                {brandName}
+                <Logo className="text-base" />
               </Link>
             )}
             <p className="mt-2 text-sm text-muted-foreground max-w-xs leading-relaxed">
               Fast builds. Clean code. Clear communication.
             </p>
+            <CommandPrompt className="mt-4" />
           </div>
 
           {/* Nav + contact columns */}
@@ -93,16 +96,18 @@ export default function Footer({
                 href={brandUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:text-foreground transition-colors"
+                aria-label={brandName}
+                className="transition-opacity hover:opacity-80"
               >
-                {brandName}
+                <Logo className="text-xs" showPrompt={false} />
               </a>
             ) : (
               <Link
                 to={brandUrl}
-                className="text-accent hover:text-foreground transition-colors"
+                aria-label={brandName}
+                className="transition-opacity hover:opacity-80"
               >
-                {brandName}
+                <Logo className="text-xs" showPrompt={false} />
               </Link>
             )}
             {showCraftedBy && " | Crafted with logic"}

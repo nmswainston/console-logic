@@ -146,8 +146,13 @@ body {
   @apply py-16 md:py-24;
 }
 
+/* Wider than the prose measure on purpose: this wraps the kicker and the
+   display heading, not body copy. .section-intro keeps its own max-w-2xl, so
+   paragraphs stay at a readable measure while headings get room to sit on one
+   line. text-wrap: balance evens out the lines when they do wrap on narrow
+   viewports, instead of dropping a single orphan word. */
 .section-header {
-  @apply mt-6 max-w-2xl;
+  @apply mt-6 max-w-4xl;
 }
 
 .section-header-flex {
@@ -162,6 +167,7 @@ body {
 
 .section-heading {
   @apply mt-3 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl;
+  text-wrap: balance;
 }
 
 .section-intro {

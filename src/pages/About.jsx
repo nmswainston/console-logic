@@ -32,7 +32,7 @@ export default function About() {
 
       <Section>
         {/* Intro */}
-        <ScrollMotion className="section-header max-w-prose" useOpacity={false}>
+        <ScrollMotion className="section-header" useOpacity={false}>
           <p className="section-kicker">About</p>
           <h1 className="section-heading">Where builders debug reality</h1>
           <p className="section-intro">
@@ -84,7 +84,7 @@ export default function About() {
         </ScrollStagger>
 
         {/* If you're not technical */}
-        <ScrollMotion className="mt-24 section-header max-w-prose" useOpacity={false}>
+        <ScrollMotion className="mt-24 section-header" useOpacity={false}>
           <p className="section-kicker">If you&rsquo;re not technical</p>
           <h2 className="section-heading">We keep things simple</h2>
           <p className="section-intro">
@@ -96,7 +96,7 @@ export default function About() {
 
         {/* How we collaborate */}
         <div className="mt-24">
-          <ScrollMotion className="section-header max-w-prose mb-6" useOpacity={false}>
+          <ScrollMotion className="section-header mb-6" useOpacity={false}>
             <p className="section-kicker">Working together</p>
             <h2 className="section-heading">How we collaborate</h2>
           </ScrollMotion>
@@ -112,7 +112,7 @@ export default function About() {
         </div>
 
         {/* Why Console Logic */}
-        <ScrollMotion className="mt-24 section-header max-w-prose" useOpacity={false}>
+        <ScrollMotion className="mt-24 section-header" useOpacity={false}>
           <p className="section-kicker">Why Console Logic</p>
           <h2 className="section-heading">The story behind the name</h2>
           <p className="section-intro">
@@ -129,7 +129,7 @@ export default function About() {
 
         {/* Typical projects */}
         <div className="mt-24">
-          <ScrollMotion className="section-header max-w-prose mb-6" useOpacity={false}>
+          <ScrollMotion className="section-header mb-6" useOpacity={false}>
             <p className="section-kicker">What we build</p>
             <h2 className="section-heading">Typical projects</h2>
           </ScrollMotion>
@@ -154,7 +154,7 @@ export default function About() {
         </div>
 
         {/* CTA */}
-        <ScrollMotion className="mt-24 section-header max-w-prose" useOpacity={false}>
+        <ScrollMotion className="mt-24 section-header" useOpacity={false}>
           <p className="section-kicker">Ready when you are</p>
           <h2 className="section-heading">Let&rsquo;s build something that lasts</h2>
           <p className="section-intro">
