@@ -7,19 +7,20 @@ import { TYPING_SPEED_MS } from "@/data/constants";
 const COMMAND = "start-a-project";
 
 /**
- * Closing prompt line that sits between the page content and the footer, so the
- * site signs off the way it opened: a terminal waiting for the next command.
+ * Closing prompt line: a terminal waiting for the next command. It lives in the
+ * footer's brand block, directly under the tagline, so it reads as part of the
+ * signature rather than floating on its own.
  *
- * It is a real button rather than decoration. Pointing at it (or tabbing to it)
- * types the command out, and activating it opens the contact modal, so the
- * "waiting for input" promise actually leads somewhere.
+ * It is a real button, not decoration. Pointing at it (or tabbing to it) types
+ * the command out, and activating it opens the contact modal, so the "waiting
+ * for input" promise actually leads somewhere.
  *
  * The caret is the only always-moving part. It reuses .cursor-blink, which
  * animations.css already switches off under prefers-reduced-motion, and it is
  * aria-hidden along with the typed text: the button carries its own label so
  * assistive tech never reads a half-typed string.
  */
-export default function CommandPrompt() {
+export default function CommandPrompt({ className = "" }) {
   const { openModal } = useContactModal();
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
@@ -45,41 +46,33 @@ export default function CommandPrompt() {
   const showCommand = hovered || !hoverCapable;
 
   return (
-    <section className="border-t border-border">
-      <div className="mx-auto max-w-screen-xl px-6 py-8">
-        <button
-          type="button"
-          onClick={openModal}
-          onMouseEnter={engage}
-          onMouseLeave={disengage}
-          onFocus={engage}
-          onBlur={disengage}
-          aria-label="Start a project"
-          className="focus-ring group flex min-h-[44px] cursor-pointer items-center gap-2 font-mono text-base text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <span aria-hidden="true" className="text-accent">
-            {">_"}
-          </span>
-          {/* min-w reserves the full command plus caret, so nothing reflows as
-              it types. 17ch covers 15 mono characters, the 1ch caret and its
-              0.25rem gap. */}
-          <span
-            aria-hidden="true"
-            className="inline-flex min-w-[17ch] items-center justify-start"
-          >
-            <TypingText
-              text={COMMAND}
-              active={showCommand}
-              speed={TYPING_SPEED_MS}
-            />
-            <span
-              className={`ml-1 inline-block h-[1em] w-[0.6em] bg-terminal-green ${
-                reduce ? "" : "cursor-blink"
-              }`}
-            />
-          </span>
-        </button>
-      </div>
-    </section>
+    <button
+      type="button"
+      onClick={openModal}
+      onMouseEnter={engage}
+      onMouseLeave={disengage}
+      onFocus={engage}
+      onBlur={disengage}
+      aria-label="Start a project"
+      className={`focus-ring group flex cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
+    >
+      <span aria-hidden="true" className="text-accent">
+        {">_"}
+      </span>
+      {/* min-w reserves the full command plus caret, so nothing reflows as it
+          types. 17ch covers 15 mono characters, the 1ch caret and its
+          0.25rem gap. */}
+      <span
+        aria-hidden="true"
+        className="inline-flex min-w-[17ch] items-center justify-start"
+      >
+        <TypingText text={COMMAND} active={showCommand} speed={TYPING_SPEED_MS} />
+        <span
+          className={`ml-1 inline-block h-[1em] w-[0.6em] bg-terminal-green ${
+            reduce ? "" : "cursor-blink"
+          }`}
+        />
+      </span>
+    </button>
   );
 }
