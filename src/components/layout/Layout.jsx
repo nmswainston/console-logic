@@ -4,6 +4,7 @@ import { Outlet, ScrollRestoration } from "react-router-dom";
 import Header from "@/components/layout/Header.jsx";
 import Footer from "@/components/layout/Footer.jsx";
 import BackToTopButton from "@/components/BackToTopButton.jsx";
+import CommandPrompt from "@/components/CommandPrompt.jsx";
 
 import TerminalBackground from "@/components/terminal/TerminalBackground.jsx";
 import TerminalGlow from "@/components/terminal/TerminalGlow.jsx";
@@ -55,9 +56,10 @@ function LayoutContent() {
       <ScrollRestoration />
       <a href="#main" className="skip-link">Skip to content</a>
       <Header />
-      <main id="main" tabIndex={-1} className="relative pt-16">
+      <main id="main" tabIndex={-1} className="relative">
         <Outlet />
       </main>
+      <CommandPrompt />
       <Footer />
       <BackToTopButton />
       {isOpen && (

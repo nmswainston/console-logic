@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useContactModal } from "@/context/ContactModalContext.jsx";
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
 import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
@@ -9,7 +9,7 @@ import TerminalCard from "@/components/terminal/TerminalCard.jsx";
 import TypingText from "@/components/terminal/TypingText.jsx";
 
 import { heroServices } from "@/data/services";
-import { TYPING_SPEED_MS, TYPING_LINE_DELAY_MS } from "@/data/constants";
+import { TYPING_SPEED_MS, TYPING_LINE_DELAY_MS, OPACITY_TRANSITION } from "@/data/constants";
 import BootSequence from "@/components/terminal/BootSequence.jsx";
 
 function BlinkingCaret() {
@@ -25,18 +25,42 @@ function BlinkingCaret() {
   );
 }
 
-function CodeBlock({ startTyping, studioDone, commandDone, setStudioDone, setCommandDone }) {
+// Live status, shown on the terminal card's path row once the boot sequence
+// completes. It rides along the ~/studio line rather than stacking under the
+// CTAs so it costs no vertical space, which is what keeps the CTAs above the
+// fold on short phones.
+function TerminalStatus({ reduce }) {
   return (
-    <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-6 font-mono text-sm leading-normal">
-      <TypingText
-        text="~/studio"
-        active={startTyping}
-        speed={TYPING_SPEED_MS}
-        delay={0}
-        onComplete={() => setStudioDone(true)}
-        className={studioDone ? "code-path" : "code-path-dim"}
+    <motion.span
+      initial={reduce ? false : { opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={OPACITY_TRANSITION}
+      className="flex shrink-0 items-center gap-2 text-terminal-green"
+    >
+      <span
+        className={`status-dot ${reduce ? "" : "status-pulse"}`}
+        aria-hidden="true"
       />
-      <div className="mt-1 flex items-center">
+      System online
+    </motion.span>
+  );
+}
+
+function CodeBlock({ startTyping, studioDone, commandDone, setStudioDone, setCommandDone, bootDone, reduce }) {
+  return (
+    <div className="code-block-terminal w-full max-w-md rounded-lg border border-border bg-elevated p-4 font-mono text-sm leading-normal sm:p-6">
+      <div className="flex min-h-[1lh] items-center justify-between gap-4">
+        <TypingText
+          text="~/studio"
+          active={startTyping}
+          speed={TYPING_SPEED_MS}
+          delay={0}
+          onComplete={() => setStudioDone(true)}
+          className={studioDone ? "code-path" : "code-path-dim"}
+        />
+        {bootDone && <TerminalStatus reduce={reduce} />}
+      </div>
+      <div className="mt-1 flex min-h-[1lh] items-center">
         <TypingText
           segments={[
             {
@@ -93,13 +117,17 @@ export default function Hero() {
     if (line === 1) setCodeBlockActive(true);
   }, []);
 
-  const codeBlockProps = { startTyping: codeBlockActive, studioDone, commandDone, setStudioDone, setCommandDone };
+  const codeBlockProps = { startTyping: codeBlockActive, studioDone, commandDone, setStudioDone, setCommandDone, bootDone, reduce };
 
+  // The header is sticky, so it already occupies its own space in flow and #main
+  // adds no padding to compensate. On desktop
+  // min-h holds the hero to one viewport and the [1fr auto] rows anchor the code
+  // block to the bottom, letting the card panel stretch down to meet it.
   return (
     <section
       ref={heroRef}
       id="hero"
-      className="relative -mt-16 mx-auto grid max-w-screen-xl grid-cols-1 gap-8 px-6 pt-6 pb-20 sm:pt-14 sm:pb-24 lg:mt-0 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-start lg:gap-10"
+      className="relative mx-auto grid max-w-screen-xl grid-cols-1 gap-24 px-6 pt-0 pb-20 sm:pt-14 sm:pb-24 lg:grid-cols-2 lg:grid-rows-[1fr_auto] lg:items-stretch lg:gap-10 lg:min-h-[calc(100dvh_-_4rem)]"
     >
       {/* Terminal glow */}
       {!reduce && (
@@ -120,8 +148,15 @@ export default function Hero() {
 
       {/* Left column. On mobile/tablet it fills the first viewport and centers its
           content (headline → code block → sub → credibility → CTAs), pushing the
-          service cards below the fold. On desktop it returns to normal grid flow. */}
-      <div className="flex min-h-[calc(100dvh_-_4rem)] flex-col justify-center lg:col-1 lg:row-1 lg:block lg:min-h-0">
+          service cards below the fold. It reserves a viewport less 8rem rather
+          than less 4rem: the scroll entrance offsets sit ~50px low at scroll 0,
+          so reserving a full viewport left centring slack under the CTAs that
+          pushed them out of view on short phones. 8rem still clears the fold
+          (pb-20 keeps the service cards below it) on tall ones.
+          On desktop the section min-height drives
+          the fill instead (row 1 is 1fr), so the explicit min-height is dropped
+          and the same flex centering balances the stack against the card panel. */}
+      <div className="flex min-h-[calc(100dvh_-_8rem)] flex-col justify-center lg:col-1 lg:row-1 lg:min-h-0">
         {/* Headline */}
         <ScrollMotion
           targetRef={heroRef}
@@ -134,7 +169,7 @@ export default function Hero() {
           {/* Height matches exactly 3 lines at the fluid font size — no dead space */}
           <div
             className="overflow-hidden"
-            style={{ height: "calc(4.2 * clamp(1.5rem, 8vw, 3.5rem))" }}
+            style={{ height: "calc(4.2 * var(--hero-headline-size))" }}
           >
             {bootDone && (
               <TypingSequence
@@ -148,7 +183,7 @@ export default function Hero() {
                 ]}
                 speed={TYPING_SPEED_MS}
                 lineDelay={TYPING_LINE_DELAY_MS}
-                className="font-mono text-terminal-green text-[clamp(1.5rem,8vw,3.5rem)] leading-snug !space-y-0"
+                className="font-mono text-terminal-green text-[length:var(--hero-headline-size)] leading-snug !space-y-0"
                 onLineStart={onHeadlineLineStart}
               />
             )}
@@ -165,7 +200,7 @@ export default function Hero() {
           scaleRange={[0.97, 1.02]}
           rotateYRange={[1.5, -1.5]}
           offset={heroOffset}
-          className="mt-8 lg:hidden [perspective:1200px]"
+          className="mt-4 sm:mt-8 lg:hidden [perspective:1200px]"
         >
           <CodeBlock {...codeBlockProps} />
         </ScrollMotion>
@@ -178,7 +213,7 @@ export default function Hero() {
           opacityInputRange={fadeInRange}
           offset={heroOffset}
         >
-          <p className="mt-6 max-w-prose text-lg leading-normal text-muted-foreground sm:text-base">
+          <p className="mt-4 max-w-prose text-lg leading-snug text-muted-foreground max-[359px]:text-base sm:mt-6 sm:text-base sm:leading-normal">
             Console Logic builds fast, polished websites and internal tools for
             small businesses and growing teams.
             <br />
@@ -187,15 +222,19 @@ export default function Hero() {
           </p>
         </ScrollMotion>
 
-        {/* Credibility line */}
+        {/* Credibility line. Hidden below sm: it restates the headline almost
+            verbatim ("Smart builds. Clean code."), and on short phones that
+            duplicate costs the vertical space the CTAs need to stay in the
+            first viewport. */}
         <ScrollMotion
           targetRef={heroRef}
           yRange={[28, -18]}
           opacityRange={[0, 1]}
           opacityInputRange={fadeInRange}
           offset={heroOffset}
+          className="hidden sm:block"
         >
-          <p className="mt-4 text-base text-muted-foreground/90 sm:text-sm">
+          <p className="mt-3 text-base text-muted-foreground/90 sm:mt-4 sm:text-sm">
             Fast builds. Clean code. Clear communication.
           </p>
         </ScrollMotion>
@@ -203,7 +242,7 @@ export default function Hero() {
         {/* Buttons */}
         <ScrollStagger
           targetRef={heroRef}
-          className="mt-8 flex flex-wrap items-center gap-4"
+          className="mt-6 flex flex-wrap items-center gap-4 sm:mt-8"
           yRange={[40, -20]}
           offset={heroOffset}
         >
@@ -219,7 +258,7 @@ export default function Hero() {
       {/* Hero cards — right column on desktop, below left col on mobile/tablet */}
       <ScrollStagger
         targetRef={heroRef}
-        className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-start"
+        className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-center"
         yRange={[40, -20]}
         offset={heroOffset}
       >

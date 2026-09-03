@@ -31,6 +31,21 @@
   animation: blink var(--caret-blink-duration, 1s) steps(2, start) infinite;
 }
 
+/* Status indicator pulse - hero "system online" LED */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.status-pulse {
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .transition,
@@ -50,7 +65,8 @@
     transform: none;
   }
   .caret-blink,
-  .cursor-blink {
+  .cursor-blink,
+  .status-pulse {
     animation: none;
   }
   .project-card-overlay,
