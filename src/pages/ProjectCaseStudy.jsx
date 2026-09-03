@@ -104,9 +104,9 @@ export default function ProjectCaseStudy() {
               <img
                 src={thumb}
                 alt=""
-                width="1200"
-                height="675"
-                className="max-h-full max-w-full object-contain"
+                width="800"
+                height="500"
+                className="h-full w-full object-contain"
               />
             </div>
           </div>
