@@ -258,7 +258,7 @@ export default function Hero() {
       {/* Hero cards — right column on desktop, below left col on mobile/tablet */}
       <ScrollStagger
         targetRef={heroRef}
-        className="grid gap-6 rounded-lg border border-border border-t-terminal-green-dim bg-elevated p-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-center"
+        className="grid gap-6 lg:col-2 lg:row-1 lg:row-span-2 lg:self-center"
         yRange={[40, -20]}
         offset={heroOffset}
       >
