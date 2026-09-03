@@ -139,7 +139,7 @@ export default function Header() {
 
           <li>
             <button
-              onClick={openModal}
+              onClick={() => openModal("header")}
               className="focus-ring btn btn-primary"
               aria-label="Start a conversation"
             >
@@ -248,7 +248,7 @@ export default function Header() {
             <li className="mt-2 pt-2 border-t border-border">
               <button
                 onClick={() => {
-                  openModal();
+                  openModal("header-mobile");
                   closeMenu(true);
                 }}
                 className="focus-ring btn btn-primary w-full justify-center"

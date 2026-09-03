@@ -51,7 +51,7 @@ export default function CommandPrompt({ className = "" }) {
   return (
     <button
       type="button"
-      onClick={openModal}
+      onClick={() => openModal("footer-prompt")}
       onMouseEnter={engage}
       onMouseLeave={disengage}
       onFocus={engage}

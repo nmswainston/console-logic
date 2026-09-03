@@ -246,7 +246,7 @@ export default function Hero() {
           yRange={[40, -20]}
           offset={heroOffset}
         >
-          <button onClick={openModal} className="btn btn-primary">
+          <button onClick={() => openModal("hero")} className="btn btn-primary">
             Start a project
           </button>
           <a href="#work" className="btn btn-ghost">

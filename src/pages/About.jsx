@@ -162,7 +162,7 @@ export default function About() {
             we&rsquo;d love to hear what you&rsquo;re building.
           </p>
           <div className="mt-6">
-            <button onClick={openModal} className="btn btn-primary">
+            <button onClick={() => openModal("about-cta")} className="btn btn-primary">
               Start a conversation
             </button>
           </div>

@@ -26,6 +26,20 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
   const hasExternalLink = link && /^https?:\/\//.test(link);
   const caseStudyUrl = slug ? `/projects/${slug}` : null;
 
+  // Declarative analytics. The Umami tracker binds one document-level click
+  // listener and walks up to the nearest data-umami-event, so these need no
+  // handlers and cost nothing when the script is blocked or absent. Spread
+  // rather than repeated inline because the same link exists twice: once in
+  // flow and once inside the hover overlay.
+  const caseStudyEvent = {
+    "data-umami-event": "case-study-click",
+    "data-umami-event-project": title,
+  };
+  const liveSiteEvent = {
+    "data-umami-event": "live-site-click",
+    "data-umami-event-project": title,
+  };
+
   const previewContent = (
     <>
       <div className="project-card-image-wrap p-6 pb-0">
@@ -66,6 +80,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
         <>
           <Link
             to={caseStudyUrl}
+            {...caseStudyEvent}
             tabIndex={inOverlay ? -1 : undefined}
             className="inline-flex items-center gap-1.5 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded font-medium"
           >
@@ -77,6 +92,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
               href={link}
               target="_blank"
               rel="noopener noreferrer"
+              {...liveSiteEvent}
               tabIndex={inOverlay ? -1 : undefined}
               className="inline-flex items-center gap-1 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded"
             >
@@ -126,6 +142,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
       {caseStudyUrl ? (
         <Link
           to={caseStudyUrl}
+          {...caseStudyEvent}
           aria-label={`${title} - ${tag}`}
           className="block focus:outline-none"
         >
@@ -134,6 +151,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
       ) : (
         <a
           href={link}
+          {...liveSiteEvent}
           aria-label={`${title} - ${tag}`}
           target={hasExternalLink ? "_blank" : undefined}
           rel={hasExternalLink ? "noopener noreferrer" : undefined}
@@ -149,6 +167,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
           href={link}
           target="_blank"
           rel="noopener noreferrer"
+          {...liveSiteEvent}
           aria-label={`Open ${title} live site in new tab`}
           className="absolute top-[12px] right-[12px] z-10 p-1.5 rounded text-muted-foreground opacity-50 transition-opacity duration-200 ease-out hover:opacity-100 hover:text-foreground hover:bg-border/50 focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 group-hover:opacity-100"
         >
