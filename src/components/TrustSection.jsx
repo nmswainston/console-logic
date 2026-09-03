@@ -16,11 +16,11 @@ const trustItems = [
         text: "Projects are structured to stay clean, readable, and easy to update after launch.",
     },
     {
-        title: "Performance-first builds",
+        title: "Built for speed",
         text: "Fast-loading pages, responsive layouts, and thoughtful implementation from the start.",
     },
     {
-        title: "Practical problem solving",
+        title: "Practical solutions",
         text: "The goal is not extra complexity. It's the simplest solution that actually helps your business.",
     },
 ];
