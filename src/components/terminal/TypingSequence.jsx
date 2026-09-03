@@ -40,7 +40,9 @@ export default function TypingSequence({
         const isSegments = Array.isArray(line);
 
         return (
-          <div key={i} className="flex items-center">
+          // min-h reserves the row before it types: an empty inline-block
+          // span has no line box and would otherwise measure 0px tall.
+          <div key={i} className="flex min-h-[1lh] items-center">
             <TypingText
               text={isSegments ? undefined : line}
               segments={isSegments ? line : undefined}

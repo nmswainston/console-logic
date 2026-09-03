@@ -117,6 +117,9 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* The header is sticky and 65px tall (h-16 + 1px border), so anchor targets
+     would otherwise land underneath it. 5rem clears it with a little air. */
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -387,10 +390,36 @@ body {
   }
 }
 
+/* Hero status indicator - "system online" LED */
+.status-dot {
+  display: inline-block;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent), transparent 40%);
+}
+
 /* Background glow */
 .terminal-glow {
   background: var(--color-terminal-glow);
   filter: blur(48px);
+}
+
+/* Hero headline fluid size.
+   Below lg the headline spans the full content width, so it can scale with 8vw.
+   At lg the hero splits into two columns and the headline only gets half the
+   width, so the slope drops to keep the longest line ("Logical outcomes.",
+   17 mono chars at 0.6em each) from clipping. Consumed by both the type size
+   and the fixed-height box that reserves exactly 3 lines. */
+:root {
+  --hero-headline-size: clamp(1.5rem, 8vw, 3.5rem);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --hero-headline-size: clamp(1.5rem, 4.1vw, 3.5rem);
+  }
 }
 
 /* Hero glow */
