@@ -1,5 +1,5 @@
 /** Shared easing curve for all motion (cubic-bezier) */
-export const EASE_SMOOTH = [0.22, 1, 0.36, 1];
+export const EASE_SMOOTH = [0.16, 1, 0.3, 1];
 
 /** Animation durations (seconds) - for Framer Motion */
 export const DURATION_FAST = 0.2;
@@ -14,6 +14,10 @@ export const TRANSITION_SECTION = { duration: DURATION_SECTION, ease: EASE_SMOOT
 /** Opacity transition - shared by SectionLoader, PromptHeader */
 export const OPACITY_DURATION = 0.25;
 export const OPACITY_TRANSITION = { duration: OPACITY_DURATION, ease: EASE_SMOOTH };
+
+/** Reveal distance (px) - y offset for fade-up motion */
+export const DISTANCE_SM = 8;
+export const DISTANCE_MD = 16;
 
 /** Stagger timing for scroll/motion groups */
 export const STAGGER_CHILDREN = 0.08;

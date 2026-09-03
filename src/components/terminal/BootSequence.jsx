@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import LoaderLine from "@/components/terminal/LoaderLine.jsx";
+import { OPACITY_TRANSITION } from "@/data/constants";
 
 export default function BootSequence({ onComplete }) {
   const [showVerify, setShowVerify] = useState(false);
@@ -30,29 +31,14 @@ export default function BootSequence({ onComplete }) {
     <motion.div
       initial={{ y: 0, opacity: 1 }}
       animate={scrollAway ? { y: -32, opacity: 0 } : { y: 0, opacity: 1 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      transition={OPACITY_TRANSITION}
       className="font-mono text-[13px] sm:text-sm md:text-base text-terminal-green absolute top-4 sm:top-6 left-6 leading-normal pointer-events-none"
     >
       <div>{`> system booting...`}</div>
 
-      {showVerify && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0.4, 1, 0.4, 1] }}
-          transition={{
-            duration: 1.4,
-            ease: "easeInOut",
-            times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-          }}
-          className="mt-1"
-        >
-          verifying integrity...
-        </motion.div>
-      )}
+      {showVerify && <LoaderLine text="verifying integrity..." className="mt-1" />}
 
-      {showComplete && (
-        <LoaderLine text="boot complete." />
-      )}
+      {showComplete && <LoaderLine text="boot complete." className="mt-1" />}
     </motion.div>
   );
 }

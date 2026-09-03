@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import TypingText from "@/components/terminal/TypingText.jsx";
 import LoaderLine from "@/components/terminal/LoaderLine.jsx";
-import { TYPING_SPEED_MS } from "@/data/constants";
+import { DISTANCE_SM, EASE_SMOOTH, TYPING_SPEED_MS } from "@/data/constants";
 
 // Snappy terminal pacing — total reveal time ~550ms after trigger
 const PROGRESS_INTERVAL_MS = 4;  // reaches 100% in ~80ms
@@ -21,13 +21,13 @@ const getFalse = () => false;
 
 // Hero-matched easing + stagger
 const revealParent = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: DISTANCE_SM },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE_SMOOTH,
       delay: 0.1,
       staggerChildren: 0.06,
     },
@@ -35,13 +35,13 @@ const revealParent = {
 };
 
 const revealChild = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: DISTANCE_SM },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.45,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE_SMOOTH,
     },
   },
 };
@@ -144,28 +144,8 @@ export default function SectionLoader({
         <span className="tabular-nums">{displayPercent}%</span>
       </div>
 
-      {showVerify && <BlinkingVerify text="verifying integrity..." />}
+      {showVerify && <LoaderLine text="verifying integrity..." />}
       {showLoaded && <LoaderLine text="section loaded." />}
     </div>
-  );
-}
-
-// Terminal-style blinking verify line
-function BlinkingVerify({ text }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: [0, 1, 0.4, 1, 0.4, 1],
-      }}
-      transition={{
-        duration: 1.4,
-        ease: "easeInOut",
-        times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-      }}
-      className="font-mono text-terminal-green mt-1"
-    >
-      {text}
-    </motion.div>
   );
 }
