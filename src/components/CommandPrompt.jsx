@@ -59,7 +59,9 @@ export default function CommandPrompt({ className = "" }) {
       aria-label="Start a project"
       className={`focus-ring group flex min-h-[44px] cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
-      <span aria-hidden="true" className="text-accent">
+      {/* Same white as the wordmark prompt above it, so the two lines read
+          as one session. The blinking caret is what signals liveness. */}
+      <span aria-hidden="true" className="logo-white">
         {">_"}
       </span>
       {/* min-w reserves the full command plus caret, so nothing reflows as it

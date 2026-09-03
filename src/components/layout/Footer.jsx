@@ -36,7 +36,7 @@ export default function Footer({
                 aria-label={brandName}
                 className="inline-block transition-opacity hover:opacity-80"
               >
-                <Logo className="text-base" />
+                <Logo className="text-sm leading-relaxed" />
               </a>
             ) : (
               <Link
@@ -44,13 +44,16 @@ export default function Footer({
                 aria-label={brandName}
                 className="inline-block transition-opacity hover:opacity-80"
               >
-                <Logo className="text-base" />
+                <Logo className="text-sm leading-relaxed" />
               </Link>
             )}
-            <p className="mt-2 text-sm text-muted-foreground max-w-xs leading-relaxed">
+            <p className="font-mono text-sm leading-relaxed text-muted-foreground">
               Fast builds. Clean code. Clear communication.
             </p>
-            <CommandPrompt className="mt-4" />
+            {/* The button keeps a 44px tap target, so its 20px of type sits
+                centred with ~12px of slack above. The negative margin pulls it
+                back onto the terminal row rhythm without shrinking the target. */}
+            <CommandPrompt className="-mt-3 leading-relaxed" />
           </div>
 
           {/* Nav + contact columns */}

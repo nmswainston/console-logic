@@ -7,10 +7,10 @@
  * the default, the footer sets its own). `showPrompt` drops the leading `>_`
  * for places that read as prose rather than as a terminal line.
  */
-export default function Logo({ className = "text-xl", showPrompt = true }) {
+export default function Logo({ className = "text-xl leading-snug", showPrompt = true }) {
   return (
     <span
-      className={`font-display tracking-tight whitespace-nowrap leading-snug ${className}`}
+      className={`font-display tracking-tight whitespace-nowrap ${className}`}
     >
       {showPrompt && <span className="logo-white">&gt;_</span>}
       <span className="logo-green">console</span>
