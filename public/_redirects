@@ -1,20 +1,19 @@
 # Umami analytics, served first-party.
 #
-# These two rules must stay ABOVE the SPA catch-all: Netlify matches _redirects
-# top to bottom and the first match wins, so /* would otherwise swallow them and
-# hand back index.html.
+# This rule must stay ABOVE the SPA catch-all: Netlify matches _redirects top to
+# bottom and the first match wins, so /* would otherwise swallow it and hand back
+# index.html.
 #
-# They exist so the tracker loads from consolelogic.net instead of umami.is,
+# It exists so the tracker loads from consolelogic.net instead of umami.is,
 # which EasyPrivacy blocks by hostname (||umami.is^$third-party). Unproxied,
 # that silently drops every visitor running a content blocker, which is a large
 # share of a developer audience.
 #
-# The two destinations are different hosts on purpose: the script is published
-# from cloud.umami.is, but the tracker posts to gateway.umami.is. The /api/send
-# path is fixed by the tracker (it appends it to data-host-url), so that rule
-# cannot be renamed the way /js/stats.js can.
+# Only the script is proxied here. The collect endpoint (/api/send, a path the
+# tracker fixes and we cannot rename) is handled by the edge function in
+# netlify/edge-functions/umami-collect.js instead, because it has to forward
+# the visitor's real IP and a plain rewrite cannot add a header.
 /js/stats.js  https://cloud.umami.is/script.js    200
-/api/send     https://gateway.umami.is/api/send   200
 
 # SPA fallback. Prerendered routes are real files in dist, and Netlify serves an
 # existing file ahead of an unforced rewrite, so this only catches unknown paths.
