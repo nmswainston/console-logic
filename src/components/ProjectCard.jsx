@@ -49,12 +49,12 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
               <img
                 src={thumb}
                 width="800"
-                height="480"
+                height="500"
                 alt=""
                 loading={priority ? "eager" : "lazy"}
                 decoding="async"
                 {...(priority && { fetchpriority: "high" })}
-                className="max-h-full max-w-full object-contain transition-transform duration-200 ease-out group-hover:scale-[1.03]"
+                className="h-full w-full object-contain transition-transform duration-200 ease-out group-hover:scale-[1.03]"
               />
             </div>
           ) : (
