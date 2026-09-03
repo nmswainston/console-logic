@@ -10,6 +10,7 @@ export default function Header() {
   const menuButtonRef = useRef(null);
   const panelRef = useRef(null);
   const closedByNavigationRef = useRef(false);
+  const wasOpenRef = useRef(false);
 
   const closeMenu = useCallback((byNavigation = false) => {
     closedByNavigationRef.current = byNavigation;
@@ -68,9 +69,15 @@ export default function Header() {
     }
   }, [menuOpen]);
 
-  // Return focus to menu button when closing (not when navigating)
+  // Return focus to menu button when closing (not when navigating).
+  // Skip on initial mount so the button is not focused before the menu
+  // has ever been opened.
   useEffect(() => {
-    if (!menuOpen && !closedByNavigationRef.current) {
+    if (menuOpen) {
+      wasOpenRef.current = true;
+      return;
+    }
+    if (wasOpenRef.current && !closedByNavigationRef.current) {
       menuButtonRef.current?.focus();
     }
     closedByNavigationRef.current = false;
