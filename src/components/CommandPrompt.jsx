@@ -15,6 +15,9 @@ const COMMAND = "start-a-project";
  * the command out, and activating it opens the contact modal, so the "waiting
  * for input" promise actually leads somewhere.
  *
+ * The button keeps a 44px minimum height. Its type is only 20px tall, which
+ * would otherwise leave a tap target well under the comfortable floor on touch.
+ *
  * The caret is the only always-moving part. It reuses .cursor-blink, which
  * animations.css already switches off under prefers-reduced-motion, and it is
  * aria-hidden along with the typed text: the button carries its own label so
@@ -54,7 +57,7 @@ export default function CommandPrompt({ className = "" }) {
       onFocus={engage}
       onBlur={disengage}
       aria-label="Start a project"
-      className={`focus-ring group flex cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
+      className={`focus-ring group flex min-h-[44px] cursor-pointer items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <span aria-hidden="true" className="text-accent">
         {">_"}
