@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Head } from "vite-react-ssg";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import Header from "@/components/layout/Header.jsx";
@@ -10,11 +10,18 @@ import TerminalGlow from "@/components/terminal/TerminalGlow.jsx";
 import ScanlineOverlay from "@/components/terminal/ScanlineOverlay.jsx";
 
 import { ContactModalProvider, useContactModal } from "@/context/ContactModalContext.jsx";
+import { applyAnalyticsPreference } from "@/lib/analytics.js";
 
 const ContactModal = lazy(() => import("@/components/ContactModal.jsx"));
 
 function LayoutContent() {
   const { isOpen, closeModal } = useContactModal();
+
+  // Runs once per page load rather than per route: the opt-out is a one-shot
+  // switch, and the URL it arrives on is the landing URL.
+  useEffect(() => {
+    applyAnalyticsPreference();
+  }, []);
 
   return (
     <>
