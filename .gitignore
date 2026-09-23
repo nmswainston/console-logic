@@ -18,7 +18,6 @@ pnpm-debug.log*
 # Editors/OS
 .vscode/
 .idea/
-.claude/
 *.sw?
 .DS_Store
 Thumbs.db
