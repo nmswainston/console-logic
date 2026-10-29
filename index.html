@@ -31,13 +31,21 @@
       crossorigin
     />
 
-    <!-- JSON-LD: Organization (no Instagram/X) -->
+    <!-- JSON-LD: Organization (no Instagram/X). City-level address only, by design. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "console.log(ic)",
+      "legalName": "ConsoleLogic LLC",
       "url": "https://consolelogic.net/",
+      "email": "contact@consolelogic.net",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Avondale",
+        "addressRegion": "AZ",
+        "addressCountry": "US"
+      },
       "logo": "https://consolelogic.net/favicon.svg",
       "sameAs": ["https://github.com/nmswainston"]
     }

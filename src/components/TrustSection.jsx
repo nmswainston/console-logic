@@ -32,7 +32,7 @@ export default function TrustSection() {
         <Section id="trust" borderTop ref={trustRef}>
             <SectionLoader label="loading section: trust" sectionRef={trustRef}>
                 <ScrollMotion className="section-header" useOpacity={false}>
-                    <p className="section-kicker">Why clients hire Console Logic</p>
+                    <p className="section-kicker">Why clients hire console.log(ic)</p>
 
                     <h2 id="trust-heading" className="section-heading">
                         Built to be clear, fast, and maintainable.

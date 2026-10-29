@@ -14,7 +14,7 @@ const OUTPUT = join(__dirname, "..", "public", "sitemap.xml");
 
 const lastmod = new Date().toISOString().slice(0, 10);
 
-const staticPaths = ["/", "/projects", "/about"];
+const staticPaths = ["/", "/projects", "/about", "/privacy"];
 const projectPaths = projects.map((p) => `/projects/${p.slug}`);
 const paths = [...staticPaths, ...projectPaths];
 

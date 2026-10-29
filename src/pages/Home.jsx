@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Head } from "vite-react-ssg";
-import { useContactModal } from "@/context/ContactModalContext.jsx";
+import ContactLink from "@/components/ContactLink.jsx";
 
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
 import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
@@ -38,7 +38,6 @@ const testimonials = [
 ];
 
 export default function Home() {
-  const { openModal } = useContactModal();
   const servicesRef = useRef(null);
   const workRef = useRef(null);
   const aboutRef = useRef(null);
@@ -229,12 +228,13 @@ export default function Home() {
                 className="mt-6 mb-7 section-cta-gap flex flex-wrap items-center"
                 initiallyVisible
               >
-                <button
-                  onClick={() => openModal("home-cta")}
+                <ContactLink
+                  source="home-cta"
+                  subject="Let's start a conversation"
                   className="btn btn-primary"
                 >
                   Start a conversation
-                </button>
+                </ContactLink>
               </ScrollStagger>
             </ScrollMotion>
           </div>

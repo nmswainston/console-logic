@@ -1,10 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useContactModal } from "@/context/ContactModalContext.jsx";
+import ContactLink from "@/components/ContactLink.jsx";
 import Logo from "@/components/Logo.jsx";
 
 export default function Header() {
-  const { openModal } = useContactModal();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
@@ -145,13 +144,13 @@ export default function Header() {
           </li>
 
           <li>
-            <button
-              onClick={() => openModal("header")}
+            <ContactLink
+              source="header"
+              subject="Let's talk"
               className="focus-ring btn btn-primary"
-              aria-label="Start a conversation"
             >
               Let&apos;s talk
-            </button>
+            </ContactLink>
           </li>
         </ul>
 
@@ -253,16 +252,14 @@ export default function Header() {
               </NavLink>
             </li>
             <li className="mt-2 pt-2 border-t border-border">
-              <button
-                onClick={() => {
-                  openModal("header-mobile");
-                  closeMenu(true);
-                }}
+              <ContactLink
+                source="header-mobile"
+                subject="Let's talk"
+                onOpen={() => closeMenu(true)}
                 className="focus-ring btn btn-primary w-full justify-center"
-                aria-label="Start a conversation"
               >
                 Let&apos;s talk
-              </button>
+              </ContactLink>
             </li>
           </ul>
         </div>

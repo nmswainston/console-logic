@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
-import { useContactModal } from "@/context/ContactModalContext.jsx";
+import ContactLink from "@/components/ContactLink.jsx";
 import TypingText from "@/components/terminal/TypingText.jsx";
 import { TYPING_SPEED_MS } from "@/data/constants";
 
@@ -24,7 +24,6 @@ const COMMAND = "start-a-project";
  * assistive tech never reads a half-typed string.
  */
 export default function CommandPrompt({ className = "" }) {
-  const { openModal } = useContactModal();
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const [hoverCapable, setHoverCapable] = useState(true);
@@ -49,9 +48,9 @@ export default function CommandPrompt({ className = "" }) {
   const showCommand = hovered || !hoverCapable;
 
   return (
-    <button
-      type="button"
-      onClick={() => openModal("footer-prompt")}
+    <ContactLink
+      source="footer-prompt"
+      subject="New project inquiry"
       onMouseEnter={engage}
       onMouseLeave={disengage}
       onFocus={engage}
@@ -78,6 +77,6 @@ export default function CommandPrompt({ className = "" }) {
           }`}
         />
       </span>
-    </button>
+    </ContactLink>
   );
 }

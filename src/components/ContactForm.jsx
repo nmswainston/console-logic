@@ -152,6 +152,20 @@ export default function ContactForm({ onClose }) {
           </div>
         )}
 
+        <p className="text-xs leading-normal text-muted-foreground">
+          We use your details only to reply to you. See our{" "}
+          {/* New tab so a half-written message is not lost with the modal. */}
+          <a
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring underline underline-offset-4 hover:text-foreground"
+          >
+            Privacy Policy
+          </a>
+          .
+        </p>
+
         <div className="flex gap-4 pt-4">
           <button
             type="submit"

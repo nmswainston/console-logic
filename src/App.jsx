@@ -5,6 +5,7 @@ import Home from "@/pages/Home.jsx";
 import Work from "@/pages/Work.jsx";
 import ProjectCaseStudy from "@/pages/ProjectCaseStudy.jsx";
 import About from "@/pages/About.jsx";
+import Privacy from "@/pages/Privacy.jsx";
 import NotFound from "@/pages/NotFound.jsx";
 
 import { projects } from "@/data/projects";
@@ -32,6 +33,7 @@ export const routes = [
         getStaticPaths: () => projects.map((p) => `projects/${p.slug}`),
       },
       { path: "about", element: <About /> },
+      { path: "privacy", element: <Privacy /> },
       { path: "*", element: <NotFound /> },
     ],
   },

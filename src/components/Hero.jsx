@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useContactModal } from "@/context/ContactModalContext.jsx";
+import ContactLink from "@/components/ContactLink.jsx";
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
 import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
 
@@ -100,7 +100,6 @@ function CodeBlock({ startTyping, studioDone, commandDone, setStudioDone, setCom
 }
 
 export default function Hero() {
-  const { openModal } = useContactModal();
   const reduce = useReducedMotion();
   const heroRef = useRef(null);
   const [bootDone, setBootDone] = useState(false);
@@ -214,7 +213,7 @@ export default function Hero() {
           offset={heroOffset}
         >
           <p className="mt-4 max-w-prose text-lg leading-snug text-muted-foreground max-[359px]:text-base sm:mt-6 sm:text-base sm:leading-normal">
-            Console Logic builds fast, polished websites and internal tools for
+            console.log(ic) builds fast, polished websites and internal tools for
             small businesses and growing teams.
             <br />
             Clean architecture, thoughtful design, and systems that stay
@@ -246,9 +245,13 @@ export default function Hero() {
           yRange={[40, -20]}
           offset={heroOffset}
         >
-          <button onClick={() => openModal("hero")} className="btn btn-primary">
+          <ContactLink
+            source="hero"
+            subject="New project inquiry"
+            className="btn btn-primary"
+          >
             Start a project
-          </button>
+          </ContactLink>
           <a href="#work" className="btn btn-ghost">
             View work
           </a>

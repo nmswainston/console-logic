@@ -12,12 +12,8 @@ const navLinks = [
 export default function Footer({
   brandName = "console.log(ic)",
   brandUrl = "/",
-  showCraftedBy = true,
-  yearStart,
 }) {
   const year = new Date().getFullYear();
-  const yearText =
-    yearStart && yearStart !== year ? `${yearStart}-${year}` : `${year}`;
 
   const isExternal = /^https?:\/\//.test(brandUrl);
 
@@ -58,7 +54,7 @@ export default function Footer({
 
           {/* Nav + contact columns */}
           <div className="flex flex-col gap-8 sm:flex-row sm:gap-14">
-            <div>
+            <nav aria-label="Footer">
               <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">
                 Navigate
               </p>
@@ -67,14 +63,14 @@ export default function Footer({
                   <li key={label}>
                     <Link
                       to={to}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="focus-ring text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {label}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
             <div>
               <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">
@@ -82,39 +78,33 @@ export default function Footer({
               </p>
               <a
                 href={`mailto:${contact.email}`}
-                className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                className="focus-ring text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 {contact.email}
               </a>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {contact.location}
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Bottom: copyright */}
-        <div className="mt-10 border-t border-border pt-6 text-xs font-mono text-muted-foreground">
-          <span>
-            © {yearText}{" "}
-            {isExternal ? (
-              <a
-                href={brandUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={brandName}
-                className="transition-opacity hover:opacity-80"
-              >
-                <Logo className="text-xs" showPrompt={false} />
-              </a>
-            ) : (
-              <Link
-                to={brandUrl}
-                aria-label={brandName}
-                className="transition-opacity hover:opacity-80"
-              >
-                <Logo className="text-xs" showPrompt={false} />
-              </Link>
-            )}
-            {showCraftedBy && " | Crafted with logic"}
-          </span>
+        {/* Bottom: legal line. The legal entity is spelled out in plain text
+            (not the logo) so it reads exactly as "ConsoleLogic LLC" to people,
+            crawlers, and reviewers. */}
+        <div className="mt-10 flex flex-col gap-3 border-t border-border pt-6 text-xs font-mono text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            &copy; {year} {contact.legalName}. {brandName} is a brand of{" "}
+            {contact.legalName}.
+          </p>
+          <p>
+            <Link
+              to="/privacy"
+              className="focus-ring underline underline-offset-4 hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

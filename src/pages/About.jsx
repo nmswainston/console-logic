@@ -1,13 +1,11 @@
 import { Head } from "vite-react-ssg";
-import { useContactModal } from "@/context/ContactModalContext.jsx";
+import ContactLink from "@/components/ContactLink.jsx";
 import Section from "@/components/Section.jsx";
 import TerminalCard from "@/components/terminal/TerminalCard.jsx";
 import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
 import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
 
 export default function About() {
-  const { openModal } = useContactModal();
-
   return (
     <>
       <Head>
@@ -36,7 +34,7 @@ export default function About() {
           <p className="section-kicker">About</p>
           <h1 className="section-heading">Where builders debug reality</h1>
           <p className="section-intro">
-            Console Logic builds software that makes life easier, not heavier. Websites,
+            console.log(ic) builds software that makes life easier, not heavier. Websites,
             internal tools, and automations that stay fast, clear, and maintainable.
           </p>
         </ScrollMotion>
@@ -111,12 +109,12 @@ export default function About() {
           </TerminalCard>
         </div>
 
-        {/* Why Console Logic */}
+        {/* Why console.log(ic) */}
         <ScrollMotion className="mt-24 section-header" useOpacity={false}>
-          <p className="section-kicker">Why Console Logic</p>
+          <p className="section-kicker">Why console.log(ic)</p>
           <h2 className="section-heading">The story behind the name</h2>
           <p className="section-intro">
-            We built Console Logic after seeing too many teams struggle with slow,
+            We built console.log(ic) after seeing too many teams struggle with slow,
             confusing, over-engineered sites.
             We wanted the opposite: clear, pragmatic software that stays fast and understandable.
           </p>
@@ -162,9 +160,13 @@ export default function About() {
             we&rsquo;d love to hear what you&rsquo;re building.
           </p>
           <div className="mt-6">
-            <button onClick={() => openModal("about-cta")} className="btn btn-primary">
+            <ContactLink
+              source="about-cta"
+              subject="Let's start a conversation"
+              className="btn btn-primary"
+            >
               Start a conversation
-            </button>
+            </ContactLink>
           </div>
         </ScrollMotion>
       </Section>
