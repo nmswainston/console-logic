@@ -28,9 +28,7 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
 
   // Declarative analytics. The Umami tracker binds one document-level click
   // listener and walks up to the nearest data-umami-event, so these need no
-  // handlers and cost nothing when the script is blocked or absent. Spread
-  // rather than repeated inline because the same link exists twice: once in
-  // flow and once inside the hover overlay.
+  // handlers and cost nothing when the script is blocked or absent.
   const caseStudyEvent = {
     "data-umami-event": "case-study-click",
     "data-umami-event-project": title,
@@ -72,16 +70,13 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
     </>
   );
 
-  // inOverlay renders the hover-overlay copy: identical layout, but the links
-  // are removed from the tab order (keyboard users get the in-flow originals).
-  const ctaRow = (inOverlay = false) => (
+  const ctaRow = (
     <div className="pt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground leading-normal transition-colors group-hover:text-foreground">
       {caseStudyUrl ? (
         <>
           <Link
             to={caseStudyUrl}
             {...caseStudyEvent}
-            tabIndex={inOverlay ? -1 : undefined}
             className="inline-flex items-center gap-1.5 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded font-medium"
           >
             View case study
@@ -93,7 +88,6 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
               target="_blank"
               rel="noopener noreferrer"
               {...liveSiteEvent}
-              tabIndex={inOverlay ? -1 : undefined}
               className="inline-flex items-center gap-1 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-terminal-green focus:ring-offset-1 rounded"
             >
               See live site
@@ -107,32 +101,23 @@ export default function ProjectCard({ title, tag, description, link = "#", slug,
     </div>
   );
 
-  /* Bottom panel: clamped description + CTA row in flow (defines the card's
-     collapsed size), plus a hover overlay holding the full description and
-     the same CTA row, which expands over the page instead of pushing it. */
+  /* Bottom panel: one copy of the description and CTA row. The slot has a
+     fixed height (see globals.css), so the card's size never changes; the
+     panel inside it grows downward on hover and sits over the page below
+     instead of pushing it. */
   const bottomPanel = (
-    <div className="relative px-6 pb-6">
-      {description && (
-        <p className="project-card-description mt-2 text-sm text-muted-foreground leading-normal">
-          {description}
-        </p>
-      )}
-      {ctaRow()}
-      {description && (
-        <div className="project-card-overlay" aria-hidden="true">
-          {/* Inside a TerminalCard tile, this box continues the inner card's
-              border so the text box visibly expands along with the tile;
-              standalone (Work page) it is unstyled. */}
-          <div className="project-card-overlay-box">
-            {/* No mt-2 here: the in-flow copy's top margin collapses out of
-                the wrapper, but inside the absolutely-positioned overlay it
-                would not, which would push this copy 8px lower. */}
-            <p className="text-sm text-muted-foreground leading-normal pointer-events-none">
+    <div className="project-card-bottom relative px-6 pb-6">
+      {description ? (
+        <div className="project-card-slot mt-2">
+          <div className="project-card-panel">
+            <p className="project-card-description text-sm text-muted-foreground leading-normal">
               {description}
             </p>
-            {ctaRow(true)}
+            {ctaRow}
           </div>
         </div>
+      ) : (
+        ctaRow
       )}
     </div>
   );

@@ -69,8 +69,7 @@
   .status-pulse {
     animation: none;
   }
-  .project-card-overlay,
-  .project-card-overlay-box > p {
+  .project-card-description {
     transition-duration: 0ms;
     transition-delay: 0ms;
   }

@@ -469,84 +469,90 @@ body {
   background: var(--preview-frame);
 }
 
-/* Project card: description clamps to two lines. On hover, an overlay panel
-   holding the full description AND the CTA row fades in exactly on top of the
-   in-flow copy, then the description's max-height animates open. Because the
-   CTA row sits in normal flow inside the panel, it slides down with the
-   expanding text, and the panel (card surface) grows over the page content
-   below instead of pushing it down. */
+/* Project card: the description clamps to two lines. On hover (or keyboard
+   focus inside the card) the SAME panel grows to show the full text, with the
+   CTA row sliding down in normal flow beneath it. The slot has a fixed height
+   (2 description lines + the CTA row), so the grid never reflows; the panel is
+   absolutely positioned inside it and takes the card surface on hover, growing
+   over the content below instead of pushing it. --pc-bleed is how far the
+   panel reaches past the slot on each side: the wrapper's px-6 plus the card
+   border, so the grown panel covers the card edge to edge. */
+.project-card-slot {
+  height: 4.6875rem; /* 2 x 1.5 x 0.875rem + 0.75rem pt-3 + 1.5 x 0.875rem */
+  position: relative;
+}
+
+/* The link row wraps in narrow cards, so the slot reserves a second line
+   rather than letting the wrapped link run into the card border. One line
+   needs about 12rem in the sans face and about 15rem inside a TerminalCard
+   tile (Home), which is set in the monospace face. */
+.project-card-bottom {
+  container-type: inline-size;
+}
+
+@container (max-width: 12.5rem) {
+  .project-card-slot {
+    height: 6rem;
+  }
+}
+
+@container (max-width: 15rem) {
+  .terminal-panel .project-card-slot {
+    height: 6rem;
+  }
+}
+
+.project-card-panel {
+  --pc-bleed: calc(1.5rem + 1px);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: calc(-1 * var(--pc-bleed));
+  /* Bleed minus the 1px border keeps the text exactly on the slot's edge */
+  padding-inline: calc(var(--pc-bleed) - 1px);
+  padding-block-end: 1.5rem;
+  border: 1px solid transparent;
+  border-block-start: 0;
+  border-end-start-radius: 0.5rem;
+  border-end-end-radius: 0.5rem;
+}
+
+/* Inside a TerminalCard tile (Home) the panel reaches the OUTER tile's edges
+   so the whole tile appears to expand as one surface: one more p-6 gutter
+   plus the tile's own 1px border on each side. */
+.terminal-panel .project-card-panel {
+  --pc-bleed: calc(3rem + 2px);
+}
+
 .project-card-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
-}
-
-.project-card-overlay {
-  position: absolute;
-  inset-block-start: 0;
-  /* Cover the card's 1px border line so the panel reads as the card itself */
-  inset-inline: -1px;
-  z-index: 20;
-  visibility: hidden;
-  /* Border (1px) + padding = the wrapper's px-6, so text lines up exactly */
-  padding-inline: 1.5rem;
-  padding-block-end: 1.5rem; /* matches the wrapper's pb-6 */
-  background: var(--color-elevated);
-  /* Same color as the resting card border: the tile must not brighten as it
-     expands */
-  border: 1px solid var(--color-border);
-  border-block-start: 0;
-  border-end-start-radius: 0.5rem;
-  border-end-end-radius: 0.5rem;
-  /* Downward-only shadows: an all-direction glow would draw a visible line
-     across the card at the panel's top edge */
-  box-shadow:
-    0 8px 10px -4px color-mix(in srgb, var(--color-accent), transparent 85%),
-    0 12px 20px -6px color-mix(in srgb, var(--color-bg), transparent 60%);
-  /* Delay hiding until the description has collapsed back */
-  transition: visibility 0s linear 200ms;
-}
-
-/* Inside a TerminalCard tile (Home), the panel reaches the OUTER tile's edges
-   so the whole tile appears to expand as one surface. Offsets walk out through
-   the inner card border (1px) + TerminalCard padding (p-6) + its border (1px);
-   the panel padding recreates the tile's p-6 gutter, and the overlay box
-   continues the inner card's border so the text box expands with the tile. */
-.terminal-panel .project-card-overlay {
-  inset-inline: calc(-1.5rem - 2px);
-  padding-inline: 1.5rem;
-  padding-block-end: 1.5rem;
-}
-
-.terminal-panel .project-card-overlay-box {
-  padding-inline: 1.5rem;
-  padding-block-end: 1.5rem;
-  background: var(--color-elevated);
-  /* Continues the inner card's side borders; its top edge meets them mid-card,
-     so no top border */
-  border: 1px solid var(--color-border);
-  border-block-start: 0;
-  border-end-start-radius: 0.5rem;
-  border-end-end-radius: 0.5rem;
-}
-
-/* Starts at exactly the clamped two-line height so the panel appears
-   seamlessly over the in-flow copy, then expands */
-.project-card-overlay-box > p {
-  max-height: calc(2 * 1.5em);
-  overflow: hidden;
+  max-height: 3em;
   transition: max-height 200ms ease-out;
 }
 
 @media (hover: hover) {
-  .group:hover .project-card-overlay {
-    visibility: visible;
-    transition: none;
+  .group:hover .project-card-panel,
+  .group:focus-within .project-card-panel {
+    z-index: 20;
+    background: var(--color-elevated);
+    /* Same color as the resting card border: the tile must not brighten as
+       it expands */
+    border-color: var(--color-border);
+    /* Downward-only shadows: an all-direction glow would draw a visible line
+       across the card at the panel's top edge */
+    box-shadow:
+      0 8px 10px -4px color-mix(in srgb, var(--color-accent), transparent 85%),
+      0 12px 20px -6px color-mix(in srgb, var(--color-bg), transparent 60%);
   }
 
-  .group:hover .project-card-overlay-box > p {
+  .group:hover .project-card-description,
+  .group:focus-within .project-card-description {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
     max-height: 30rem;
   }
 }
