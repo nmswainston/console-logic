@@ -10,6 +10,7 @@ import TerminalCard from "@/components/terminal/TerminalCard.jsx";
 
 import Hero from "@/components/Hero.jsx";
 import TrustSection from "@/components/TrustSection.jsx";
+import ProcessSection from "@/components/ProcessSection.jsx";
 import Section from "@/components/Section.jsx";
 import ProjectCard from "@/components/ProjectCard.jsx";
 
@@ -135,6 +136,10 @@ export default function Home() {
           </ScrollStagger>
         </SectionLoader>
       </Section>
+
+      {/* How it works: sits after the work so a visitor who liked what they
+          saw learns what hiring us involves before the About and Contact asks. */}
+      <ProcessSection />
 
       {/* About */}
       <Section id="about" borderTop ref={aboutRef}>
