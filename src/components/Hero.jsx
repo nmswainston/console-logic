@@ -165,8 +165,20 @@ export default function Hero() {
           scaleRange={[0.98, 1.02]}
           offset={heroOffset}
         >
+          {/* The page's main heading. The visible headline below is typed in by
+              JavaScript after the boot sequence, so on its own it is missing
+              from the prerendered HTML: search engines saw a homepage with no
+              headline, and a screen reader would hear it one letter at a time.
+
+              This h1 carries the same words as real text from the first byte.
+              It is visually hidden (not display:none, which would also hide it
+              from assistive tech), and the animated copy is aria-hidden so the
+              headline is announced once. Keep the two in sync. */}
+          <h1 className="sr-only">Smart builds. Clean code. Logical outcomes.</h1>
+
           {/* Height matches exactly 3 lines at the fluid font size — no dead space */}
           <div
+            aria-hidden="true"
             className="overflow-hidden"
             style={{ height: "calc(4.2 * var(--hero-headline-size))" }}
           >
@@ -267,7 +279,9 @@ export default function Hero() {
       >
         {heroServices.map((item) => (
           <TerminalCard key={item.title}>
-            <h3 className="card-title">{item.title}</h3>
+            {/* h2, not h3: these sit directly under the page's h1, and heading
+                levels should not skip. The look comes from .card-title. */}
+            <h2 className="card-title">{item.title}</h2>
             <p className="card-text">{item.text}</p>
           </TerminalCard>
         ))}
