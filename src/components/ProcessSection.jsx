@@ -6,6 +6,8 @@ import ScrollMotion from "@/components/motion/ScrollMotion.jsx";
 import ScrollStagger from "@/components/motion/ScrollStagger.jsx";
 import TerminalCard from "@/components/terminal/TerminalCard.jsx";
 
+import { startingPrice } from "@/data/pricing";
+
 // The four stages a project goes through, in order. Someone who has never
 // hired a developer mostly wants to know what happens after they get in touch,
 // so each step says what they will see or receive, not what we do internally.
@@ -49,6 +51,21 @@ export default function ProcessSection() {
             Most clients have never hired a developer before. Here is what happens from the
             first conversation to launch day and after.
           </p>
+
+          {/* A starting figure lets a visitor rule themselves in or out before
+              the first call, which saves both sides time. It is a floor, not a
+              quote, so the second sentence says where the real number comes
+              from. Hidden until a figure is set in src/data/pricing.js.
+
+              It lives in the header block, like the response-time line in the
+              Contact section, because the card grid below drifts with scroll
+              and a line placed under it would not keep a steady gap. */}
+          {startingPrice && (
+            <p className="mt-3 text-sm font-mono text-terminal-green">
+              {">"} Most projects start at {startingPrice}. You get an exact quote in writing
+              before any work starts.
+            </p>
+          )}
         </ScrollMotion>
 
         {/* The step number is real text, not decoration: the order is the
