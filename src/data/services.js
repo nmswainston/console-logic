@@ -1,7 +1,7 @@
 export const services = [
   {
     title: "Clean frontends",
-    text: "React interfaces with clean UX, built for speed, clarity, and long term sanity.",
+    text: "React interfaces with clean UX, built for speed, clarity, and long term peace.",
   },
   {
     title: "Calm backends",
