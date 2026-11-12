@@ -41,7 +41,9 @@ export const projects = [
     slug: "relay",
     title: "Relay",
     tag: "Internal tool",
-    link: "https://relay-clientops.netlify.app/login",
+    // No `link`: the app sits behind a login, so a "See live site" link only
+    // showed visitors a sign-in form. The card and case study both hide their
+    // live-site links when this field is absent.
     thumb: "/projects/relay.png",
     description: "Client ops were scattered across spreadsheets and email. Centralized app tracks status and next steps so teams spend less time switching tools.",
     overview: "An internal client operations tool that centralizes status tracking and next steps. Reduces context-switching between spreadsheets and email.",
