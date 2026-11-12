@@ -1,3 +1,23 @@
+# Baseline security headers for every response.
+#
+# nosniff:            the browser must trust the declared Content-Type and never
+#                     guess, so an uploaded or proxied file cannot run as script.
+# X-Frame-Options:    the site may not be embedded in a frame on another origin,
+#                     which blocks clickjacking overlays.
+# Referrer-Policy:    outbound links (the project "live site" links) receive the
+#                     origin only, never the full path the visitor was on.
+# Permissions-Policy: the site uses none of these device features, so no script
+#                     on the page, ours or injected, may request them.
+#
+# Netlify already sends Strict-Transport-Security. A Content-Security-Policy is
+# left out on purpose: the prerendered pages carry inline scripts and styles, so
+# it needs its own careful pass rather than a line here.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
 # Self-hosted fonts: treated as immutable (rename the file if a font is ever updated)
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
