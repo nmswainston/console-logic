@@ -1,17 +1,11 @@
+// Order matters: the homepage shows the first six, the Work page shows all of
+// them in this order, and case-study prev/next links follow it too.
+//
+// Client sites lead, because a visitor deciding whether to hire the studio wants
+// to see work done for a business like theirs. Tools and builds come next, then
+// personal projects, and the product concepts (prototypes, not shipped products)
+// sit last.
 export const projects = [
-  {
-    slug: "portfolio",
-    title: "Portfolio",
-    tag: "Website",
-    link: "https://www.nmswainston.com",
-    thumb: "/projects/nmswainston.png",
-    description: "Many portfolios become hard to maintain over time. Built with clean architecture so it stays fast and simple to update.",
-    overview: "A personal portfolio site designed for long-term maintainability. Clean architecture and minimal dependencies keep it fast and straightforward to update.",
-    problem: "Portfolios often accumulate technical debt. Over time, dependencies age, build tools change, and what started simple becomes a maintenance burden.",
-    approach: "Designed with a lean stack and clear separation of concerns. Content lives in structured data; styling uses design tokens. No CMS overhead, just files that are easy to edit.",
-    outcome: "A site that loads quickly, stays easy to update, and won't require a rewrite when tooling evolves.",
-    techStack: ["React", "Vite", "Tailwind CSS"],
-  },
   {
     slug: "litchfield-perk",
     title: "Litchfield Perk",
@@ -70,6 +64,19 @@ export const projects = [
     techStack: ["React", "Netlify", "Supabase"],
   },
   {
+    slug: "mini-saas-starter",
+    title: "Mini SaaS Starter Kit",
+    tag: "Frontend build",
+    link: "https://mini-saas-template.netlify.app/",
+    thumb: "/projects/mini-saas-starter.png",
+    description: "New SaaS products waste weeks on auth, billing, and tenancy. This starter ships with those patterns built in so teams can focus on the product.",
+    overview: "A frontend starter kit for new SaaS products. Auth, billing, and tenancy patterns built in so teams can focus on the product.",
+    problem: "New SaaS products spend weeks on auth, billing, and multi-tenancy before writing product code. Boilerplate is repetitive and error-prone.",
+    approach: "Pre-built patterns for auth flows, subscription billing, and tenant isolation. Clean abstractions so teams can customize without rewriting.",
+    outcome: "Teams ship product features faster. Less time on plumbing, more time on what makes the product unique.",
+    techStack: ["React", "Vite", "Tailwind", "Stripe", "Supabase"],
+  },
+  {
     slug: "stacys-40th",
     title: "Stacy's 40th",
     tag: "Event site",
@@ -81,6 +88,19 @@ export const projects = [
     approach: "Single-page design with event details, RSVP form, and optional photo gallery. Mobile-friendly so guests can respond from their phones.",
     outcome: "Clean RSVP tracking and a single link to share. No app downloads or account signups required.",
     techStack: ["HTML", "CSS", "JavaScript", "Netlify Forms"],
+  },
+  {
+    slug: "portfolio",
+    title: "Portfolio",
+    tag: "Website",
+    link: "https://www.nmswainston.com",
+    thumb: "/projects/nmswainston.png",
+    description: "Many portfolios become hard to maintain over time. Built with clean architecture so it stays fast and simple to update.",
+    overview: "A personal portfolio site designed for long-term maintainability. Clean architecture and minimal dependencies keep it fast and straightforward to update.",
+    problem: "Portfolios often accumulate technical debt. Over time, dependencies age, build tools change, and what started simple becomes a maintenance burden.",
+    approach: "Designed with a lean stack and clear separation of concerns. Content lives in structured data; styling uses design tokens. No CMS overhead, just files that are easy to edit.",
+    outcome: "A site that loads quickly, stays easy to update, and won't require a rewrite when tooling evolves.",
+    techStack: ["React", "Vite", "Tailwind CSS"],
   },
   {
     slug: "signal-over-noise",
@@ -107,19 +127,6 @@ export const projects = [
     approach: "Graph-based note storage with visible connections. Search plus browse by relationship. Export and sync with existing tools.",
     outcome: "A prototype that shows how connected notes could work. Used to validate interest before investing in full product.",
     techStack: ["React", "Netlify", "Graph data model"],
-  },
-  {
-    slug: "mini-saas-starter",
-    title: "Mini SaaS Starter Kit",
-    tag: "Frontend build",
-    link: "https://mini-saas-template.netlify.app/",
-    thumb: "/projects/mini-saas-starter.png",
-    description: "New SaaS products waste weeks on auth, billing, and tenancy. This starter ships with those patterns built in so teams can focus on the product.",
-    overview: "A frontend starter kit for new SaaS products. Auth, billing, and tenancy patterns built in so teams can focus on the product.",
-    problem: "New SaaS products spend weeks on auth, billing, and multi-tenancy before writing product code. Boilerplate is repetitive and error-prone.",
-    approach: "Pre-built patterns for auth flows, subscription billing, and tenant isolation. Clean abstractions so teams can customize without rewriting.",
-    outcome: "Teams ship product features faster. Less time on plumbing, more time on what makes the product unique.",
-    techStack: ["React", "Vite", "Tailwind", "Stripe", "Supabase"],
   },
 ];
 
