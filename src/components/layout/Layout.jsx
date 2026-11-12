@@ -29,27 +29,27 @@ function LayoutContent() {
           where useful, og:image. Canonical is intentionally omitted here because
           <link> tags are not de-duplicated, so each page sets its own. */}
       <Head>
-        <title>console.log(ic) - Smart devs. Clean code.</title>
+        <title>console.log(ic) - Websites and web apps for small businesses</title>
         <meta
           name="description"
-          content="A modern terminal-inspired studio. Smart devs, clean code, logical outcomes."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="console.log(ic)" />
-        <meta property="og:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta property="og:title" content="console.log(ic) - Websites and web apps for small businesses" />
         <meta
           property="og:description"
-          content="A small studio shipping fast, reliable web apps and AI automations."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
         <meta property="og:url" content="https://consolelogic.net/" />
         <meta property="og:image" content="https://consolelogic.net/og.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta name="twitter:title" content="console.log(ic) - Websites and web apps for small businesses" />
         <meta
           name="twitter:description"
-          content="A small studio shipping fast, reliable web apps and AI automations."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
         <meta name="twitter:image" content="https://consolelogic.net/og.png" />
       </Head>
