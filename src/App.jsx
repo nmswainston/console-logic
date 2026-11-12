@@ -34,6 +34,11 @@ export const routes = [
       },
       { path: "about", element: <About /> },
       { path: "privacy", element: <Privacy /> },
+      // Prerendered to dist/404.html. Netlify serves that file, with a real
+      // 404 status, for any URL that matches no file, so this route exists to
+      // give the build something to render rather than to be visited.
+      { path: "404", element: <NotFound /> },
+      // The same page for unknown URLs once the client router has taken over.
       { path: "*", element: <NotFound /> },
     ],
   },
