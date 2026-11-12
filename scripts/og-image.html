@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the 1200x630 preview image that link unfurlers
+  (iMessage, LinkedIn, Slack, Facebook) show when someone shares the site.
+
+  It is a plain HTML page so the image uses the real brand fonts and colours.
+  To regenerate after a brand change, screenshot it with headless Chrome from
+  the repo root:
+
+    chrome --headless=new --hide-scrollbars --window-size=1200,630 \
+      --screenshot=public/og.png scripts/og-image.html
+
+  This is a manual step, not part of the build: Netlify's build image has no
+  Chrome, and the image only changes when the brand does.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("../public/fonts/jetbrains-mono-latin.woff2") format("woff2");
+        font-weight: 100 800;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("../public/fonts/inter-latin.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      /* Colours mirror the tokens in src/styles/globals.css. */
+      body {
+        background:
+          radial-gradient(900px 500px at 85% 110%, rgba(25, 230, 165, 0.1), transparent 70%),
+          #0e1821;
+        color: #e6f1f5;
+        font-family: "JetBrains Mono", monospace;
+        padding: 72px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-top: 6px solid #19e6a5;
+      }
+      .logo {
+        font-size: 40px;
+        letter-spacing: -0.02em;
+      }
+      .white {
+        color: #ffffff;
+      }
+      .green {
+        color: #19e6a5;
+      }
+      .blue {
+        color: #61affe;
+      }
+      h1 {
+        font-size: 76px;
+        font-weight: 500;
+        line-height: 1.22;
+        letter-spacing: -0.02em;
+      }
+      .caret {
+        display: inline-block;
+        width: 0.5em;
+        height: 0.95em;
+        margin-left: 0.08em;
+        background: #19e6a5;
+        transform: translateY(0.12em);
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: "Inter", sans-serif;
+        font-size: 28px;
+        color: #9fb3c2;
+      }
+      .foot .url {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 24px;
+        color: #19e6a5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <span class="white">&gt;_</span><span class="green">console</span
+      ><span class="white">.</span><span class="blue">log</span
+      ><span class="white">(</span><span class="blue">ic</span
+      ><span class="white">)</span>
+    </div>
+
+    <h1>
+      <span class="green">Smart builds.</span><br />
+      <span class="green">Clean code.</span><br />
+      <span class="blue">Logical</span> <span class="green">outcomes.</span
+      ><span class="caret"></span>
+    </h1>
+
+    <div class="foot">
+      <span>Websites, web apps and automation for small businesses</span>
+      <span class="url">consolelogic.net</span>
+    </div>
+  </body>
+</html>
