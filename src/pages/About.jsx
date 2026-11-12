@@ -39,10 +39,12 @@ export default function About() {
           </p>
         </ScrollMotion>
 
-        {/* What we do / Stack / How we work / Good fit */}
+        {/* What we do / Stack / How we work / Good fit.
+            These are h2, not h3: they sit directly under the page's h1, and
+            heading levels should not skip. The look comes from .card-title. */}
         <ScrollStagger className="mt-8 grid gap-6 sm:grid-cols-2" initiallyVisible>
           <TerminalCard className="h-full">
-            <h3 className="card-title">What we do</h3>
+            <h2 className="card-title">What we do</h2>
             <p className="card-text">
               UI engineering, APIs, and thoughtful automation.
               Products that feel calm to use and boring to maintain.
@@ -51,7 +53,7 @@ export default function About() {
           </TerminalCard>
 
           <TerminalCard className="h-full">
-            <h3 className="card-title">Stack</h3>
+            <h2 className="card-title">Stack</h2>
             <p className="card-text">
               React, Node, Tailwind, and TypeScript when it earns its keep.
               Tools chosen for clarity, speed, and a tight feedback loop.
@@ -59,7 +61,7 @@ export default function About() {
           </TerminalCard>
 
           <TerminalCard className="h-full">
-            <h3 className="card-title">How we work</h3>
+            <h2 className="card-title">How we work</h2>
             <ul className="card-text mt-2 list-disc pl-5 space-y-2">
               <li>Start with the user flow.</li>
               <li>Ship in small, validated slices.</li>
@@ -69,7 +71,7 @@ export default function About() {
           </TerminalCard>
 
           <TerminalCard className="h-full">
-            <h3 className="card-title">Good fit</h3>
+            <h2 className="card-title">Good fit</h2>
             <p className="card-text">
               You want something fast, clear, and dependable. You value
               communication and steady progress.
