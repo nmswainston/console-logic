@@ -47,22 +47,22 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>console.log(ic) - Smart devs. Clean code.</title>
+        <title>console.log(ic) - Websites and web apps for small businesses</title>
         <meta
           name="description"
-          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
         <link rel="canonical" href="https://consolelogic.net/" />
-        <meta property="og:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta property="og:title" content="console.log(ic) - Websites and web apps for small businesses" />
         <meta
           property="og:description"
-          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
         <meta property="og:url" content="https://consolelogic.net/" />
-        <meta name="twitter:title" content="console.log(ic) - Smart devs. Clean code." />
+        <meta name="twitter:title" content="console.log(ic) - Websites and web apps for small businesses" />
         <meta
           name="twitter:description"
-          content="We build crisp frontends, tidy backends, and automations that keep teams moving."
+          content="console.log(ic) is a small web studio in Avondale, Arizona. We build fast websites, web apps and automations for small businesses."
         />
       </Head>
 
