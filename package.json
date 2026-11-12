@@ -7,6 +7,7 @@
     "dev": "vite-react-ssg dev",
     "optimize-images": "node scripts/optimize-images.js",
     "sitemap": "node scripts/generate-sitemap.js",
+    "icons": "node scripts/generate-icons.js",
     "check:placeholders": "node scripts/check-placeholders.js",
     "prebuild": "npm run check:placeholders && npm run sitemap && npm run optimize-images",
     "build": "vite-react-ssg build",
