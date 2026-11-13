@@ -28,7 +28,7 @@ export const projects = [
     description:
       "A stained glass artist with 30 years of work needed a home for it online. Brand site pairs her story with a gallery, shop categories, and custom orders.",
     overview:
-      "A storefront and brand site for an Arizona stained glass studio. Presents the artist's story, gallery, and shop categories, and routes buyers to Etsy listings and custom order requests.",
+      "Brand site and storefront for an Arizona stained glass studio: the artist's story, gallery, shop categories, and links to Etsy and custom orders.",
     problem:
       "Thirty years of handmade stained glass lived only in marketplace listings and social posts. There was no single place that told the artist's story, showed the range of work, and made custom orders easy to request.",
     approach:
