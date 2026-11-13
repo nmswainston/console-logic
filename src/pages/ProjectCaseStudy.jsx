@@ -172,12 +172,12 @@ export default function ProjectCaseStudy() {
           </div>
 
           <div
-            className={`mt-8 grid gap-3 items-stretch ${prev && next ? "sm:grid-cols-2" : "grid-cols-1"}`}
+            className={`mt-8 grid gap-3 items-stretch ${prev && next ? "grid-cols-2" : "grid-cols-1"}`}
           >
             {prev && (
               <Link
                 to={`/projects/${prev.slug}`}
-                className="flex flex-col rounded-lg border border-border bg-surface/60 p-4 transition hover:border-accent/40 focus-ring focus:outline-none"
+                className="flex flex-col rounded-lg border border-border bg-surface/60 p-3 sm:p-4 transition hover:border-accent/40 focus-ring focus:outline-none"
               >
                 <span className="text-xs uppercase tracking-wide text-muted-foreground">
                   ← Previous
@@ -190,7 +190,7 @@ export default function ProjectCaseStudy() {
             {next && (
               <Link
                 to={`/projects/${next.slug}`}
-                className="flex flex-col rounded-lg border border-border bg-surface/60 p-4 transition hover:border-accent/40 focus-ring focus:outline-none text-right"
+                className="flex flex-col rounded-lg border border-border bg-surface/60 p-3 sm:p-4 transition hover:border-accent/40 focus-ring focus:outline-none text-right"
               >
                 <span className="text-xs uppercase tracking-wide text-muted-foreground">
                   Next →
