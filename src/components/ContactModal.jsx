@@ -39,8 +39,9 @@ export default function ContactModal({ isOpen, onClose }) {
         aria-label="Close modal"
       />
       
-      {/* Modal */}
-      <div className="relative w-full max-w-lg bg-elevated border border-border rounded-lg shadow-md">
+      {/* Modal. Capped to the screen height and scrollable, so on short
+          screens the form scrolls inside it and the Send button stays reachable. */}
+      <div className="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto bg-elevated border border-border rounded-lg shadow-md">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display text-3xl leading-snug">Let&apos;s start a conversation</h2>
