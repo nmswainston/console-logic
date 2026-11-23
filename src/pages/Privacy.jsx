@@ -2,7 +2,7 @@ import { Head } from "vite-react-ssg";
 import Section from "@/components/Section.jsx";
 import { contact } from "@/data/contact";
 
-const EFFECTIVE_DATE = "October 29, 2026";
+const EFFECTIVE_DATE = "November 23, 2026";
 const TITLE = "Privacy Policy - console.log(ic)";
 const DESCRIPTION =
   "How ConsoleLogic LLC handles personal information on consolelogic.net and in its mobile apps on Google Play.";
@@ -128,9 +128,9 @@ export default function Privacy() {
               </li>
             </List>
             <p>
-              Analytics requests go through consolelogic.net rather than
-              directly from your browser to a third-party domain. You can opt
-              out in your current browser by visiting{" "}
+              Umami requests go through consolelogic.net rather than directly
+              from your browser to a third-party domain. You can opt out of
+              Umami in your current browser by visiting{" "}
               <a
                 href="/?analytics=off"
                 className="focus-ring text-accent underline underline-offset-4 hover:text-foreground"
@@ -138,8 +138,22 @@ export default function Privacy() {
                 consolelogic.net/?analytics=off
               </a>
               . That saves a small opt-out flag in your browser&apos;s local
-              storage, which is the only thing we ever store on your device.
-              Clearing your site data removes it.
+              storage. Clearing your site data removes it.
+            </p>
+
+            <h3 className="font-display text-xl text-foreground">
+              Advertising
+            </h3>
+            <p>
+              We run ads on Google Ads. To see whether those ads lead people to
+              this site and to get in touch, every page loads the Google tag
+              from Google. It sets cookies in your browser and sends Google
+              details such as the page you are viewing, your IP address, your
+              browser and whether you arrived by clicking one of our ads.
+              Google handles that information under its own privacy policy. You
+              can limit ad personalization in your Google account&apos;s ad
+              settings, and you can block or clear these cookies in your
+              browser at any time.
             </p>
 
             <h3 className="font-display text-xl text-foreground">
@@ -156,7 +170,6 @@ export default function Privacy() {
               What we do not do
             </h3>
             <List>
-              <li>We do not use advertising cookies or ad trackers.</li>
               <li>We do not sell your personal information.</li>
               <li>
                 We do not load fonts, maps, videos or social widgets from other
@@ -214,6 +227,10 @@ export default function Privacy() {
               <li>
                 <strong className="text-foreground">Umami</strong>: website
                 analytics.
+              </li>
+              <li>
+                <strong className="text-foreground">Google</strong>: measuring
+                our Google Ads campaigns.
               </li>
             </List>
             <p>
