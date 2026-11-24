@@ -1,7 +1,7 @@
 /**
  * Analytics helpers.
  *
- * Thin wrapper over the Umami tracker.
+ * Thin wrappers over the Umami tracker and the Google Ads conversion event.
  *
  * The tracker tag is injected only into built HTML (see vite.config.js), so
  * window.umami is genuinely absent during the static prerender and in dev, and
@@ -20,6 +20,36 @@ export function track(event, data) {
   try {
     if (data) umami.track(event, data);
     else umami.track(event);
+  } catch {
+    // Deliberately silent.
+  }
+}
+
+/**
+ * Reports a Google Ads conversion: a contact form message that was delivered.
+ *
+ * This is the "request_quote" conversion action's event snippet from Google
+ * Ads, moved out of a <script> tag and into code. Google's instructions assume
+ * a separate thank-you page; this site has none (the form posts in the
+ * background and shows its success message in place), so the event fires from
+ * the same success branch as the Umami event instead.
+ *
+ * window.gtag is defined by the Google tag in index.html. It is missing during
+ * the static prerender and whenever a content blocker removes the tag, so like
+ * track() above this has to tolerate its absence and never throw.
+ */
+const ADS_CONVERSION = "AW-18591571761/3RmICNCw-70dELG-k6FF";
+
+export function trackAdsConversion() {
+  if (typeof window === "undefined") return;
+  if (typeof window.gtag !== "function") return;
+
+  try {
+    window.gtag("event", "conversion", {
+      send_to: ADS_CONVERSION,
+      value: 1.0,
+      currency: "USD",
+    });
   } catch {
     // Deliberately silent.
   }
