@@ -2,7 +2,7 @@ import { Head } from "vite-react-ssg";
 import Section from "@/components/Section.jsx";
 import { contact } from "@/data/contact";
 
-const EFFECTIVE_DATE = "November 23, 2026";
+const EFFECTIVE_DATE = "November 24, 2026";
 const TITLE = "Privacy Policy - console.log(ic)";
 const DESCRIPTION =
   "How ConsoleLogic LLC handles personal information on consolelogic.net and in its mobile apps on Google Play.";
@@ -140,6 +140,16 @@ export default function Privacy() {
               . That saves a small opt-out flag in your browser&apos;s local
               storage. Clearing your site data removes it.
             </p>
+            <p>
+              We also use Google Analytics to see how visitors use the site
+              and how they found it, including from our ads. Unlike Umami, it
+              sets cookies in your browser and sends Google details such as
+              the pages you view, your IP address, your browser and device,
+              and how you arrived. Google handles that information under its
+              own privacy policy. You can block or clear these cookies in your
+              browser, or install Google&apos;s Analytics opt-out browser
+              add-on.
+            </p>
 
             <h3 className="font-display text-xl text-foreground">
               Advertising
@@ -229,8 +239,9 @@ export default function Privacy() {
                 analytics.
               </li>
               <li>
-                <strong className="text-foreground">Google</strong>: measuring
-                our Google Ads campaigns.
+                <strong className="text-foreground">Google</strong>: website
+                analytics (Google Analytics) and measuring our Google Ads
+                campaigns.
               </li>
             </List>
             <p>
@@ -255,6 +266,10 @@ export default function Privacy() {
               <li>
                 Analytics data: kept in aggregate form by Umami for as long as
                 we run the website, and it does not identify you personally.
+              </li>
+              <li>
+                Google Analytics data: kept by Google for the retention period
+                set in our Analytics account.
               </li>
               <li>App data: see the apps section above.</li>
             </List>
