@@ -259,7 +259,6 @@ export default function Hero() {
         >
           <ContactLink
             source="hero"
-            subject="New project inquiry"
             className="btn btn-primary"
           >
             Start a project

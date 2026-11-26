@@ -5,6 +5,9 @@ export const contact = {
   location: "Avondale, Arizona",
 };
 
+// The page that holds the contact form. Every contact call to action links here.
+export const CONTACT_PATH = "/contact";
+
 export function getMailtoHref(subject = contact.subject) {
   return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}`;
 }

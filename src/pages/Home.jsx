@@ -235,7 +235,6 @@ export default function Home() {
               >
                 <ContactLink
                   source="home-cta"
-                  subject="Let's start a conversation"
                   className="btn btn-primary"
                 >
                   Start a conversation
