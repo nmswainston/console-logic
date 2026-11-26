@@ -146,7 +146,6 @@ export default function Header() {
           <li>
             <ContactLink
               source="header"
-              subject="Let's talk"
               className="focus-ring btn btn-primary"
             >
               Let&apos;s talk
@@ -254,7 +253,6 @@ export default function Header() {
             <li className="mt-2 pt-2 border-t border-border">
               <ContactLink
                 source="header-mobile"
-                subject="Let's talk"
                 onOpen={() => closeMenu(true)}
                 className="focus-ring btn btn-primary w-full justify-center"
               >

@@ -6,6 +6,7 @@ import Work from "@/pages/Work.jsx";
 import ProjectCaseStudy from "@/pages/ProjectCaseStudy.jsx";
 import About from "@/pages/About.jsx";
 import Privacy from "@/pages/Privacy.jsx";
+import Contact from "@/pages/Contact.jsx";
 import NotFound from "@/pages/NotFound.jsx";
 
 import { projects } from "@/data/projects";
@@ -33,6 +34,7 @@ export const routes = [
         getStaticPaths: () => projects.map((p) => `projects/${p.slug}`),
       },
       { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
       // Prerendered to dist/404.html. Netlify serves that file, with a real
       // 404 status, for any URL that matches no file, so this route exists to

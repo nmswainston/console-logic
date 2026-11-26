@@ -50,7 +50,6 @@ export default function CommandPrompt({ className = "" }) {
   return (
     <ContactLink
       source="footer-prompt"
-      subject="New project inquiry"
       onMouseEnter={engage}
       onMouseLeave={disengage}
       onFocus={engage}

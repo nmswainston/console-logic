@@ -164,7 +164,6 @@ export default function About() {
           <div className="mt-6">
             <ContactLink
               source="about-cta"
-              subject="Let's start a conversation"
               className="btn btn-primary"
             >
               Start a conversation

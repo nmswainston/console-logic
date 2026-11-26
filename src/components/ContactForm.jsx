@@ -142,13 +142,13 @@ export default function ContactForm({ onClose }) {
         </div>
 
         {submitStatus === "success" && (
-          <div className="p-4 rounded-lg border border-terminal-green/30 bg-terminal-green/10 text-terminal-green text-sm leading-normal">
+          <div role="status" className="p-4 rounded-lg border border-terminal-green/30 bg-terminal-green/10 text-terminal-green text-sm leading-normal">
             ✓ Thanks! Your message has been sent successfully.
           </div>
         )}
 
         {submitStatus === "error" && (
-          <div className="p-4 rounded-lg border border-border bg-elevated text-muted-foreground text-sm leading-normal">
+          <div role="alert" className="p-4 rounded-lg border border-border bg-elevated text-muted-foreground text-sm leading-normal">
             ✗ Something went wrong. Please try again or email us directly.
           </div>
         )}
